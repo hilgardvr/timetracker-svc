@@ -10,7 +10,7 @@ class HistoryService {
     val history: ListBuffer[TimedItem] = {
         ListBuffer(
             TimedItem(1, "Project name1", now, now + 1, "note1"), 
-            TimedItem(2, "Project name2", now, now + 1, "note2")
+            TimedItem(2, "Project name2", now, now + 2, "note2")
         )
     }
 
