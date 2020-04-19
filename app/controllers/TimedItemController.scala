@@ -27,7 +27,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
 
             println(s"item: $timedItem")
 
-            historyService.addUserHitoryItem(id, timedItem)
+            historyService.addUserHistoryItem(id, timedItem)
 
             Ok("created")
           }
@@ -40,4 +40,5 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
     }
 
   }
+
 }
