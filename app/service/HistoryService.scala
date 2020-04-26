@@ -14,11 +14,14 @@ class HistoryService {
        )
    }
 
+   val emptyHistory: ListBuffer[TimedItem] = new ListBuffer[TimedItem]()
+
     def fetchUserHistory(id: Long) = {
-        history
+        if (id == 0) emptyHistory
+        else history
     }
 
     def addUserHistoryItem(id: Long, timedItem: TimedItem) = {
-      history //+= timedItem
+      history += timedItem
     }
 }
