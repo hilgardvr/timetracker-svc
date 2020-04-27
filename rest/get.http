@@ -1,4 +1,4 @@
-GET http://localhost:9000/api/userhistory/1 HTTP/1.1
+GET http://localhost:9000/api/userhistory/0 HTTP/1.1
 
 ####
 

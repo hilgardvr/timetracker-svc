@@ -21,13 +21,12 @@ class HistoryService @Inject()(timeDao: TimeDao) {
 
     def fetchUserHistory(id: Long) = {
 
-        timeDao.fetchForUser(0)
-        if (id == 0) emptyHistory
-        else emptyHistory
+        timeDao.fetchForUser(id)
+
     }
 
     def addUserHistoryItem(id: Long, timedItem: TimedItem) = {
-      emptyHistory += timedItem
+      // emptyHistory += timedItem
     }
 
     def login(creds: Login) = {
