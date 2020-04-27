@@ -3,7 +3,7 @@ package service
 import play.api.libs.json.{Json, OFormat}
 
 case class TimedItem (
-    id: String,
+    id: Int,
     project: String,
     startTime: Long,
     endTime: Long,

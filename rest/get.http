@@ -12,3 +12,13 @@ Content-Type: application/json
     "endTime": 1,
     "note": "note9"
 }
+
+####
+
+POST http://localhost:9000/api/login
+Content-Type: application/json
+
+{
+    "userName": "potato",
+    "password": "uhm"
+}

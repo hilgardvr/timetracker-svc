@@ -6,6 +6,7 @@ import play.api.mvc._
 import play.api.libs.json._
 import service.HistoryService
 import service.TimedItem
+import service.Login
 import scala.util.{Try, Success, Failure}
 
 @Singleton
@@ -38,6 +39,37 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
       }
       case None => BadRequest(request.body.toString)
     }
+
+  }
+
+  def login() = Action { implicit request: Request[AnyContent] =>
+  
+    val jsonBody: Option[JsValue] = request.body.asJson
+
+    jsonBody match {
+      case Some(jsonItem) => {
+        val creds = Try(jsonItem.as[Login])
+      
+        println(creds)
+
+        creds match {
+          case Success(creds) => {
+
+            println(s"item: $creds")
+
+            historyService.fetchUserHistory(0)
+
+            Ok(s"$creds")
+            // Unauthorized
+          }
+          case Failure(_) => BadRequest(s"Request sucked: ${request.body.toString}")
+        }
+
+
+      }
+      case None => BadRequest(request.body.toString)
+    }
+
 
   }
 

@@ -3,25 +3,34 @@ package service
 import service.TimedItem
 import java.time.Instant
 import scala.collection.mutable.ListBuffer
+import com.google.inject.Inject
+import dao.TimeDao
 
-class HistoryService {
-    val now: Long = Instant.now().getEpochSecond()
+class HistoryService @Inject()(timeDao: TimeDao) {
 
-   val history: ListBuffer[TimedItem] = {
-       ListBuffer(
-           TimedItem("1", "Project name1", now, now + 1, "note1"), 
-           TimedItem("2", "Project name2", now, now + 2, "note2")
-       )
-   }
+    // val now: Long = Instant.now().getEpochSecond()
 
-   val emptyHistory: ListBuffer[TimedItem] = new ListBuffer[TimedItem]()
+    // val history: ListBuffer[TimedItem] = {
+    //     ListBuffer(
+    //         TimedItem("1", "Project name1", now, now + 1, "note1"), 
+    //         TimedItem("2", "Project name2", now, now + 2, "note2")
+    //     )
+    // }
+
+    val emptyHistory: ListBuffer[TimedItem] = new ListBuffer[TimedItem]()
 
     def fetchUserHistory(id: Long) = {
+
+        timeDao.fetchForUser(0)
         if (id == 0) emptyHistory
-        else history
+        else emptyHistory
     }
 
     def addUserHistoryItem(id: Long, timedItem: TimedItem) = {
-      history += timedItem
+      emptyHistory += timedItem
+    }
+
+    def login(creds: Login) = {
+        
     }
 }
