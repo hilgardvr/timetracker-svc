@@ -30,6 +30,6 @@ class HistoryService @Inject()(timeDao: TimeDao) {
     }
 
     def login(creds: Login) = {
-        
+      timeDao.getUserId(creds)
     }
 }
