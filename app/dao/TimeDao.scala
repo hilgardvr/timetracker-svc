@@ -14,7 +14,7 @@ class TimeDao @Inject()(timeDb: Database) {
         timeDb.withConnection( implicit con => 
             SQL"""
                select user_id from dsrleiwu.public.users where
-               userName = ${creds.userName} and password = ${creds.password};
+               userName = ${creds.username} and password = ${creds.password};
             """.as(scalar[Option[Int]].single)
         )
     }

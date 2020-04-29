@@ -42,35 +42,48 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
 
   }
 
-  def login() = Action { implicit request: Request[AnyContent] =>
-  
+  private def extractCreds(request: Request[AnyContent]): Option[Login] = {
     val jsonBody: Option[JsValue] = request.body.asJson
 
     jsonBody match {
       case Some(jsonItem) => {
+        println(jsonItem)
         val creds = Try(jsonItem.as[Login])
       
         println(creds)
 
         creds match {
-          case Success(creds) => {
-
-            println(s"item: $creds")
-
-            historyService.fetchUserHistory(0)
-
-            Ok(s"$creds")
-            // Unauthorized
-          }
-          case Failure(_) => BadRequest(s"Request sucked: ${request.body.toString}")
+          case Success(creds) => Some(creds)
+          case Failure(_) => None
         }
+      }
+      case None => None
+    }
+  }
 
-
+  def login() = Action { implicit request: Request[AnyContent] =>
+    val login = extractCreds(request)
+            
+    login match {
+      case Some(creds) => {
+        println(s"item: $creds")
+        Ok("1")
       }
       case None => BadRequest(request.body.toString)
     }
-
-
   }
 
+
+  def createAccount() = Action { implicit request: Request[AnyContent] =>
+
+    val login = extractCreds(request)
+            
+    login match {
+      case Some(creds) => {
+        println(s"item: $creds")
+        Ok("1")
+      }
+      case None => BadRequest(request.body.toString)
+    }
+  }
 }
