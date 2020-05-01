@@ -5,8 +5,14 @@ import java.time.Instant
 import scala.collection.mutable.ListBuffer
 import com.google.inject.Inject
 import dao.TimeDao
+import play.api.http._
+import play.api.mvc._
+import dao.UserDao
 
-class HistoryService @Inject()(timeDao: TimeDao) {
+class HistoryService @Inject()(
+  timeDao: TimeDao,
+  userDao: UserDao
+) {
 
     // val now: Long = Instant.now().getEpochSecond()
 
@@ -30,6 +36,23 @@ class HistoryService @Inject()(timeDao: TimeDao) {
     }
 
     def login(creds: Login) = {
-      timeDao.getUserId(creds)
+     userDao.readUserId(creds)
+    }
+
+    def createAccount(creds: Login): Either[String, String] = {
+
+      val userIdOption = userDao.readUserId(creds)
+
+      userIdOption match {
+        case Some(id) => Left("User already exists")
+        case None     => {
+          try {
+            userDao.createUser(creds)
+            Right("Created")
+          } catch {
+            case e: Exception => Left(e.toString())
+          }
+        }
+      }
     }
 }

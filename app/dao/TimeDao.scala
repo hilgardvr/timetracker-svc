@@ -10,15 +10,6 @@ import service.{TimedItem, Login}
 @Singleton
 class TimeDao @Inject()(timeDb: Database) {
 
-    def getUserId(creds: Login): Option[Int] = {
-        timeDb.withConnection( implicit con => 
-            SQL"""
-               select user_id from dsrleiwu.public.users where
-               userName = ${creds.username} and password = ${creds.password};
-            """.as(scalar[Option[Int]].single)
-        )
-    }
-
     def fetchForUser(id: Long): List[TimedItem]= {
         val x = timeDb.withConnection( implicit con =>
             SQL"""
@@ -29,12 +20,13 @@ class TimeDao @Inject()(timeDb: Database) {
         x
     }
 
-    def insertItem(timedItem: TimedItem, userId: Int): Boolean = {
+    def insertItem(timedItem: TimedItem, userId: Int): Option[Int] = {
         timeDb.withConnection( implicit con => 
             SQL"""
                 insert into dsrleiwu.public.timed_items (project, startTime, endTime, note, user_id) 
-                values ('test_projec1', 1588004579, 1588004579, 'test_note1', $userId);
-                """.execute()
+                values (${timedItem.project}, ${timedItem.startTime}, ${timedItem.endTime}, ${timedItem.note}, $userId)
+                returning user_id;
+            """.as(scalar[Int].singleOpt)
         )
     }
 }

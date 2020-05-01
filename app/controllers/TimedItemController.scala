@@ -42,12 +42,45 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
 
   }
 
+  def login() = Action { implicit request: Request[AnyContent] =>
+    val login = extractCreds(request)
+            
+    login match {
+      case Some(creds) => {
+        println(s"creds: $creds")
+        
+        Ok("")
+      }
+      case None => BadRequest(request.body.toString)
+    }
+  }
+
+
+  def createAccount() = Action { implicit request: Request[AnyContent] =>
+
+    val login: Option[Login] = extractCreds(request)
+            
+    login match {
+      case Some(creds) => {
+        // println(s"item: $creds")
+        historyService.createAccount(creds) match {
+          case Left(err) => {
+            if (err == "User already exists") Conflict(err)
+            else ServiceUnavailable(err)
+          }
+          case Right(result) => Created(result)
+        }
+      }
+      case None => BadRequest(request.body.toString)
+    }
+  }
+
   private def extractCreds(request: Request[AnyContent]): Option[Login] = {
     val jsonBody: Option[JsValue] = request.body.asJson
 
     jsonBody match {
       case Some(jsonItem) => {
-        println(jsonItem)
+
         val creds = Try(jsonItem.as[Login])
       
         println(creds)
@@ -61,29 +94,4 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
     }
   }
 
-  def login() = Action { implicit request: Request[AnyContent] =>
-    val login = extractCreds(request)
-            
-    login match {
-      case Some(creds) => {
-        println(s"item: $creds")
-        Ok("1")
-      }
-      case None => BadRequest(request.body.toString)
-    }
-  }
-
-
-  def createAccount() = Action { implicit request: Request[AnyContent] =>
-
-    val login = extractCreds(request)
-            
-    login match {
-      case Some(creds) => {
-        println(s"item: $creds")
-        Ok("1")
-      }
-      case None => BadRequest(request.body.toString)
-    }
-  }
 }
