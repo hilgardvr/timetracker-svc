@@ -10,21 +10,24 @@ import service.{TimedItem, Login}
 @Singleton
 class UserDao @Inject()(timeDb: Database) {
 
-    def readUserId(creds: Login): Option[Int] = {
+    def getUserId(creds: Login): Option[Int] = {
         timeDb.withConnection( implicit con => 
             SQL"""
                select user_id from dsrleiwu.public.users where
-               email = ${creds.email};
+                email = ${creds.email}
+               and
+                password = ${creds.password};
             """.as(scalar[Int].singleOpt)
         )
     }
 
-    def createUser(creds: Login) = {
+    def createUser(creds: Login): Int = {
         timeDb.withConnection( implicit con => 
             SQL"""
                 insert into dsrleiwu.public.users (email, password)
-                values (${creds.email}, ${creds.password});
-            """.execute()
+                values (${creds.email}, ${creds.password})
+                returning user_id;
+            """.as(scalar[Int].single)
         )
     }
 

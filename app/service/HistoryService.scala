@@ -1,6 +1,5 @@
 package service
 
-import service.TimedItem
 import java.time.Instant
 import scala.collection.mutable.ListBuffer
 import com.google.inject.Inject
@@ -14,20 +13,20 @@ class HistoryService @Inject()(
   userDao: UserDao
 ) {
 
-    // val now: Long = Instant.now().getEpochSecond()
+    def fetchUserHistory(userId: Long): List[TimedItem] = {
+      timeDao.fetchForUser(userId)
+    }
 
-    // val history: ListBuffer[TimedItem] = {
-    //     ListBuffer(
-    //         TimedItem("1", "Project name1", now, now + 1, "note1"), 
-    //         TimedItem("2", "Project name2", now, now + 2, "note2")
-    //     )
-    // }
+    def fetchUserHistory(creds: Login): List[TimedItem] = {
 
-    val emptyHistory: ListBuffer[TimedItem] = new ListBuffer[TimedItem]()
+      val user_id: Option[Int] = userDao.getUserId(creds)
 
-    def fetchUserHistory(id: Long) = {
-
-        timeDao.fetchForUser(id)
+      user_id match {
+        case Some(user_id) => {
+          timeDao.fetchForUser(user_id)
+        }
+        case None => List[TimedItem]()
+      }
 
     }
 
@@ -36,23 +35,14 @@ class HistoryService @Inject()(
     }
 
     def login(creds: Login) = {
-     userDao.readUserId(creds)
+      userDao.getUserId(creds)
     }
 
-    def createAccount(creds: Login): Either[String, String] = {
-
-      val userIdOption = userDao.readUserId(creds)
-
-      userIdOption match {
-        case Some(id) => Left("User already exists")
-        case None     => {
-          try {
-            userDao.createUser(creds)
-            Right("Created")
-          } catch {
-            case e: Exception => Left(e.toString())
-          }
-        }
+    def createAccount(creds: Login): Either[String, Int] = {
+      try {
+        Right(userDao.createUser(creds))
+      } catch {
+        case e: Exception => Left(e.toString())
       }
     }
 }

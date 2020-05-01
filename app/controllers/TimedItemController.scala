@@ -43,13 +43,18 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
   }
 
   def login() = Action { implicit request: Request[AnyContent] =>
+    
     val login = extractCreds(request)
             
     login match {
       case Some(creds) => {
-        println(s"creds: $creds")
-        
-        Ok("")
+
+        println(s"login creds: $creds")
+
+        historyService.login(creds) match {
+          case Some(userId) => Ok(JsNumber(userId))
+          case None         => Unauthorized(request.body.toString)
+        }
       }
       case None => BadRequest(request.body.toString)
     }
@@ -68,7 +73,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
             if (err == "User already exists") Conflict(err)
             else ServiceUnavailable(err)
           }
-          case Right(result) => Created(result)
+          case Right(result) => Created(JsNumber(result))
         }
       }
       case None => BadRequest(request.body.toString)
