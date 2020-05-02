@@ -30,7 +30,8 @@ class HistoryService @Inject()(
 
     }
 
-    def addUserHistoryItem(id: Long, timedItem: TimedItem) = {
+    def addUserHistoryItem(userId: Long, timedItem: TimedItem) = {
+      timeDao.insertItem(userId, timedItem)
       // emptyHistory += timedItem
     }
 

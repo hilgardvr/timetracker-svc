@@ -20,13 +20,13 @@ class TimeDao @Inject()(timeDb: Database) {
         x
     }
 
-    def insertItem(timedItem: TimedItem, userId: Int): Option[Int] = {
+    def insertItem(userId: Long, timedItem: TimedItem) = {
         timeDb.withConnection( implicit con => 
             SQL"""
-                insert into dsrleiwu.public.timed_items (project, startTime, endTime, note, user_id) 
-                values (${timedItem.project}, ${timedItem.startTime}, ${timedItem.endTime}, ${timedItem.note}, $userId)
-                returning user_id;
-            """.as(scalar[Int].singleOpt)
+                insert into dsrleiwu.public.timed_items (id, project, startTime, endTime, note, user_id) 
+                values (${timedItem.id}, ${timedItem.project}, ${timedItem.startTime}, ${timedItem.endTime}, ${timedItem.note}, $userId)
+                returning id;
+            """.execute()
         )
     }
 }

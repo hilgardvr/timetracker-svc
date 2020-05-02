@@ -5,6 +5,7 @@
 
 # An example controller showing a sample home page
 GET         /                           controllers.Assets.at(path="/public", file="html/index.html")
+GET         /api/health                 controllers.TimedItemController.health()
 GET         /api/userhistory/:id        controllers.TimedItemController.getHistory(id: Long)
 POST        /api/createitem/:id         controllers.TimedItemController.createItem(id: Long)
 POST        /api/login                  controllers.TimedItemController.login()
