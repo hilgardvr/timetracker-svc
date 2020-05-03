@@ -8,6 +8,7 @@ GET         /                           controllers.Assets.at(path="/public", fi
 GET         /api/health                 controllers.TimedItemController.health()
 GET         /api/userhistory/:id        controllers.TimedItemController.getHistory(id: Long)
 POST        /api/createitem/:id         controllers.TimedItemController.createItem(id: Long)
+POST        /api/createitemlist/:id     controllers.TimedItemController.createItemList(id: Long)
 POST        /api/login                  controllers.TimedItemController.login()
 POST        /api/createaccount          controllers.TimedItemController.createAccount()
 

@@ -39,6 +39,29 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
     Ok(Json.toJson(historyService.fetchUserHistory(userId)))
   }
 
+  def createItemList(userId: Long) = Action { implicit request: Request[AnyContent] =>
+    val jsonBody: Option[JsValue] = request.body.asJson
+
+    jsonBody match {
+      case Some(jsonItems) => {
+        println(s"createItem body: $jsonBody")
+        val items = Try(jsonItems.as[List[TimedItem]])
+        items match {
+          case Success(timedItems) => {
+            println(s"item: $timedItems")
+            timedItems.map(item => historyService.addUserHistoryItem(userId, item))
+            Created
+          }
+          case Failure(_) => BadRequest(request.body.toString)
+        }
+      }
+      case None => {
+        println(s"Invalid: $jsonBody")
+        BadRequest(request.body.toString)
+      }
+    }
+  }
+
   def createItem(userId: Long) = Action { implicit request: Request[AnyContent] =>
 
     val jsonBody: Option[JsValue] = request.body.asJson
@@ -49,7 +72,6 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
         val item = Try(jsonItem.as[TimedItem])
         item match {
           case Success(timedItem) => {
-            println(s"item: $timedItem")
             historyService.addUserHistoryItem(userId, timedItem)
             Created
           }
