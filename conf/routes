@@ -4,13 +4,14 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /                           controllers.Assets.at(path="/public", file="html/index.html")
-GET         /api/health                 controllers.TimedItemController.health()
-GET         /api/userhistory/:id        controllers.TimedItemController.getHistory(id: Long)
-POST        /api/createitem/:id         controllers.TimedItemController.createItem(id: Long)
-POST        /api/createitemlist/:id     controllers.TimedItemController.createItemList(id: Long)
-POST        /api/login                  controllers.TimedItemController.login()
-POST        /api/createaccount          controllers.TimedItemController.createAccount()
+GET         /                                   controllers.Assets.at(path="/public", file="html/index.html")
+GET         /api/health                         controllers.TimedItemController.health()
+GET         /api/userhistory/:id                controllers.TimedItemController.getHistory(id: Long)
+POST        /api/createitem/:id                 controllers.TimedItemController.createItem(id: Long)
+POST        /api/createitemlist/:id             controllers.TimedItemController.createItemList(id: Long)
+POST        /api/login                          controllers.TimedItemController.login()
+POST        /api/createaccount                  controllers.TimedItemController.createAccount()
+DELETE      /api/deleteitem/:userId/:itemId     controllers.TimedItemController.deleteItem(userId: Long, itemId: String)
 
 # Map static resources from the /public folder to the /assets URL path
 #GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

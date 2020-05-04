@@ -32,7 +32,6 @@ class HistoryService @Inject()(
 
     def addUserHistoryItem(userId: Long, timedItem: TimedItem) = {
       timeDao.insertItem(userId, timedItem)
-      // emptyHistory += timedItem
     }
 
     def login(creds: Login) = {
@@ -45,5 +44,13 @@ class HistoryService @Inject()(
       } catch {
         case e: Exception => Left(e.toString())
       }
+    }
+
+    def deleteItem(userId: Long, itemId: String) = {
+      timeDao.deleteItem(userId, itemId)
+    }
+
+    def updateItem(userId: Long, timedItem: TimedItem) = {
+      timeDao.updateItem(userId, timedItem)
     }
 }
