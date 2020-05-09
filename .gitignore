@@ -10,3 +10,5 @@ target
 .g8
 .metals
 .bloop
+local.conf
+index.html
