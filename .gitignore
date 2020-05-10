@@ -11,4 +11,4 @@ target
 .metals
 .bloop
 local.conf
-index.html
+local.sh
