@@ -16181,6 +16181,29 @@ var $author$project$View$FilterView$filterHistory = function (model) {
 		},
 		model.completedList);
 };
+var $author$project$View$View$displayTotalTime = function (model) {
+	var completedTimes = A2(
+		$elm$core$List$map,
+		function (item) {
+			return $elm$time$Time$posixToMillis(item.endTime) - $elm$time$Time$posixToMillis(item.startTime);
+		},
+		$author$project$View$FilterView$filterHistory(model));
+	var totalTime = A3($elm$core$List$foldl, $elm$core$Basics$add, 0, completedTimes);
+	return A2(
+		$mdgriffith$elm_ui$Element$layout,
+		_List_Nil,
+		A2(
+			$mdgriffith$elm_ui$Element$row,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$text(
+					'Total time spent: ' + A2(
+						$author$project$View$DisplayTime$timeSpendString,
+						$elm$time$Time$millisToPosix(0),
+						$elm$time$Time$millisToPosix(totalTime)))
+				])));
+};
 var $elm$html$Html$h4 = _VirtualDom_node('h4');
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
@@ -16260,6 +16283,7 @@ var $author$project$View$View$viewTimedHistory = function (model) {
 								]));
 					},
 					model.projectList)),
+				$author$project$View$View$displayTotalTime(model),
 				A2(
 				$elm$html$Html$ul,
 				_List_Nil,
