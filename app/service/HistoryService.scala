@@ -1,17 +1,22 @@
 package service
 
-import java.time.Instant
-import scala.collection.mutable.ListBuffer
 import com.google.inject.Inject
 import dao.TimeDao
-import play.api.http._
-import play.api.mvc._
 import dao.UserDao
+import org.mindrot.jbcrypt.BCrypt
 
 class HistoryService @Inject()(
   timeDao: TimeDao,
   userDao: UserDao
 ) {
+
+    def hashPassword(password: String): String = {
+      BCrypt.hashpw(password, BCrypt.gensalt())
+    }
+
+     def checkPassword(creds: Login): Boolean = {
+       //todo
+     }
 
     def fetchUserHistory(userId: Long): List[TimedItem] = {
       timeDao.fetchForUser(userId)
@@ -35,12 +40,14 @@ class HistoryService @Inject()(
     }
 
     def login(creds: Login) = {
-      userDao.getUserId(creds)
+      val hashedCreds = Login(creds.email, hashPassword(creds.password))
+      userDao.getUserId(hashedCreds)
     }
 
     def createAccount(creds: Login): Either[String, Int] = {
       try {
-        Right(userDao.createUser(creds))
+        val hashedCreds = Login(creds.email, hashPassword(creds.password))
+        Right(userDao.createUser(hashedCreds))
       } catch {
         case e: Exception => Left(e.toString())
       }

@@ -14,11 +14,6 @@ libraryDependencies += "org.playframework.anorm" %% "anorm" % "2.6.2"
 libraryDependencies += "org.postgresql" % "postgresql" % "42.2.1"
 // https://mvnrepository.com/artifact/com.typesafe.play/play
 libraryDependencies += "com.typesafe.play" %% "play" % "2.7.0"
+// https://mvnrepository.com/artifact/org.mindrot.bcrypt/bcrypt
+libraryDependencies += "org.mindrot" % "jbcrypt" % "0.3m"
 
-
-
-// Adds additional packages into Twirl
-//TwirlKeys.templateImports += "com.gmail.hilgardvr.controllers._"
-
-// Adds additional packages into conf/routes
-// play.sbt.routes.RoutesKeys.routesImport += "com.gmail.hilgardvr.binders._"

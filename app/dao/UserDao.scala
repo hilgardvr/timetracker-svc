@@ -1,11 +1,10 @@
 package dao
 
-import anorm.Macro
 import anorm.SqlParser.scalar
 import javax.inject._
 import play.api.db.Database
 import anorm._
-import service.{TimedItem, Login}
+import service.Login
 
 @Singleton
 class UserDao @Inject()(timeDb: Database) {
