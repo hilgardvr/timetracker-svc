@@ -15,7 +15,8 @@ class HistoryService @Inject()(
     }
 
      def checkPassword(creds: Login): Boolean = {
-       //todo
+       val pwHash = userDao.getPasswordHash(creds)
+       BCrypt.checkpw(creds.password, pwHash)
      }
 
     def fetchUserHistory(userId: Long): List[TimedItem] = {
@@ -35,13 +36,13 @@ class HistoryService @Inject()(
 
     }
 
-    def addUserHistoryItem(userId: Long, timedItem: TimedItem) = {
+    def addUserHistoryItem(userId: Long, timedItem: TimedItem): Boolean = {
       timeDao.insertItem(userId, timedItem)
     }
 
-    def login(creds: Login) = {
-      val hashedCreds = Login(creds.email, hashPassword(creds.password))
-      userDao.getUserId(hashedCreds)
+    def login(creds: Login): Option[Int] = {
+      if (checkPassword(creds)) userDao.getUserId(creds)
+      else None
     }
 
     def createAccount(creds: Login): Either[String, Int] = {

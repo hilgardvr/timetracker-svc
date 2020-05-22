@@ -14,8 +14,6 @@ class UserDao @Inject()(timeDb: Database) {
             SQL"""
                select user_id from dsrleiwu.public.users where
                 email = ${creds.email}
-               and
-                password = ${creds.password};
             """.as(scalar[Int].singleOpt)
         )
     }
@@ -28,6 +26,16 @@ class UserDao @Inject()(timeDb: Database) {
                 returning user_id;
             """.as(scalar[Int].single)
         )
+    }
+
+    def getPasswordHash(creds: Login): String = {
+      timeDb.withConnection( implicit con =>
+        SQL"""
+             select password
+             from users
+             where email = ${creds.email}
+        """.as(scalar[String].single)
+      )
     }
 
 }
