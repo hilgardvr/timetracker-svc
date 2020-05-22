@@ -7314,6 +7314,184 @@ var $author$project$Update$Update$editCompleted = F2(
 var $author$project$Model$Model$UserIdResult = function (a) {
 	return {$: 'UserIdResult', a: a};
 };
+var $author$project$Update$Update$credsEncoder = F2(
+	function (email, password) {
+		return $elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					'email',
+					$elm$json$Json$Encode$string(email)),
+					_Utils_Tuple2(
+					'password',
+					$elm$json$Json$Encode$string(password))
+				]));
+	});
+var $author$project$Update$Update$fetchUserId = F2(
+	function (model, endpoint) {
+		var x = A2($elm$core$Debug$log, 'sending', 'login request');
+		return $elm$http$Http$post(
+			{
+				body: $elm$http$Http$jsonBody(
+					A2($author$project$Update$Update$credsEncoder, model.userName, model.password)),
+				expect: A2($elm$http$Http$expectJson, $author$project$Model$Model$UserIdResult, $elm$json$Json$Decode$int),
+				url: _Utils_ap($author$project$Update$Update$api, endpoint)
+			});
+	});
+var $author$project$Update$Update$getTimeFrameFromString = function (timeFrame) {
+	switch (timeFrame) {
+		case 'Year':
+			return $author$project$Model$Model$Year;
+		case 'Month':
+			return $author$project$Model$Model$Month;
+		case 'Day':
+			return $author$project$Model$Model$Day;
+		case 'Hour':
+			return $author$project$Model$Model$Hour;
+		case 'Minute':
+			return $author$project$Model$Model$Minute;
+		case 'Second':
+			return $author$project$Model$Model$Second;
+		default:
+			return $author$project$Model$Model$Minute;
+	}
+};
+var $author$project$Update$Update$handleDeletedResult = F2(
+	function (model, result) {
+		if (result.$ === 'Ok') {
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		} else {
+			var err = result.a;
+			var x = A2($elm$core$Debug$log, 'handleDeletedResult', err);
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		}
+	});
+var $author$project$Update$Update$handleUpdatedItemResult = F2(
+	function (model, result) {
+		if (result.$ === 'Ok') {
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		} else {
+			var err = result.a;
+			var x = A2($elm$core$Debug$log, 'handleUpdatedItemResult', err);
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		}
+	});
+var $author$project$Update$Update$loginEndPoint = 'login';
+var $elm$core$Basics$not = _Basics_not;
+var $elm$core$Basics$modBy = _Basics_modBy;
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $elm$time$Time$flooredDiv = F2(
+	function (numerator, denominator) {
+		return $elm$core$Basics$floor(numerator / denominator);
+	});
+var $elm$time$Time$toAdjustedMinutesHelp = F3(
+	function (defaultOffset, posixMinutes, eras) {
+		toAdjustedMinutesHelp:
+		while (true) {
+			if (!eras.b) {
+				return posixMinutes + defaultOffset;
+			} else {
+				var era = eras.a;
+				var olderEras = eras.b;
+				if (_Utils_cmp(era.start, posixMinutes) < 0) {
+					return posixMinutes + era.offset;
+				} else {
+					var $temp$defaultOffset = defaultOffset,
+						$temp$posixMinutes = posixMinutes,
+						$temp$eras = olderEras;
+					defaultOffset = $temp$defaultOffset;
+					posixMinutes = $temp$posixMinutes;
+					eras = $temp$eras;
+					continue toAdjustedMinutesHelp;
+				}
+			}
+		}
+	});
+var $elm$time$Time$toAdjustedMinutes = F2(
+	function (_v0, time) {
+		var defaultOffset = _v0.a;
+		var eras = _v0.b;
+		return A3(
+			$elm$time$Time$toAdjustedMinutesHelp,
+			defaultOffset,
+			A2(
+				$elm$time$Time$flooredDiv,
+				$elm$time$Time$posixToMillis(time),
+				60000),
+			eras);
+	});
+var $elm$time$Time$toHour = F2(
+	function (zone, time) {
+		return A2(
+			$elm$core$Basics$modBy,
+			24,
+			A2(
+				$elm$time$Time$flooredDiv,
+				A2($elm$time$Time$toAdjustedMinutes, zone, time),
+				60));
+	});
+var $author$project$Update$Update$setCurrentTime = F2(
+	function (model, time) {
+		var timeInt = $elm$time$Time$posixToMillis(time);
+		var startOfToday = timeInt - A2($elm$core$Basics$modBy, 86400000, timeInt);
+		var hours = A2(
+			$elm$time$Time$toHour,
+			model.timeZone,
+			$elm$time$Time$millisToPosix(startOfToday));
+		var millisToAdjust = (hours > 12) ? ((24 - hours) * 3600000) : ((-hours) * 3600000);
+		var startDayThisZone = $elm$time$Time$millisToPosix(startOfToday + millisToAdjust);
+		var endOfToday = startOfToday + 86399000;
+		var endDayThisZone = $elm$time$Time$millisToPosix(endOfToday + millisToAdjust);
+		return _Utils_update(
+			model,
+			{completedFromTime: startDayThisZone, completedToTime: endDayThisZone});
+	});
+var $author$project$Model$Model$CreatedItemId = function (a) {
+	return {$: 'CreatedItemId', a: a};
+};
+var $author$project$Update$Update$createItem = F3(
+	function (model, completedItem, endpoint) {
+		var _v0 = model.userId;
+		if (_v0.$ === 'Just') {
+			var userId = _v0.a;
+			return $elm$http$Http$post(
+				{
+					body: $elm$http$Http$jsonBody(
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'id',
+									$elm$json$Json$Encode$string(completedItem.id)),
+									_Utils_Tuple2(
+									'project',
+									$elm$json$Json$Encode$string(completedItem.project)),
+									_Utils_Tuple2(
+									'startTime',
+									$elm$json$Json$Encode$int(
+										$elm$time$Time$posixToMillis(completedItem.startTime))),
+									_Utils_Tuple2(
+									'endTime',
+									$elm$json$Json$Encode$int(
+										$elm$time$Time$posixToMillis(completedItem.endTime))),
+									_Utils_Tuple2(
+									'note',
+									$elm$json$Json$Encode$string(completedItem.note))
+								]))),
+					expect: $elm$http$Http$expectWhatever($author$project$Model$Model$CreatedItemId),
+					url: _Utils_ap(
+						$author$project$Update$Update$api,
+						_Utils_ap(
+							endpoint,
+							$elm$core$String$fromInt(userId)))
+				});
+		} else {
+			return $elm$core$Platform$Cmd$none;
+		}
+	});
+var $author$project$Update$Update$createItemEndPoint = 'createitem/';
 var $billstclair$elm_sha256$Sha256$initialHs = function (is224) {
 	return is224 ? {a: 3238371032, b: 914150663, c: 812702999, d: 4144912697, e: 4290775857, f: 1750603025, g: 1694076839, h: 3204075428} : {a: 1779033703, b: 3144134277, c: 1013904242, d: 2773480762, e: 1359893119, f: 2600822924, g: 528734635, h: 1541459225};
 };
@@ -7322,9 +7500,6 @@ var $elm$core$Array$length = function (_v0) {
 	return len;
 };
 var $elm$core$Bitwise$and = _Bitwise_and;
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
 var $billstclair$elm_sha256$Sha256$extra = _List_fromArray(
 	[-2147483648, 8388608, 32768, 128]);
 var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
@@ -7430,7 +7605,6 @@ var $billstclair$elm_sha256$Sha256$getShift = F2(
 	function (i, n) {
 		return 8 * (3 - ((i + n) & 3));
 	});
-var $elm$core$Basics$not = _Basics_not;
 var $elm$core$Bitwise$or = _Bitwise_or;
 var $elm$core$Elm$JsArray$unsafeSet = _JsArray_unsafeSet;
 var $elm$core$Array$setHelp = F4(
@@ -7888,180 +8062,6 @@ var $billstclair$elm_sha256$Sha256$hash = F2(
 var $billstclair$elm_sha256$Sha256$sha256 = function (string) {
 	return A2($billstclair$elm_sha256$Sha256$hash, string, false);
 };
-var $author$project$Update$Update$credsEncoder = F2(
-	function (email, password) {
-		var pwHash = $billstclair$elm_sha256$Sha256$sha256(password);
-		return $elm$json$Json$Encode$object(
-			_List_fromArray(
-				[
-					_Utils_Tuple2(
-					'email',
-					$elm$json$Json$Encode$string(email)),
-					_Utils_Tuple2(
-					'password',
-					$elm$json$Json$Encode$string(pwHash))
-				]));
-	});
-var $author$project$Update$Update$fetchUserId = F2(
-	function (model, endpoint) {
-		return $elm$http$Http$post(
-			{
-				body: $elm$http$Http$jsonBody(
-					A2($author$project$Update$Update$credsEncoder, model.userName, model.password)),
-				expect: A2($elm$http$Http$expectJson, $author$project$Model$Model$UserIdResult, $elm$json$Json$Decode$int),
-				url: _Utils_ap($author$project$Update$Update$api, endpoint)
-			});
-	});
-var $author$project$Update$Update$getTimeFrameFromString = function (timeFrame) {
-	switch (timeFrame) {
-		case 'Year':
-			return $author$project$Model$Model$Year;
-		case 'Month':
-			return $author$project$Model$Model$Month;
-		case 'Day':
-			return $author$project$Model$Model$Day;
-		case 'Hour':
-			return $author$project$Model$Model$Hour;
-		case 'Minute':
-			return $author$project$Model$Model$Minute;
-		case 'Second':
-			return $author$project$Model$Model$Second;
-		default:
-			return $author$project$Model$Model$Minute;
-	}
-};
-var $author$project$Update$Update$handleDeletedResult = F2(
-	function (model, result) {
-		if (result.$ === 'Ok') {
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-		} else {
-			var err = result.a;
-			var x = A2($elm$core$Debug$log, 'handleDeletedResult', err);
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-		}
-	});
-var $author$project$Update$Update$handleUpdatedItemResult = F2(
-	function (model, result) {
-		if (result.$ === 'Ok') {
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-		} else {
-			var err = result.a;
-			var x = A2($elm$core$Debug$log, 'handleUpdatedItemResult', err);
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-		}
-	});
-var $author$project$Update$Update$loginEndPoint = 'login';
-var $elm$core$Basics$modBy = _Basics_modBy;
-var $elm$time$Time$flooredDiv = F2(
-	function (numerator, denominator) {
-		return $elm$core$Basics$floor(numerator / denominator);
-	});
-var $elm$time$Time$toAdjustedMinutesHelp = F3(
-	function (defaultOffset, posixMinutes, eras) {
-		toAdjustedMinutesHelp:
-		while (true) {
-			if (!eras.b) {
-				return posixMinutes + defaultOffset;
-			} else {
-				var era = eras.a;
-				var olderEras = eras.b;
-				if (_Utils_cmp(era.start, posixMinutes) < 0) {
-					return posixMinutes + era.offset;
-				} else {
-					var $temp$defaultOffset = defaultOffset,
-						$temp$posixMinutes = posixMinutes,
-						$temp$eras = olderEras;
-					defaultOffset = $temp$defaultOffset;
-					posixMinutes = $temp$posixMinutes;
-					eras = $temp$eras;
-					continue toAdjustedMinutesHelp;
-				}
-			}
-		}
-	});
-var $elm$time$Time$toAdjustedMinutes = F2(
-	function (_v0, time) {
-		var defaultOffset = _v0.a;
-		var eras = _v0.b;
-		return A3(
-			$elm$time$Time$toAdjustedMinutesHelp,
-			defaultOffset,
-			A2(
-				$elm$time$Time$flooredDiv,
-				$elm$time$Time$posixToMillis(time),
-				60000),
-			eras);
-	});
-var $elm$time$Time$toHour = F2(
-	function (zone, time) {
-		return A2(
-			$elm$core$Basics$modBy,
-			24,
-			A2(
-				$elm$time$Time$flooredDiv,
-				A2($elm$time$Time$toAdjustedMinutes, zone, time),
-				60));
-	});
-var $author$project$Update$Update$setCurrentTime = F2(
-	function (model, time) {
-		var timeInt = $elm$time$Time$posixToMillis(time);
-		var startOfToday = timeInt - A2($elm$core$Basics$modBy, 86400000, timeInt);
-		var hours = A2(
-			$elm$time$Time$toHour,
-			model.timeZone,
-			$elm$time$Time$millisToPosix(startOfToday));
-		var millisToAdjust = (hours > 12) ? ((24 - hours) * 3600000) : ((-hours) * 3600000);
-		var startDayThisZone = $elm$time$Time$millisToPosix(startOfToday + millisToAdjust);
-		var endOfToday = startOfToday + 86399000;
-		var endDayThisZone = $elm$time$Time$millisToPosix(endOfToday + millisToAdjust);
-		return _Utils_update(
-			model,
-			{completedFromTime: startDayThisZone, completedToTime: endDayThisZone});
-	});
-var $author$project$Model$Model$CreatedItemId = function (a) {
-	return {$: 'CreatedItemId', a: a};
-};
-var $author$project$Update$Update$createItem = F3(
-	function (model, completedItem, endpoint) {
-		var _v0 = model.userId;
-		if (_v0.$ === 'Just') {
-			var userId = _v0.a;
-			return $elm$http$Http$post(
-				{
-					body: $elm$http$Http$jsonBody(
-						$elm$json$Json$Encode$object(
-							_List_fromArray(
-								[
-									_Utils_Tuple2(
-									'id',
-									$elm$json$Json$Encode$string(completedItem.id)),
-									_Utils_Tuple2(
-									'project',
-									$elm$json$Json$Encode$string(completedItem.project)),
-									_Utils_Tuple2(
-									'startTime',
-									$elm$json$Json$Encode$int(
-										$elm$time$Time$posixToMillis(completedItem.startTime))),
-									_Utils_Tuple2(
-									'endTime',
-									$elm$json$Json$Encode$int(
-										$elm$time$Time$posixToMillis(completedItem.endTime))),
-									_Utils_Tuple2(
-									'note',
-									$elm$json$Json$Encode$string(completedItem.note))
-								]))),
-					expect: $elm$http$Http$expectWhatever($author$project$Model$Model$CreatedItemId),
-					url: _Utils_ap(
-						$author$project$Update$Update$api,
-						_Utils_ap(
-							endpoint,
-							$elm$core$String$fromInt(userId)))
-				});
-		} else {
-			return $elm$core$Platform$Cmd$none;
-		}
-	});
-var $author$project$Update$Update$createItemEndPoint = 'createitem/';
 var $author$project$Update$Update$toggleTimer = function (model) {
 	if (model.timing) {
 		var completed = {
