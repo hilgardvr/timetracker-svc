@@ -5419,38 +5419,55 @@ var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Model$Model$AdjustTimeZone = function (a) {
 	return {$: 'AdjustTimeZone', a: a};
 };
+var $author$project$Model$Model$Day = {$: 'Day'};
+var $author$project$Model$Model$HomeScreen = {$: 'HomeScreen'};
 var $author$project$Model$Model$LoggedOut = {$: 'LoggedOut'};
-var $author$project$Model$Model$Minute = {$: 'Minute'};
 var $author$project$Model$Model$Model = function (completedList) {
 	return function (timing) {
 		return function (currentProject) {
-			return function (currentTime) {
-				return function (startTime) {
-					return function (timeZone) {
-						return function (projectList) {
-							return function (newProject) {
-								return function (note) {
-									return function (editing) {
-										return function (editingId) {
-											return function (editingProject) {
-												return function (editingNote) {
-													return function (editingStartTime) {
-														return function (editingEndTime) {
-															return function (editingStartTimeFrame) {
-																return function (editingEndTimeFrame) {
-																	return function (timeFrameList) {
-																		return function (completedFromTimeFrame) {
-																			return function (completedToTimeFrame) {
-																				return function (completedFromTime) {
-																					return function (completedToTime) {
-																						return function (showByStartTime) {
-																							return function (showByProject) {
-																								return function (projectShown) {
-																									return function (userName) {
-																										return function (password) {
-																											return function (loginStatus) {
-																												return function (userId) {
-																													return {completedFromTime: completedFromTime, completedFromTimeFrame: completedFromTimeFrame, completedList: completedList, completedToTime: completedToTime, completedToTimeFrame: completedToTimeFrame, currentProject: currentProject, currentTime: currentTime, editing: editing, editingEndTime: editingEndTime, editingEndTimeFrame: editingEndTimeFrame, editingId: editingId, editingNote: editingNote, editingProject: editingProject, editingStartTime: editingStartTime, editingStartTimeFrame: editingStartTimeFrame, loginStatus: loginStatus, newProject: newProject, note: note, password: password, projectList: projectList, projectShown: projectShown, showByProject: showByProject, showByStartTime: showByStartTime, startTime: startTime, timeFrameList: timeFrameList, timeZone: timeZone, timing: timing, userId: userId, userName: userName};
+			return function (showProjectDropDown) {
+				return function (showTimeFrameFromDropDown) {
+					return function (showTimeFrameToDropDown) {
+						return function (showFilterByProjectDropDown) {
+							return function (showEditingCompletedProjectDropDown) {
+								return function (showEditingStartTimeDropDown) {
+									return function (showEditingEndTimeDropDown) {
+										return function (currentTime) {
+											return function (startTime) {
+												return function (timeZone) {
+													return function (projectList) {
+														return function (newProject) {
+															return function (note) {
+																return function (editing) {
+																	return function (editingId) {
+																		return function (editingProject) {
+																			return function (editingNote) {
+																				return function (editingStartTime) {
+																					return function (editingEndTime) {
+																						return function (editingStartTimeFrame) {
+																							return function (editingEndTimeFrame) {
+																								return function (timeFrameList) {
+																									return function (completedFromTimeFrame) {
+																										return function (completedToTimeFrame) {
+																											return function (completedFromTime) {
+																												return function (completedToTime) {
+																													return function (showByStartTime) {
+																														return function (showFilterByProject) {
+																															return function (projectShown) {
+																																return function (userName) {
+																																	return function (password) {
+																																		return function (loginStatus) {
+																																			return function (userId) {
+																																				return function (loggedInPage) {
+																																					return {completedFromTime: completedFromTime, completedFromTimeFrame: completedFromTimeFrame, completedList: completedList, completedToTime: completedToTime, completedToTimeFrame: completedToTimeFrame, currentProject: currentProject, currentTime: currentTime, editing: editing, editingEndTime: editingEndTime, editingEndTimeFrame: editingEndTimeFrame, editingId: editingId, editingNote: editingNote, editingProject: editingProject, editingStartTime: editingStartTime, editingStartTimeFrame: editingStartTimeFrame, loggedInPage: loggedInPage, loginStatus: loginStatus, newProject: newProject, note: note, password: password, projectList: projectList, projectShown: projectShown, showByStartTime: showByStartTime, showEditingCompletedProjectDropDown: showEditingCompletedProjectDropDown, showEditingEndTimeDropDown: showEditingEndTimeDropDown, showEditingStartTimeDropDown: showEditingStartTimeDropDown, showFilterByProject: showFilterByProject, showFilterByProjectDropDown: showFilterByProjectDropDown, showProjectDropDown: showProjectDropDown, showTimeFrameFromDropDown: showTimeFrameFromDropDown, showTimeFrameToDropDown: showTimeFrameToDropDown, startTime: startTime, timeFrameList: timeFrameList, timeZone: timeZone, timing: timing, userId: userId, userName: userName};
+																																				};
+																																			};
+																																		};
+																																	};
+																																};
+																															};
+																														};
+																													};
 																												};
 																											};
 																										};
@@ -5496,8 +5513,8 @@ var $elm$time$Time$Posix = function (a) {
 	return {$: 'Posix', a: a};
 };
 var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
-var $author$project$Model$Model$Day = {$: 'Day'};
 var $author$project$Model$Model$Hour = {$: 'Hour'};
+var $author$project$Model$Model$Minute = {$: 'Minute'};
 var $author$project$Model$Model$Month = {$: 'Month'};
 var $author$project$Model$Model$Second = {$: 'Second'};
 var $author$project$Model$Model$Year = {$: 'Year'};
@@ -5506,13 +5523,13 @@ var $author$project$Model$Model$timeFrameList = _List_fromArray(
 var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
 var $author$project$Model$Model$init = function (_v0) {
 	return _Utils_Tuple2(
-		$author$project$Model$Model$Model(_List_Nil)(false)('')(
+		$author$project$Model$Model$Model(_List_Nil)(false)('')(false)(false)(false)(false)(false)(false)(false)(
 			$elm$time$Time$millisToPosix(0))(
 			$elm$time$Time$millisToPosix(0))($elm$time$Time$utc)(_List_Nil)('')('')(false)('')('')('')(
 			$elm$time$Time$millisToPosix(0))(
-			$elm$time$Time$millisToPosix(0))($author$project$Model$Model$Minute)($author$project$Model$Model$Minute)($author$project$Model$Model$timeFrameList)($author$project$Model$Model$Minute)($author$project$Model$Model$Minute)(
+			$elm$time$Time$millisToPosix(0))($author$project$Model$Model$Day)($author$project$Model$Model$Day)($author$project$Model$Model$timeFrameList)($author$project$Model$Model$Day)($author$project$Model$Model$Day)(
 			$elm$time$Time$millisToPosix(0))(
-			$elm$time$Time$millisToPosix(0))(true)(false)('')('')('')($author$project$Model$Model$LoggedOut)($elm$core$Maybe$Nothing),
+			$elm$time$Time$millisToPosix(0))(false)(false)('')('')('')($author$project$Model$Model$LoggedOut)($elm$core$Maybe$Nothing)($author$project$Model$Model$HomeScreen),
 		A2($elm$core$Task$perform, $author$project$Model$Model$AdjustTimeZone, $elm$time$Time$here));
 };
 var $author$project$Model$Model$Tick = function (a) {
@@ -6174,14 +6191,14 @@ var $author$project$Update$Update$changeCompletedTime = F3(
 			}
 		}
 	});
+var $author$project$Model$Model$secs = 1000;
+var $author$project$Model$Model$mins = $author$project$Model$Model$secs * 60;
+var $author$project$Model$Model$hours = $author$project$Model$Model$mins * 60;
+var $author$project$Model$Model$days = $author$project$Model$Model$hours * 24;
+var $author$project$Model$Model$months = $author$project$Model$Model$days * 30;
+var $author$project$Model$Model$years = $author$project$Model$Model$days * 365;
 var $author$project$Update$Update$changeEditTime = F3(
 	function (model, startOrEnd, incOrDec) {
-		var secs = 1000;
-		var mins = secs * 60;
-		var hours = mins * 60;
-		var days = hours * 24;
-		var months = days * 30;
-		var years = days * 365;
 		if (startOrEnd.$ === 'Start') {
 			var _v1 = model.editingStartTimeFrame;
 			switch (_v1.$) {
@@ -6191,14 +6208,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) + secs)
+									$elm$time$Time$posixToMillis(model.editingStartTime) + $author$project$Model$Model$secs)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) - secs)
+									$elm$time$Time$posixToMillis(model.editingStartTime) - $author$project$Model$Model$secs)
 							});
 					}
 				case 'Minute':
@@ -6207,14 +6224,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) + mins)
+									$elm$time$Time$posixToMillis(model.editingStartTime) + $author$project$Model$Model$mins)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) - mins)
+									$elm$time$Time$posixToMillis(model.editingStartTime) - $author$project$Model$Model$mins)
 							});
 					}
 				case 'Hour':
@@ -6223,14 +6240,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) + hours)
+									$elm$time$Time$posixToMillis(model.editingStartTime) + $author$project$Model$Model$hours)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) - hours)
+									$elm$time$Time$posixToMillis(model.editingStartTime) - $author$project$Model$Model$hours)
 							});
 					}
 				case 'Day':
@@ -6239,14 +6256,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) + days)
+									$elm$time$Time$posixToMillis(model.editingStartTime) + $author$project$Model$Model$days)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) - days)
+									$elm$time$Time$posixToMillis(model.editingStartTime) - $author$project$Model$Model$days)
 							});
 					}
 				case 'Month':
@@ -6255,14 +6272,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) + months)
+									$elm$time$Time$posixToMillis(model.editingStartTime) + $author$project$Model$Model$months)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) - months)
+									$elm$time$Time$posixToMillis(model.editingStartTime) - $author$project$Model$Model$months)
 							});
 					}
 				default:
@@ -6271,14 +6288,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) + years)
+									$elm$time$Time$posixToMillis(model.editingStartTime) + $author$project$Model$Model$years)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingStartTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingStartTime) - years)
+									$elm$time$Time$posixToMillis(model.editingStartTime) - $author$project$Model$Model$years)
 							});
 					}
 			}
@@ -6291,14 +6308,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) + secs)
+									$elm$time$Time$posixToMillis(model.editingEndTime) + $author$project$Model$Model$secs)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) - secs)
+									$elm$time$Time$posixToMillis(model.editingEndTime) - $author$project$Model$Model$secs)
 							});
 					}
 				case 'Minute':
@@ -6307,14 +6324,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) + mins)
+									$elm$time$Time$posixToMillis(model.editingEndTime) + $author$project$Model$Model$mins)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) - mins)
+									$elm$time$Time$posixToMillis(model.editingEndTime) - $author$project$Model$Model$mins)
 							});
 					}
 				case 'Hour':
@@ -6323,14 +6340,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) + hours)
+									$elm$time$Time$posixToMillis(model.editingEndTime) + $author$project$Model$Model$hours)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) - hours)
+									$elm$time$Time$posixToMillis(model.editingEndTime) - $author$project$Model$Model$hours)
 							});
 					}
 				case 'Day':
@@ -6339,14 +6356,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) + days)
+									$elm$time$Time$posixToMillis(model.editingEndTime) + $author$project$Model$Model$days)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) - days)
+									$elm$time$Time$posixToMillis(model.editingEndTime) - $author$project$Model$Model$days)
 							});
 					}
 				case 'Month':
@@ -6355,14 +6372,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) + months)
+									$elm$time$Time$posixToMillis(model.editingEndTime) + $author$project$Model$Model$months)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) - months)
+									$elm$time$Time$posixToMillis(model.editingEndTime) - $author$project$Model$Model$months)
 							});
 					}
 				default:
@@ -6371,14 +6388,14 @@ var $author$project$Update$Update$changeEditTime = F3(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) + years)
+									$elm$time$Time$posixToMillis(model.editingEndTime) + $author$project$Model$Model$years)
 							});
 					} else {
 						return _Utils_update(
 							model,
 							{
 								editingEndTime: $elm$time$Time$millisToPosix(
-									$elm$time$Time$posixToMillis(model.editingEndTime) - years)
+									$elm$time$Time$posixToMillis(model.editingEndTime) - $author$project$Model$Model$years)
 							});
 					}
 			}
@@ -6388,7 +6405,7 @@ var $author$project$Update$Update$createAccountEndPoint = 'createaccount';
 var $author$project$Model$Model$CreatedItemList = function (a) {
 	return {$: 'CreatedItemList', a: a};
 };
-var $author$project$Update$Update$url = 'https://shrouded-lowlands-13511.herokuapp.com/';
+var $author$project$Update$Update$url = 'http://localhost:9000/';
 var $author$project$Update$Update$api = $author$project$Update$Update$url + 'api/';
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -7307,7 +7324,7 @@ var $author$project$Update$Update$editCompleted = F2(
 			return _Utils_Tuple2(
 				_Utils_update(
 					model,
-					{editing: true, editingEndTime: completed.endTime, editingId: completed.id, editingProject: completed.project, editingStartTime: completed.startTime}),
+					{editing: true, editingEndTime: completed.endTime, editingId: completed.id, editingNote: completed.note, editingProject: completed.project, editingStartTime: completed.startTime}),
 				$elm$core$Platform$Cmd$none);
 		}
 	});
@@ -7329,7 +7346,6 @@ var $author$project$Update$Update$credsEncoder = F2(
 	});
 var $author$project$Update$Update$fetchUserId = F2(
 	function (model, endpoint) {
-		var x = A2($elm$core$Debug$log, 'sending', 'login request');
 		return $elm$http$Http$post(
 			{
 				body: $elm$http$Http$jsonBody(
@@ -7366,26 +7382,12 @@ var $author$project$Update$Update$handleDeletedResult = F2(
 			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
-var $author$project$Update$Update$handleUpdatedItemResult = F2(
-	function (model, result) {
-		if (result.$ === 'Ok') {
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-		} else {
-			var err = result.a;
-			var x = A2($elm$core$Debug$log, 'handleUpdatedItemResult', err);
-			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-		}
-	});
-var $author$project$Update$Update$loginEndPoint = 'login';
-var $elm$core$Basics$not = _Basics_not;
-var $elm$core$Basics$modBy = _Basics_modBy;
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
+var $elm$core$Basics$ge = _Utils_ge;
 var $elm$time$Time$flooredDiv = F2(
 	function (numerator, denominator) {
 		return $elm$core$Basics$floor(numerator / denominator);
 	});
+var $elm$core$Basics$modBy = _Basics_modBy;
 var $elm$time$Time$toAdjustedMinutesHelp = F3(
 	function (defaultOffset, posixMinutes, eras) {
 		toAdjustedMinutesHelp:
@@ -7432,6 +7434,100 @@ var $elm$time$Time$toHour = F2(
 				A2($elm$time$Time$toAdjustedMinutes, zone, time),
 				60));
 	});
+var $elm$time$Time$toMinute = F2(
+	function (zone, time) {
+		return A2(
+			$elm$core$Basics$modBy,
+			60,
+			A2($elm$time$Time$toAdjustedMinutes, zone, time));
+	});
+var $elm$time$Time$toSecond = F2(
+	function (_v0, time) {
+		return A2(
+			$elm$core$Basics$modBy,
+			60,
+			A2(
+				$elm$time$Time$flooredDiv,
+				$elm$time$Time$posixToMillis(time),
+				1000));
+	});
+var $author$project$Update$Update$handleFilterTimeChange = F4(
+	function (model, time, timeFrame, startOrEnd) {
+		var _v0 = $elm$core$String$toInt(time);
+		if (_v0.$ === 'Just') {
+			var t = _v0.a;
+			if (startOrEnd.$ === 'Start') {
+				switch (timeFrame.$) {
+					case 'Hour':
+						return ((t >= 0) && (t <= 23)) ? _Utils_update(
+							model,
+							{
+								completedFromTime: $elm$time$Time$millisToPosix(
+									$elm$time$Time$posixToMillis(model.completedFromTime) + ((t - A2($elm$time$Time$toHour, model.timeZone, model.completedFromTime)) * $author$project$Model$Model$hours))
+							}) : model;
+					case 'Minute':
+						return ((t >= 0) && (t <= 59)) ? _Utils_update(
+							model,
+							{
+								completedFromTime: $elm$time$Time$millisToPosix(
+									$elm$time$Time$posixToMillis(model.completedFromTime) + ((t - A2($elm$time$Time$toMinute, model.timeZone, model.completedFromTime)) * $author$project$Model$Model$mins))
+							}) : model;
+					case 'Second':
+						return ((t >= 0) && (t <= 59)) ? _Utils_update(
+							model,
+							{
+								completedFromTime: $elm$time$Time$millisToPosix(
+									$elm$time$Time$posixToMillis(model.completedFromTime) + ((t - A2($elm$time$Time$toSecond, model.timeZone, model.completedFromTime)) * $author$project$Model$Model$secs))
+							}) : model;
+					default:
+						return model;
+				}
+			} else {
+				switch (timeFrame.$) {
+					case 'Hour':
+						return ((t >= 0) && (t <= 23)) ? _Utils_update(
+							model,
+							{
+								completedToTime: $elm$time$Time$millisToPosix(
+									$elm$time$Time$posixToMillis(model.completedToTime) + ((t - A2($elm$time$Time$toHour, model.timeZone, model.completedToTime)) * $author$project$Model$Model$hours))
+							}) : model;
+					case 'Minute':
+						return ((t >= 0) && (t <= 59)) ? _Utils_update(
+							model,
+							{
+								completedToTime: $elm$time$Time$millisToPosix(
+									$elm$time$Time$posixToMillis(model.completedToTime) + ((t - A2($elm$time$Time$toMinute, model.timeZone, model.completedToTime)) * $author$project$Model$Model$mins))
+							}) : model;
+					case 'Second':
+						return ((t >= 0) && (t <= 59)) ? _Utils_update(
+							model,
+							{
+								completedToTime: $elm$time$Time$millisToPosix(
+									$elm$time$Time$posixToMillis(model.completedToTime) + ((t - A2($elm$time$Time$toSecond, model.timeZone, model.completedToTime)) * $author$project$Model$Model$secs))
+							}) : model;
+					default:
+						return model;
+				}
+			}
+		} else {
+			return model;
+		}
+	});
+var $author$project$Update$Update$handleUpdatedItemResult = F2(
+	function (model, result) {
+		if (result.$ === 'Ok') {
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		} else {
+			var err = result.a;
+			var x = A2($elm$core$Debug$log, 'handleUpdatedItemResult', err);
+			return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+		}
+	});
+var $author$project$Update$Update$loginEndPoint = 'login';
+var $elm$core$Basics$not = _Basics_not;
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
 var $author$project$Update$Update$setCurrentTime = F2(
 	function (model, time) {
 		var timeInt = $elm$time$Time$posixToMillis(time);
@@ -7504,7 +7600,6 @@ var $billstclair$elm_sha256$Sha256$extra = _List_fromArray(
 	[-2147483648, 8388608, 32768, 128]);
 var $elm$core$Bitwise$shiftRightZfBy = _Bitwise_shiftRightZfBy;
 var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
-var $elm$core$Basics$ge = _Utils_ge;
 var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
 var $elm$core$Array$getHelp = F3(
 	function (shift, index, tree) {
@@ -8282,6 +8377,7 @@ var $author$project$Update$Update$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'ChangeCompletedFromTimeFrame':
 				var timeFrame = msg.a;
+				var x = A2($elm$core$Debug$log, 'ChangeCompletedFromTimeFrame', timeFrame);
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -8330,18 +8426,6 @@ var $author$project$Update$Update$update = F2(
 				var result = msg.a;
 				return _Utils_Tuple2(
 					A2($author$project$Update$Update$useFetchedHistory, model, result),
-					$elm$core$Platform$Cmd$none);
-			case 'ToggleShowStarted':
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{showByStartTime: !model.showByStartTime}),
-					$elm$core$Platform$Cmd$none);
-			case 'ToggleShowByProject':
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{showByProject: !model.showByProject}),
 					$elm$core$Platform$Cmd$none);
 			case 'ChangeShowByProject':
 				var project = msg.a;
@@ -8409,12 +8493,83 @@ var $author$project$Update$Update$update = F2(
 						model,
 						{loginStatus: $author$project$Model$Model$Signup}),
 					$elm$core$Platform$Cmd$none);
-			default:
+			case 'LoginPage':
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{loginStatus: $author$project$Model$Model$LoggedOut}),
 					$elm$core$Platform$Cmd$none);
+			case 'ToggleProjectDropDown':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showProjectDropDown: !model.showProjectDropDown}),
+					$elm$core$Platform$Cmd$none);
+			case 'CloseMenu':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showProjectDropDown: false}),
+					$elm$core$Platform$Cmd$none);
+			case 'HandleFilterTimeChange':
+				var timeFrame = msg.a;
+				var startOrEnd = msg.b;
+				var time = msg.c;
+				return _Utils_Tuple2(
+					A4($author$project$Update$Update$handleFilterTimeChange, model, time, timeFrame, startOrEnd),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleShowStarted':
+				var show = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showByStartTime: show}),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleTimeFrameFromDropDown':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showTimeFrameFromDropDown: !model.showTimeFrameFromDropDown}),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleTimeFrameToDropDown':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showTimeFrameToDropDown: !model.showTimeFrameToDropDown}),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleShowFilterProject':
+				var show = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showFilterByProject: show}),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleFilterProjectDropDown':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showFilterByProjectDropDown: !model.showFilterByProjectDropDown}),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleShowEditingCompletedProjectDropDown':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showEditingCompletedProjectDropDown: !model.showEditingCompletedProjectDropDown}),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleShowEditingStartTimeDropDown':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showEditingStartTimeDropDown: !model.showEditingStartTimeDropDown}),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleShowEditingEndTimeDropDown':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showEditingEndTimeDropDown: !model.showEditingEndTimeDropDown}),
+					$elm$core$Platform$Cmd$none);
+			default:
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$Update$Update$useCreatedItemList = F2(
@@ -8447,36 +8602,12 @@ var $author$project$Update$Update$useUserCreatedResult = F2(
 				$elm$core$Platform$Cmd$none);
 		}
 	});
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $mdgriffith$elm_ui$Internal$Style$classes = {above: 'a', active: 'atv', alignBottom: 'ab', alignCenterX: 'cx', alignCenterY: 'cy', alignContainerBottom: 'acb', alignContainerCenterX: 'accx', alignContainerCenterY: 'accy', alignContainerRight: 'acr', alignLeft: 'al', alignRight: 'ar', alignTop: 'at', alignedHorizontally: 'ah', alignedVertically: 'av', any: 's', behind: 'bh', below: 'b', bold: 'w7', borderDashed: 'bd', borderDotted: 'bdt', borderNone: 'bn', borderSolid: 'bs', capturePointerEvents: 'cpe', clip: 'cp', clipX: 'cpx', clipY: 'cpy', column: 'c', container: 'ctr', contentBottom: 'cb', contentCenterX: 'ccx', contentCenterY: 'ccy', contentLeft: 'cl', contentRight: 'cr', contentTop: 'ct', cursorPointer: 'cptr', cursorText: 'ctxt', focus: 'fcs', focusedWithin: 'focus-within', fullSize: 'fs', grid: 'g', hasBehind: 'hbh', heightContent: 'hc', heightExact: 'he', heightFill: 'hf', heightFillPortion: 'hfp', hover: 'hv', imageContainer: 'ic', inFront: 'fr', inputMultiline: 'iml', inputMultilineFiller: 'imlf', inputMultilineParent: 'imlp', inputMultilineWrapper: 'implw', inputText: 'it', italic: 'i', link: 'lnk', nearby: 'nb', noTextSelection: 'notxt', onLeft: 'ol', onRight: 'or', opaque: 'oq', overflowHidden: 'oh', page: 'pg', paragraph: 'p', passPointerEvents: 'ppe', root: 'ui', row: 'r', scrollbars: 'sb', scrollbarsX: 'sbx', scrollbarsY: 'sby', seButton: 'sbt', single: 'e', sizeByCapital: 'cap', spaceEvenly: 'sev', strike: 'sk', text: 't', textCenter: 'tc', textExtraBold: 'w8', textExtraLight: 'w2', textHeavy: 'w9', textJustify: 'tj', textJustifyAll: 'tja', textLeft: 'tl', textLight: 'w3', textMedium: 'w5', textNormalWeight: 'w4', textRight: 'tr', textSemiBold: 'w6', textThin: 'w1', textUnitalicized: 'tun', transition: 'ts', transparent: 'clr', underline: 'u', widthContent: 'wc', widthExact: 'we', widthFill: 'wf', widthFillPortion: 'wfp', wrapped: 'wrp'};
-var $mdgriffith$elm_ui$Internal$Model$Attr = function (a) {
-	return {$: 'Attr', a: a};
-};
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
-	});
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $mdgriffith$elm_ui$Internal$Model$htmlClass = function (cls) {
-	return $mdgriffith$elm_ui$Internal$Model$Attr(
-		$elm$html$Html$Attributes$class(cls));
-};
-var $mdgriffith$elm_ui$Internal$Model$OnlyDynamic = F2(
-	function (a, b) {
-		return {$: 'OnlyDynamic', a: a, b: b};
-	});
-var $mdgriffith$elm_ui$Internal$Model$StaticRootAndDynamic = F2(
-	function (a, b) {
-		return {$: 'StaticRootAndDynamic', a: a, b: b};
-	});
 var $mdgriffith$elm_ui$Internal$Model$Unkeyed = function (a) {
 	return {$: 'Unkeyed', a: a};
 };
-var $mdgriffith$elm_ui$Internal$Model$AsEl = {$: 'AsEl'};
-var $mdgriffith$elm_ui$Internal$Model$asEl = $mdgriffith$elm_ui$Internal$Model$AsEl;
+var $mdgriffith$elm_ui$Internal$Model$AsColumn = {$: 'AsColumn'};
+var $mdgriffith$elm_ui$Internal$Model$asColumn = $mdgriffith$elm_ui$Internal$Model$AsColumn;
+var $mdgriffith$elm_ui$Internal$Style$classes = {above: 'a', active: 'atv', alignBottom: 'ab', alignCenterX: 'cx', alignCenterY: 'cy', alignContainerBottom: 'acb', alignContainerCenterX: 'accx', alignContainerCenterY: 'accy', alignContainerRight: 'acr', alignLeft: 'al', alignRight: 'ar', alignTop: 'at', alignedHorizontally: 'ah', alignedVertically: 'av', any: 's', behind: 'bh', below: 'b', bold: 'w7', borderDashed: 'bd', borderDotted: 'bdt', borderNone: 'bn', borderSolid: 'bs', capturePointerEvents: 'cpe', clip: 'cp', clipX: 'cpx', clipY: 'cpy', column: 'c', container: 'ctr', contentBottom: 'cb', contentCenterX: 'ccx', contentCenterY: 'ccy', contentLeft: 'cl', contentRight: 'cr', contentTop: 'ct', cursorPointer: 'cptr', cursorText: 'ctxt', focus: 'fcs', focusedWithin: 'focus-within', fullSize: 'fs', grid: 'g', hasBehind: 'hbh', heightContent: 'hc', heightExact: 'he', heightFill: 'hf', heightFillPortion: 'hfp', hover: 'hv', imageContainer: 'ic', inFront: 'fr', inputMultiline: 'iml', inputMultilineFiller: 'imlf', inputMultilineParent: 'imlp', inputMultilineWrapper: 'implw', inputText: 'it', italic: 'i', link: 'lnk', nearby: 'nb', noTextSelection: 'notxt', onLeft: 'ol', onRight: 'or', opaque: 'oq', overflowHidden: 'oh', page: 'pg', paragraph: 'p', passPointerEvents: 'ppe', root: 'ui', row: 'r', scrollbars: 'sb', scrollbarsX: 'sbx', scrollbarsY: 'sby', seButton: 'sbt', single: 'e', sizeByCapital: 'cap', spaceEvenly: 'sev', strike: 'sk', text: 't', textCenter: 'tc', textExtraBold: 'w8', textExtraLight: 'w2', textHeavy: 'w9', textJustify: 'tj', textJustifyAll: 'tja', textLeft: 'tl', textLight: 'w3', textMedium: 'w5', textNormalWeight: 'w4', textRight: 'tr', textSemiBold: 'w6', textThin: 'w1', textUnitalicized: 'tun', transition: 'ts', transparent: 'clr', underline: 'u', widthContent: 'wc', widthExact: 'we', widthFill: 'wf', widthFillPortion: 'wfp', wrapped: 'wrp'};
 var $mdgriffith$elm_ui$Internal$Model$Generic = {$: 'Generic'};
 var $mdgriffith$elm_ui$Internal$Model$div = $mdgriffith$elm_ui$Internal$Model$Generic;
 var $mdgriffith$elm_ui$Internal$Model$NoNearbyChildren = {$: 'NoNearbyChildren'};
@@ -8576,6 +8707,8 @@ var $mdgriffith$elm_ui$Internal$Model$addKeyedChildren = F3(
 							inFront)));
 		}
 	});
+var $mdgriffith$elm_ui$Internal$Model$AsEl = {$: 'AsEl'};
+var $mdgriffith$elm_ui$Internal$Model$asEl = $mdgriffith$elm_ui$Internal$Model$AsEl;
 var $mdgriffith$elm_ui$Internal$Model$AsParagraph = {$: 'AsParagraph'};
 var $mdgriffith$elm_ui$Internal$Model$asParagraph = $mdgriffith$elm_ui$Internal$Model$AsParagraph;
 var $mdgriffith$elm_ui$Internal$Flag$Flag = function (a) {
@@ -8591,6 +8724,15 @@ var $mdgriffith$elm_ui$Internal$Flag$alignBottom = $mdgriffith$elm_ui$Internal$F
 var $mdgriffith$elm_ui$Internal$Flag$alignRight = $mdgriffith$elm_ui$Internal$Flag$flag(40);
 var $mdgriffith$elm_ui$Internal$Flag$centerX = $mdgriffith$elm_ui$Internal$Flag$flag(42);
 var $mdgriffith$elm_ui$Internal$Flag$centerY = $mdgriffith$elm_ui$Internal$Flag$flag(43);
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $mdgriffith$elm_ui$Internal$Model$lengthClassName = function (x) {
 	switch (x.$) {
 		case 'Px':
@@ -13760,6 +13902,53 @@ var $mdgriffith$elm_ui$Internal$Model$element = F4(
 				$mdgriffith$elm_ui$Internal$Model$NoNearbyChildren,
 				$elm$core$List$reverse(attributes)));
 	});
+var $mdgriffith$elm_ui$Internal$Model$Height = function (a) {
+	return {$: 'Height', a: a};
+};
+var $mdgriffith$elm_ui$Element$height = $mdgriffith$elm_ui$Internal$Model$Height;
+var $mdgriffith$elm_ui$Internal$Model$Attr = function (a) {
+	return {$: 'Attr', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$htmlClass = function (cls) {
+	return $mdgriffith$elm_ui$Internal$Model$Attr(
+		$elm$html$Html$Attributes$class(cls));
+};
+var $mdgriffith$elm_ui$Internal$Model$Content = {$: 'Content'};
+var $mdgriffith$elm_ui$Element$shrink = $mdgriffith$elm_ui$Internal$Model$Content;
+var $mdgriffith$elm_ui$Internal$Model$Width = function (a) {
+	return {$: 'Width', a: a};
+};
+var $mdgriffith$elm_ui$Element$width = $mdgriffith$elm_ui$Internal$Model$Width;
+var $mdgriffith$elm_ui$Element$column = F2(
+	function (attrs, children) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asColumn,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.contentTop + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.contentLeft)),
+				A2(
+					$elm$core$List$cons,
+					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
+					A2(
+						$elm$core$List$cons,
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
+						attrs))),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
+	});
+var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
+	return {$: 'Fill', a: a};
+};
+var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
+var $mdgriffith$elm_ui$Internal$Model$OnlyDynamic = F2(
+	function (a, b) {
+		return {$: 'OnlyDynamic', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Model$StaticRootAndDynamic = F2(
+	function (a, b) {
+		return {$: 'StaticRootAndDynamic', a: a, b: b};
+	});
 var $mdgriffith$elm_ui$Internal$Model$AllowHover = {$: 'AllowHover'};
 var $mdgriffith$elm_ui$Internal$Model$Layout = {$: 'Layout'};
 var $mdgriffith$elm_ui$Internal$Model$Rgba = F4(
@@ -14029,7 +14218,50 @@ var $mdgriffith$elm_ui$Element$layoutWith = F3(
 	});
 var $mdgriffith$elm_ui$Element$layout = $mdgriffith$elm_ui$Element$layoutWith(
 	{options: _List_Nil});
+var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
+	return {$: 'AlignX', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
+var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
+var $mdgriffith$elm_ui$Element$Background$color = function (clr) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$bgColor,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Colored,
+			'bg-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
+			'background-color',
+			clr));
+};
+var $mdgriffith$elm_ui$Element$rgb255 = F3(
+	function (red, green, blue) {
+		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, red / 255, green / 255, blue / 255, 1);
+	});
+var $author$project$View$Colors$darkColor = A3($mdgriffith$elm_ui$Element$rgb255, 106, 203, 160);
+var $mdgriffith$elm_ui$Element$el = F2(
+	function (attrs, child) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asEl,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
+				A2(
+					$elm$core$List$cons,
+					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
+					attrs)),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(
+				_List_fromArray(
+					[child])));
+	});
+var $author$project$View$Colors$lightColor = A3($mdgriffith$elm_ui$Element$rgb255, 209, 255, 255);
+var $author$project$Model$Model$CreateAccountPage = {$: 'CreateAccountPage'};
+var $author$project$Model$Model$LoginPage = {$: 'LoginPage'};
 var $author$project$Model$Model$Logout = {$: 'Logout'};
+var $author$project$Model$Model$ShowHistory = {$: 'ShowHistory'};
+var $mdgriffith$elm_ui$Internal$Model$Right = {$: 'Right'};
+var $mdgriffith$elm_ui$Element$alignRight = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$Right);
 var $mdgriffith$elm_ui$Internal$Model$Button = {$: 'Button'};
 var $mdgriffith$elm_ui$Internal$Model$Describe = function (a) {
 	return {$: 'Describe', a: a};
@@ -14056,10 +14288,6 @@ var $mdgriffith$elm_ui$Element$Input$hasFocusStyle = function (attr) {
 var $mdgriffith$elm_ui$Element$Input$focusDefault = function (attrs) {
 	return A2($elm$core$List$any, $mdgriffith$elm_ui$Element$Input$hasFocusStyle, attrs) ? $mdgriffith$elm_ui$Internal$Model$NoAttribute : $mdgriffith$elm_ui$Internal$Model$htmlClass('focusable');
 };
-var $mdgriffith$elm_ui$Internal$Model$Height = function (a) {
-	return {$: 'Height', a: a};
-};
-var $mdgriffith$elm_ui$Element$height = $mdgriffith$elm_ui$Internal$Model$Height;
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -14119,18 +14347,12 @@ var $mdgriffith$elm_ui$Internal$Model$Class = F2(
 	});
 var $mdgriffith$elm_ui$Internal$Flag$cursor = $mdgriffith$elm_ui$Internal$Flag$flag(21);
 var $mdgriffith$elm_ui$Element$pointer = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$cursor, $mdgriffith$elm_ui$Internal$Style$classes.cursorPointer);
-var $mdgriffith$elm_ui$Internal$Model$Content = {$: 'Content'};
-var $mdgriffith$elm_ui$Element$shrink = $mdgriffith$elm_ui$Internal$Model$Content;
 var $elm$html$Html$Attributes$tabindex = function (n) {
 	return A2(
 		_VirtualDom_attribute,
 		'tabIndex',
 		$elm$core$String$fromInt(n));
 };
-var $mdgriffith$elm_ui$Internal$Model$Width = function (a) {
-	return {$: 'Width', a: a};
-};
-var $mdgriffith$elm_ui$Element$width = $mdgriffith$elm_ui$Internal$Model$Width;
 var $mdgriffith$elm_ui$Element$Input$button = F2(
 	function (attrs, _v0) {
 		var onPress = _v0.onPress;
@@ -14183,25 +14405,12 @@ var $mdgriffith$elm_ui$Element$Input$button = F2(
 				_List_fromArray(
 					[label])));
 	});
-var $mdgriffith$elm_ui$Element$Background$color = function (clr) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$bgColor,
-		A3(
-			$mdgriffith$elm_ui$Internal$Model$Colored,
-			'bg-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
-			'background-color',
-			clr));
-};
 var $mdgriffith$elm_ui$Internal$Model$Focus = {$: 'Focus'};
 var $mdgriffith$elm_ui$Internal$Model$PseudoSelector = F2(
 	function (a, b) {
 		return {$: 'PseudoSelector', a: a, b: b};
 	});
 var $mdgriffith$elm_ui$Internal$Flag$focus = $mdgriffith$elm_ui$Internal$Flag$flag(31);
-var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
-	return {$: 'AlignX', a: a};
-};
 var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
 	return {$: 'AlignY', a: a};
 };
@@ -14340,11 +14549,77 @@ var $mdgriffith$elm_ui$Element$focused = function (decs) {
 			$mdgriffith$elm_ui$Internal$Model$Focus,
 			$mdgriffith$elm_ui$Internal$Model$unwrapDecorations(decs)));
 };
-var $mdgriffith$elm_ui$Element$rgb255 = F3(
-	function (red, green, blue) {
-		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, red / 255, green / 255, blue / 255, 1);
+var $author$project$View$Colors$focussedColor = A3($mdgriffith$elm_ui$Element$rgb255, 111, 111, 111);
+var $author$project$View$Colors$navBarHeight = 50;
+var $mdgriffith$elm_ui$Element$none = $mdgriffith$elm_ui$Internal$Model$Empty;
+var $mdgriffith$elm_ui$Internal$Model$OnLeft = {$: 'OnLeft'};
+var $mdgriffith$elm_ui$Element$createNearby = F2(
+	function (loc, element) {
+		if (element.$ === 'Empty') {
+			return $mdgriffith$elm_ui$Internal$Model$NoAttribute;
+		} else {
+			return A2($mdgriffith$elm_ui$Internal$Model$Nearby, loc, element);
+		}
 	});
-var $author$project$View$LoginView$primaryColor = A3($mdgriffith$elm_ui$Element$rgb255, 157, 255, 209);
+var $mdgriffith$elm_ui$Element$onLeft = function (element) {
+	return A2($mdgriffith$elm_ui$Element$createNearby, $mdgriffith$elm_ui$Internal$Model$OnLeft, element);
+};
+var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
+	return {$: 'Px', a: a};
+};
+var $mdgriffith$elm_ui$Element$px = $mdgriffith$elm_ui$Internal$Model$Px;
+var $mdgriffith$elm_ui$Element$text = function (content) {
+	return $mdgriffith$elm_ui$Internal$Model$Text(content);
+};
+var $author$project$View$LoginView$makeCreateOrLogOutButton = function (status) {
+	var historyButton = A2(
+		$mdgriffith$elm_ui$Element$Input$button,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor),
+				$mdgriffith$elm_ui$Element$height(
+				$mdgriffith$elm_ui$Element$px($author$project$View$Colors$navBarHeight))
+			]),
+		{
+			label: $mdgriffith$elm_ui$Element$text('Show History'),
+			onPress: $elm$core$Maybe$Just($author$project$Model$Model$ShowHistory)
+		});
+	var _v0 = function () {
+		switch (status.$) {
+			case 'LoggedIn':
+				return _Utils_Tuple3($author$project$Model$Model$Logout, 'Logout', $mdgriffith$elm_ui$Element$none);
+			case 'LoggedOut':
+				return _Utils_Tuple3($author$project$Model$Model$CreateAccountPage, 'Create a free account?', $mdgriffith$elm_ui$Element$none);
+			case 'Signup':
+				return _Utils_Tuple3($author$project$Model$Model$LoginPage, 'Already have an account?', $mdgriffith$elm_ui$Element$none);
+			default:
+				return _Utils_Tuple3($author$project$Model$Model$CreateAccountPage, 'Create Account', $mdgriffith$elm_ui$Element$none);
+		}
+	}();
+	var action = _v0.a;
+	var buttonText = _v0.b;
+	var history = _v0.c;
+	return A2(
+		$mdgriffith$elm_ui$Element$Input$button,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor),
+				$mdgriffith$elm_ui$Element$focused(
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+					])),
+				$mdgriffith$elm_ui$Element$alignRight,
+				$mdgriffith$elm_ui$Element$onLeft(history),
+				$mdgriffith$elm_ui$Element$height(
+				$mdgriffith$elm_ui$Element$px($author$project$View$Colors$navBarHeight))
+			]),
+		{
+			label: $mdgriffith$elm_ui$Element$text(buttonText),
+			onPress: $elm$core$Maybe$Just(action)
+		});
+};
+var $author$project$View$Colors$primaryColor = A3($mdgriffith$elm_ui$Element$rgb255, 157, 255, 209);
 var $mdgriffith$elm_ui$Internal$Model$AsRow = {$: 'AsRow'};
 var $mdgriffith$elm_ui$Internal$Model$asRow = $mdgriffith$elm_ui$Internal$Model$AsRow;
 var $mdgriffith$elm_ui$Element$row = F2(
@@ -14365,78 +14640,42 @@ var $mdgriffith$elm_ui$Element$row = F2(
 						attrs))),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
-var $mdgriffith$elm_ui$Element$text = function (content) {
-	return $mdgriffith$elm_ui$Internal$Model$Text(content);
-};
-var $author$project$View$LoginView$viewLoggedIn = A2(
-	$mdgriffith$elm_ui$Element$row,
-	_List_Nil,
-	_List_fromArray(
-		[
-			$mdgriffith$elm_ui$Element$text('Time-me'),
-			$mdgriffith$elm_ui$Element$text('You are logged in'),
-			A2(
-			$mdgriffith$elm_ui$Element$Input$button,
-			_List_fromArray(
-				[
-					$mdgriffith$elm_ui$Element$Background$color($author$project$View$LoginView$primaryColor),
-					$mdgriffith$elm_ui$Element$focused(
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$Background$color(
-							A3($mdgriffith$elm_ui$Element$rgb255, 111, 111, 111))
-						]))
-				]),
-			{
-				label: $mdgriffith$elm_ui$Element$text('Logout'),
-				onPress: $elm$core$Maybe$Just($author$project$Model$Model$Logout)
-			})
-		]));
-var $mdgriffith$elm_ui$Internal$Model$Bottom = {$: 'Bottom'};
-var $mdgriffith$elm_ui$Element$alignBottom = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$Bottom);
-var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
-var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
-var $mdgriffith$elm_ui$Internal$Model$AsColumn = {$: 'AsColumn'};
-var $mdgriffith$elm_ui$Internal$Model$asColumn = $mdgriffith$elm_ui$Internal$Model$AsColumn;
-var $mdgriffith$elm_ui$Element$column = F2(
-	function (attrs, children) {
-		return A4(
-			$mdgriffith$elm_ui$Internal$Model$element,
-			$mdgriffith$elm_ui$Internal$Model$asColumn,
-			$mdgriffith$elm_ui$Internal$Model$div,
-			A2(
-				$elm$core$List$cons,
-				$mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.contentTop + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.contentLeft)),
+var $author$project$View$LoginView$viewNavBar = function (model) {
+	var createOrLogoutButton = $author$project$View$LoginView$makeCreateOrLogOutButton(model.loginStatus);
+	return A2(
+		$mdgriffith$elm_ui$Element$row,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+			]),
+		_List_fromArray(
+			[
 				A2(
-					$elm$core$List$cons,
-					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
-					A2(
-						$elm$core$List$cons,
-						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
-						attrs))),
-			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
-	});
-var $mdgriffith$elm_ui$Element$el = F2(
-	function (attrs, child) {
-		return A4(
-			$mdgriffith$elm_ui$Internal$Model$element,
-			$mdgriffith$elm_ui$Internal$Model$asEl,
-			$mdgriffith$elm_ui$Internal$Model$div,
-			A2(
-				$elm$core$List$cons,
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
-				A2(
-					$elm$core$List$cons,
-					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
-					attrs)),
-			$mdgriffith$elm_ui$Internal$Model$Unkeyed(
+				$mdgriffith$elm_ui$Element$el,
 				_List_fromArray(
-					[child])));
-	});
-var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
-	return {$: 'Fill', a: a};
+					[
+						$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$darkColor),
+						$mdgriffith$elm_ui$Element$height(
+						$mdgriffith$elm_ui$Element$px($author$project$View$Colors$navBarHeight))
+					]),
+				$mdgriffith$elm_ui$Element$text('Time-Me')),
+				A2(
+				$mdgriffith$elm_ui$Element$el,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$centerX,
+						$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor)
+					]),
+				$mdgriffith$elm_ui$Element$text('Focus on the process')),
+				createOrLogoutButton
+			]));
 };
-var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
+var $author$project$View$LoginView$viewLoggedIn = function (model) {
+	return $author$project$View$LoginView$viewNavBar(model);
+};
+var $mdgriffith$elm_ui$Internal$Model$CenterY = {$: 'CenterY'};
+var $mdgriffith$elm_ui$Element$centerY = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$CenterY);
 var $author$project$Model$Model$ChangePassword = function (a) {
 	return {$: 'ChangePassword', a: a};
 };
@@ -14444,9 +14683,6 @@ var $author$project$Model$Model$ChangeUserName = function (a) {
 	return {$: 'ChangeUserName', a: a};
 };
 var $author$project$Model$Model$Login = {$: 'Login'};
-var $mdgriffith$elm_ui$Internal$Model$CenterY = {$: 'CenterY'};
-var $mdgriffith$elm_ui$Element$centerY = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$CenterY);
-var $author$project$View$LoginView$darkColor = A3($mdgriffith$elm_ui$Element$rgb255, 106, 203, 160);
 var $mdgriffith$elm_ui$Element$Input$Above = {$: 'Above'};
 var $mdgriffith$elm_ui$Element$Input$Label = F3(
 	function (a, b, c) {
@@ -14529,14 +14765,6 @@ var $mdgriffith$elm_ui$Element$Input$autofill = A2(
 	$mdgriffith$elm_ui$Internal$Model$Attr,
 	$elm$html$Html$Attributes$attribute('autocomplete'));
 var $mdgriffith$elm_ui$Internal$Model$Behind = {$: 'Behind'};
-var $mdgriffith$elm_ui$Element$createNearby = F2(
-	function (loc, element) {
-		if (element.$ === 'Empty') {
-			return $mdgriffith$elm_ui$Internal$Model$NoAttribute;
-		} else {
-			return A2($mdgriffith$elm_ui$Internal$Model$Nearby, loc, element);
-		}
-	});
 var $mdgriffith$elm_ui$Element$behindContent = function (element) {
 	return A2($mdgriffith$elm_ui$Element$createNearby, $mdgriffith$elm_ui$Internal$Model$Behind, element);
 };
@@ -15406,7 +15634,11 @@ var $author$project$View$LoginView$viewLogginRow = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$row,
 		_List_fromArray(
-			[$mdgriffith$elm_ui$Element$centerX, $mdgriffith$elm_ui$Element$centerY]),
+			[
+				$mdgriffith$elm_ui$Element$height(
+				$mdgriffith$elm_ui$Element$px(100)),
+				$mdgriffith$elm_ui$Element$centerX
+			]),
 		_List_fromArray(
 			[
 				A2(
@@ -15438,97 +15670,17 @@ var $author$project$View$LoginView$viewLogginRow = function (model) {
 				$mdgriffith$elm_ui$Element$Input$button,
 				_List_fromArray(
 					[
-						$mdgriffith$elm_ui$Element$Background$color($author$project$View$LoginView$darkColor),
+						$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor),
 						$mdgriffith$elm_ui$Element$focused(
 						_List_fromArray(
 							[
-								$mdgriffith$elm_ui$Element$Background$color(
-								A3($mdgriffith$elm_ui$Element$rgb255, 111, 111, 111))
+								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
 							]))
 					]),
 				{
 					label: $mdgriffith$elm_ui$Element$text('Login'),
 					onPress: $elm$core$Maybe$Just($author$project$Model$Model$Login)
 				})
-			]));
-};
-var $author$project$View$LoginView$lightColor = A3($mdgriffith$elm_ui$Element$rgb255, 209, 255, 255);
-var $author$project$Model$Model$CreateAccountPage = {$: 'CreateAccountPage'};
-var $author$project$Model$Model$LoginPage = {$: 'LoginPage'};
-var $mdgriffith$elm_ui$Internal$Model$Right = {$: 'Right'};
-var $mdgriffith$elm_ui$Element$alignRight = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$Right);
-var $author$project$View$LoginView$makeCreateOrLogOutButton = function (status) {
-	var _v0 = function () {
-		switch (status.$) {
-			case 'LoggedIn':
-				return _Utils_Tuple2($author$project$Model$Model$Logout, 'Logout');
-			case 'LoggedOut':
-				return _Utils_Tuple2($author$project$Model$Model$CreateAccountPage, 'Create Account');
-			case 'Signup':
-				return _Utils_Tuple2($author$project$Model$Model$LoginPage, 'Login');
-			default:
-				return _Utils_Tuple2($author$project$Model$Model$CreateAccountPage, 'Create Account');
-		}
-	}();
-	var action = _v0.a;
-	var buttonText = _v0.b;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$button,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$Background$color($author$project$View$LoginView$darkColor),
-				$mdgriffith$elm_ui$Element$focused(
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$Background$color($author$project$View$LoginView$darkColor)
-					])),
-				$mdgriffith$elm_ui$Element$alignRight
-			]),
-		{
-			label: $mdgriffith$elm_ui$Element$text(buttonText),
-			onPress: $elm$core$Maybe$Just(action)
-		});
-};
-var $mdgriffith$elm_ui$Element$padding = function (x) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$padding,
-		A5(
-			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-			'p-' + $elm$core$String$fromInt(x),
-			x,
-			x,
-			x,
-			x));
-};
-var $author$project$View$LoginView$viewNavBar = function (model) {
-	var createOrLogoutButton = $author$project$View$LoginView$makeCreateOrLogOutButton(model.loginStatus);
-	return A2(
-		$mdgriffith$elm_ui$Element$row,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$padding(20),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$View$LoginView$primaryColor),
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$mdgriffith$elm_ui$Element$el,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$Background$color($author$project$View$LoginView$darkColor)
-					]),
-				$mdgriffith$elm_ui$Element$text('Time-Me')),
-				A2(
-				$mdgriffith$elm_ui$Element$el,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$centerX,
-						$mdgriffith$elm_ui$Element$Background$color($author$project$View$LoginView$lightColor)
-					]),
-				$mdgriffith$elm_ui$Element$text('Focus on the process and the results wil come')),
-				createOrLogoutButton
 			]));
 };
 var $author$project$View$LoginView$viewLoggedOut = function (model) {
@@ -15544,14 +15696,19 @@ var $author$project$View$LoginView$viewLoggedOut = function (model) {
 				$author$project$View$LoginView$viewNavBar(model),
 				A2(
 				$mdgriffith$elm_ui$Element$row,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+						$mdgriffith$elm_ui$Element$height(
+						$mdgriffith$elm_ui$Element$px(100))
+					]),
 				_List_fromArray(
 					[
 						A2(
 						$mdgriffith$elm_ui$Element$el,
 						_List_fromArray(
-							[$mdgriffith$elm_ui$Element$alignBottom, $mdgriffith$elm_ui$Element$centerX]),
-						$mdgriffith$elm_ui$Element$text('Please login or created account'))
+							[$mdgriffith$elm_ui$Element$centerX, $mdgriffith$elm_ui$Element$centerY]),
+						$mdgriffith$elm_ui$Element$text('Please enter your account details to login'))
 					])),
 				$author$project$View$LoginView$viewLogginRow(model)
 			]));
@@ -15568,7 +15725,11 @@ var $author$project$View$LoginView$viewCreateAccountRow = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$row,
 		_List_fromArray(
-			[$mdgriffith$elm_ui$Element$centerX, $mdgriffith$elm_ui$Element$centerY]),
+			[
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$height(
+				$mdgriffith$elm_ui$Element$px(100))
+			]),
 		_List_fromArray(
 			[
 				A2(
@@ -15600,7 +15761,7 @@ var $author$project$View$LoginView$viewCreateAccountRow = function (model) {
 				$mdgriffith$elm_ui$Element$Input$button,
 				_List_fromArray(
 					[
-						$mdgriffith$elm_ui$Element$Background$color($author$project$View$LoginView$darkColor),
+						$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$darkColor),
 						$mdgriffith$elm_ui$Element$focused(
 						_List_fromArray(
 							[
@@ -15627,14 +15788,19 @@ var $author$project$View$LoginView$viewSignUpPage = function (model) {
 				$author$project$View$LoginView$viewNavBar(model),
 				A2(
 				$mdgriffith$elm_ui$Element$row,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+						$mdgriffith$elm_ui$Element$height(
+						$mdgriffith$elm_ui$Element$px(100))
+					]),
 				_List_fromArray(
 					[
 						A2(
 						$mdgriffith$elm_ui$Element$el,
 						_List_fromArray(
-							[$mdgriffith$elm_ui$Element$alignBottom, $mdgriffith$elm_ui$Element$centerX]),
-						$mdgriffith$elm_ui$Element$text('Create a free account'))
+							[$mdgriffith$elm_ui$Element$centerX, $mdgriffith$elm_ui$Element$centerY]),
+						$mdgriffith$elm_ui$Element$text('Please fill in details to create a free account'))
 					])),
 				$author$project$View$LoginView$viewCreateAccountRow(model)
 			]));
@@ -15643,7 +15809,7 @@ var $author$project$View$LoginView$loginView = function (model) {
 	var _v0 = model.loginStatus;
 	switch (_v0.$) {
 		case 'LoggedIn':
-			return $author$project$View$LoginView$viewLoggedIn;
+			return $author$project$View$LoginView$viewLoggedIn(model);
 		case 'Pending':
 			return $author$project$View$LoginView$viewPending;
 		case 'LoggedOut':
@@ -15652,56 +15818,6 @@ var $author$project$View$LoginView$loginView = function (model) {
 			return $author$project$View$LoginView$viewSignUpPage(model);
 	}
 };
-var $author$project$Model$Model$AddProject = {$: 'AddProject'};
-var $author$project$Model$Model$NewProject = function (a) {
-	return {$: 'NewProject', a: a};
-};
-var $elm$html$Html$button = _VirtualDom_node('button');
-var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
-var $author$project$View$View$viewAddProject = function (model) {
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				($elm$core$List$isEmpty(model.projectList) && (!model.timing)) ? A2(
-				$elm$html$Html$h3,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Add a new project below to start...')
-					])) : A2($elm$html$Html$h3, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$input,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$type_('text'),
-						$elm$html$Html$Attributes$placeholder('Add a new project here'),
-						$elm$html$Html$Attributes$value(model.newProject),
-						$elm$html$Html$Events$onInput($author$project$Model$Model$NewProject)
-					]),
-				_List_Nil),
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick($author$project$Model$Model$AddProject)
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('New project to time track')
-					]))
-			]));
-};
-var $author$project$Model$Model$ChangeCurrentProject = function (a) {
-	return {$: 'ChangeCurrentProject', a: a};
-};
-var $author$project$Model$Model$ChangeNote = function (a) {
-	return {$: 'ChangeNote', a: a};
-};
-var $author$project$Model$Model$ToggleTimer = {$: 'ToggleTimer'};
 var $author$project$View$DisplayTime$monthToString = function (month) {
 	switch (month.$) {
 		case 'Jan':
@@ -15762,13 +15878,6 @@ var $elm$time$Time$toDay = F2(
 		return $elm$time$Time$toCivil(
 			A2($elm$time$Time$toAdjustedMinutes, zone, time)).day;
 	});
-var $elm$time$Time$toMinute = F2(
-	function (zone, time) {
-		return A2(
-			$elm$core$Basics$modBy,
-			60,
-			A2($elm$time$Time$toAdjustedMinutes, zone, time));
-	});
 var $elm$time$Time$Apr = {$: 'Apr'};
 var $elm$time$Time$Aug = {$: 'Aug'};
 var $elm$time$Time$Dec = {$: 'Dec'};
@@ -15812,23 +15921,13 @@ var $elm$time$Time$toMonth = F2(
 				return $elm$time$Time$Dec;
 		}
 	});
-var $elm$time$Time$toSecond = F2(
-	function (_v0, time) {
-		return A2(
-			$elm$core$Basics$modBy,
-			60,
-			A2(
-				$elm$time$Time$flooredDiv,
-				$elm$time$Time$posixToMillis(time),
-				1000));
-	});
 var $elm$time$Time$toYear = F2(
 	function (zone, time) {
 		return $elm$time$Time$toCivil(
 			A2($elm$time$Time$toAdjustedMinutes, zone, time)).year;
 	});
-var $author$project$View$DisplayTime$stringTime = F2(
-	function (time, zone) {
+var $author$project$View$DisplayTime$stringDateTime = F3(
+	function (time, zone, timeframe) {
 		var year = $elm$core$String$fromInt(
 			A2($elm$time$Time$toYear, zone, time));
 		var second = $author$project$View$DisplayTime$padTime(
@@ -15844,22 +15943,39 @@ var $author$project$View$DisplayTime$stringTime = F2(
 				A2($elm$time$Time$toHour, zone, time)));
 		var day = $elm$core$String$fromInt(
 			A2($elm$time$Time$toDay, zone, time));
-		return hour + (':' + (minute + (':' + (second + (' ' + (day + (' ' + (month + (' ' + year)))))))));
+		if (timeframe.$ === 'Nothing') {
+			return hour + (':' + (minute + (':' + (second + (' ' + (day + (' ' + (month + (' ' + year)))))))));
+		} else {
+			switch (timeframe.a.$) {
+				case 'Year':
+					var _v1 = timeframe.a;
+					return year;
+				case 'Month':
+					var _v2 = timeframe.a;
+					return month;
+				case 'Day':
+					var _v3 = timeframe.a;
+					return day;
+				case 'Hour':
+					var _v4 = timeframe.a;
+					return hour;
+				case 'Minute':
+					var _v5 = timeframe.a;
+					return minute;
+				default:
+					var _v6 = timeframe.a;
+					return second;
+			}
+		}
 	});
-var $author$project$View$DisplayTime$displayTime = F2(
-	function (time, zone) {
-		return A2(
-			$elm$html$Html$span,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$elm$html$Html$text(
-					A2($author$project$View$DisplayTime$stringTime, time, zone))
-				]));
-	});
-var $elm$html$Html$option = _VirtualDom_node('option');
-var $elm$html$Html$select = _VirtualDom_node('select');
-var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
+var $author$project$View$View$showCurrentDateTime = function (model) {
+	return A2(
+		$mdgriffith$elm_ui$Element$el,
+		_List_fromArray(
+			[$mdgriffith$elm_ui$Element$centerX]),
+		$mdgriffith$elm_ui$Element$text(
+			A3($author$project$View$DisplayTime$stringDateTime, model.currentTime, model.timeZone, $elm$core$Maybe$Nothing)));
+};
 var $author$project$Model$Model$Editing = function (a) {
 	return {$: 'Editing', a: a};
 };
@@ -15879,15 +15995,108 @@ var $author$project$Model$Model$ChangeEditingEndTimeFrame = function (a) {
 var $author$project$Model$Model$ChangeEditingStartTimeFrame = function (a) {
 	return {$: 'ChangeEditingStartTimeFrame', a: a};
 };
+var $author$project$Model$Model$Decrement = {$: 'Decrement'};
 var $author$project$Model$Model$DeleteCompleted = function (a) {
 	return {$: 'DeleteCompleted', a: a};
 };
 var $author$project$Model$Model$DiscardChanges = {$: 'DiscardChanges'};
 var $author$project$Model$Model$End = {$: 'End'};
-var $author$project$Model$Model$Start = {$: 'Start'};
-var $elm$html$Html$br = _VirtualDom_node('br');
-var $author$project$Model$Model$Decrement = {$: 'Decrement'};
 var $author$project$Model$Model$Increment = {$: 'Increment'};
+var $author$project$Model$Model$Start = {$: 'Start'};
+var $author$project$Model$Model$ToggleShowEditingCompletedProjectDropDown = {$: 'ToggleShowEditingCompletedProjectDropDown'};
+var $author$project$Model$Model$ToggleShowEditingEndTimeDropDown = {$: 'ToggleShowEditingEndTimeDropDown'};
+var $author$project$Model$Model$ToggleShowEditingStartTimeDropDown = {$: 'ToggleShowEditingStartTimeDropDown'};
+var $author$project$View$View$createDropDownItems = F4(
+	function (showDropDown, selected, msg, lst) {
+		return showDropDown ? A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor)
+				]),
+			A2(
+				$elm$core$List$map,
+				function (listItem) {
+					return _Utils_eq(listItem, selected) ? $mdgriffith$elm_ui$Element$none : A2(
+						$mdgriffith$elm_ui$Element$row,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Events$onClick(
+								msg(listItem)),
+								$mdgriffith$elm_ui$Element$width(
+								$mdgriffith$elm_ui$Element$px(100))
+							]),
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$text(listItem)
+							]));
+				},
+				lst)) : $mdgriffith$elm_ui$Element$none;
+	});
+var $mdgriffith$elm_ui$Internal$Model$Left = {$: 'Left'};
+var $mdgriffith$elm_ui$Element$alignLeft = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$Left);
+var $mdgriffith$elm_ui$Internal$Model$Below = {$: 'Below'};
+var $mdgriffith$elm_ui$Element$below = function (element) {
+	return A2($mdgriffith$elm_ui$Element$createNearby, $mdgriffith$elm_ui$Internal$Model$Below, element);
+};
+var $author$project$View$View$createDropDownRow = F4(
+	function (toggler, dropDownItems, width, txt) {
+		return A2(
+			$mdgriffith$elm_ui$Element$row,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Events$onClick(toggler),
+					$mdgriffith$elm_ui$Element$alignLeft,
+					$mdgriffith$elm_ui$Element$below(dropDownItems)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width(
+							$mdgriffith$elm_ui$Element$px(width)),
+							$mdgriffith$elm_ui$Element$clip
+						]),
+					$mdgriffith$elm_ui$Element$text(txt)),
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$alignRight]),
+					$mdgriffith$elm_ui$Element$text(' ▾ '))
+				]));
+	});
+var $author$project$View$DisplayTime$displayTime = F2(
+	function (time, zone) {
+		return $mdgriffith$elm_ui$Element$text(
+			A3($author$project$View$DisplayTime$stringDateTime, time, zone, $elm$core$Maybe$Nothing));
+	});
+var $mdgriffith$elm_ui$Element$Input$OnLeft = {$: 'OnLeft'};
+var $mdgriffith$elm_ui$Element$Input$labelLeft = $mdgriffith$elm_ui$Element$Input$Label($mdgriffith$elm_ui$Element$Input$OnLeft);
+var $mdgriffith$elm_ui$Element$padding = function (x) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$padding,
+		A5(
+			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+			'p-' + $elm$core$String$fromInt(x),
+			x,
+			x,
+			x,
+			x));
+};
+var $mdgriffith$elm_ui$Element$Input$Placeholder = F2(
+	function (a, b) {
+		return {$: 'Placeholder', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Element$Input$placeholder = $mdgriffith$elm_ui$Element$Input$Placeholder;
+var $mdgriffith$elm_ui$Element$Input$text = $mdgriffith$elm_ui$Element$Input$textHelper(
+	{
+		autofill: $elm$core$Maybe$Nothing,
+		spellchecked: false,
+		type_: $mdgriffith$elm_ui$Element$Input$TextInputNode('text')
+	});
 var $author$project$Model$Model$timeFrameToString = function (timeFrame) {
 	switch (timeFrame.$) {
 		case 'Year':
@@ -15904,76 +16113,6 @@ var $author$project$Model$Model$timeFrameToString = function (timeFrame) {
 			return 'Second';
 	}
 };
-var $author$project$View$View$displayAdjustTimes = F4(
-	function (model, timeToChange, timeFrameChanged, startOrEnd) {
-		return A2(
-			$elm$html$Html$span,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$button,
-					_List_fromArray(
-						[
-							$elm$html$Html$Events$onClick(
-							A2(timeToChange, startOrEnd, $author$project$Model$Model$Decrement))
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('-')
-						])),
-					A2(
-					$elm$html$Html$select,
-					_List_fromArray(
-						[
-							$elm$html$Html$Events$onInput(timeFrameChanged)
-						]),
-					A2(
-						$elm$core$List$map,
-						function (timeFrame) {
-							var isSelected = function () {
-								var _v0 = timeFrameChanged('');
-								switch (_v0.$) {
-									case 'ChangeEditingStartTimeFrame':
-										return _Utils_eq(model.editingStartTimeFrame, timeFrame);
-									case 'ChangeEditingEndTimeFrame':
-										return _Utils_eq(model.editingEndTimeFrame, timeFrame);
-									case 'ChangeCompletedFromTimeFrame':
-										return _Utils_eq(model.completedFromTimeFrame, timeFrame);
-									case 'ChangeCompletedToTimeFrame':
-										return _Utils_eq(model.completedToTimeFrame, timeFrame);
-									default:
-										return _Utils_eq(timeFrame, $author$project$Model$Model$Minute);
-								}
-							}();
-							return A2(
-								$elm$html$Html$option,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$value(
-										$author$project$Model$Model$timeFrameToString(timeFrame)),
-										$elm$html$Html$Attributes$selected(isSelected)
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(
-										$author$project$Model$Model$timeFrameToString(timeFrame))
-									]));
-						},
-						model.timeFrameList)),
-					A2(
-					$elm$html$Html$button,
-					_List_fromArray(
-						[
-							$elm$html$Html$Events$onClick(
-							A2(timeToChange, startOrEnd, $author$project$Model$Model$Increment))
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('+')
-						]))
-				]));
-	});
 var $author$project$View$DisplayTime$timeSpendString = F2(
 	function (startTime, endTime) {
 		var totalMs = $elm$time$Time$posixToMillis(endTime) - $elm$time$Time$posixToMillis(startTime);
@@ -15987,90 +16126,275 @@ var $author$project$View$DisplayTime$timeSpendString = F2(
 	});
 var $author$project$View$View$displayEditCompletedItem = F2(
 	function (model, completed) {
-		return _List_fromArray(
-			[
-				$elm$html$Html$text('Project: ' + completed.project),
-				A2(
-				$elm$html$Html$select,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onInput($author$project$Model$Model$ChangeEditProject)
-					]),
-				A2(
-					$elm$core$List$map,
-					function (project) {
-						var isSelected = _Utils_eq(project, completed.project);
-						return A2(
-							$elm$html$Html$option,
+		var timeFrameStringList = A2(
+			$elm$core$List$map,
+			function (tf) {
+				return $author$project$Model$Model$timeFrameToString(tf);
+			},
+			$author$project$Model$Model$timeFrameList);
+		var startDropDownItems = A4(
+			$author$project$View$View$createDropDownItems,
+			model.showEditingStartTimeDropDown,
+			$author$project$Model$Model$timeFrameToString(model.editingStartTimeFrame),
+			$author$project$Model$Model$ChangeEditingStartTimeFrame,
+			timeFrameStringList);
+		var endDropDownItems = A4(
+			$author$project$View$View$createDropDownItems,
+			model.showEditingEndTimeDropDown,
+			$author$project$Model$Model$timeFrameToString(model.editingEndTimeFrame),
+			$author$project$Model$Model$ChangeEditingEndTimeFrame,
+			timeFrameStringList);
+		var dropDownItems = A4($author$project$View$View$createDropDownItems, model.showEditingCompletedProjectDropDown, model.editingProject, $author$project$Model$Model$ChangeEditProject, model.projectList);
+		return A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$mdgriffith$elm_ui$Element$row,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$text('Project: '),
+							A4($author$project$View$View$createDropDownRow, $author$project$Model$Model$ToggleShowEditingCompletedProjectDropDown, dropDownItems, 100, model.editingProject)
+						])),
+					A2(
+					$mdgriffith$elm_ui$Element$row,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$text(
+							'Time Spend: ' + A2($author$project$View$DisplayTime$timeSpendString, completed.startTime, completed.endTime))
+						])),
+					A2(
+					$mdgriffith$elm_ui$Element$row,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$text('Note: '),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$text,
 							_List_fromArray(
 								[
-									$elm$html$Html$Attributes$value(project),
-									$elm$html$Html$Attributes$selected(isSelected)
+									$mdgriffith$elm_ui$Element$width(
+									$mdgriffith$elm_ui$Element$px(200))
 								]),
+							{
+								label: A2($mdgriffith$elm_ui$Element$Input$labelLeft, _List_Nil, $mdgriffith$elm_ui$Element$none),
+								onChange: $author$project$Model$Model$ChangeEditNote,
+								placeholder: $elm$core$Maybe$Just(
+									A2(
+										$mdgriffith$elm_ui$Element$Input$placeholder,
+										_List_Nil,
+										$mdgriffith$elm_ui$Element$text('Add a note?'))),
+								text: model.editingNote
+							})
+						])),
+					A2(
+					$mdgriffith$elm_ui$Element$row,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$text('Start Time: '),
+							A2($author$project$View$DisplayTime$displayTime, model.editingStartTime, model.timeZone),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$button,
 							_List_fromArray(
 								[
-									$elm$html$Html$text(project)
-								]));
-					},
-					model.projectList)),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				$elm$html$Html$text('time spend: '),
-				$elm$html$Html$text(
-				A2($author$project$View$DisplayTime$timeSpendString, completed.startTime, completed.endTime)),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				$elm$html$Html$text('note: ' + completed.note),
-				A2(
-				$elm$html$Html$input,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$type_('text'),
-						$elm$html$Html$Attributes$placeholder('Edit note?'),
-						$elm$html$Html$Attributes$value(model.editingNote),
-						$elm$html$Html$Events$onInput($author$project$Model$Model$ChangeEditNote)
-					]),
-				_List_Nil),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				$elm$html$Html$text('start time: '),
-				A2($author$project$View$DisplayTime$displayTime, model.editingStartTime, model.timeZone),
-				A4($author$project$View$View$displayAdjustTimes, model, $author$project$Model$Model$ChangeEditTime, $author$project$Model$Model$ChangeEditingStartTimeFrame, $author$project$Model$Model$Start),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				$elm$html$Html$text('end time : '),
-				A2($author$project$View$DisplayTime$displayTime, model.editingEndTime, model.timeZone),
-				A4($author$project$View$View$displayAdjustTimes, model, $author$project$Model$Model$ChangeEditTime, $author$project$Model$Model$ChangeEditingEndTimeFrame, $author$project$Model$Model$End),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick(
-						$author$project$Model$Model$Editing(completed))
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Save')
-					])),
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick(
-						$author$project$Model$Model$DeleteCompleted(completed))
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Delete')
-					])),
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick($author$project$Model$Model$DiscardChanges)
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Cancel')
-					]))
-			]);
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+									$mdgriffith$elm_ui$Element$focused(
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+										]))
+								]),
+							{
+								label: A2(
+									$mdgriffith$elm_ui$Element$el,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$padding(10)
+										]),
+									$mdgriffith$elm_ui$Element$text('-')),
+								onPress: $elm$core$Maybe$Just(
+									A2($author$project$Model$Model$ChangeEditTime, $author$project$Model$Model$Start, $author$project$Model$Model$Decrement))
+							}),
+							A4(
+							$author$project$View$View$createDropDownRow,
+							$author$project$Model$Model$ToggleShowEditingStartTimeDropDown,
+							startDropDownItems,
+							70,
+							$author$project$Model$Model$timeFrameToString(model.editingStartTimeFrame)),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$button,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+									$mdgriffith$elm_ui$Element$focused(
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+										]))
+								]),
+							{
+								label: A2(
+									$mdgriffith$elm_ui$Element$el,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$padding(10)
+										]),
+									$mdgriffith$elm_ui$Element$text('+')),
+								onPress: $elm$core$Maybe$Just(
+									A2($author$project$Model$Model$ChangeEditTime, $author$project$Model$Model$Start, $author$project$Model$Model$Increment))
+							})
+						])),
+					A2(
+					$mdgriffith$elm_ui$Element$row,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$text('End Time: '),
+							A2($author$project$View$DisplayTime$displayTime, model.editingEndTime, model.timeZone),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$button,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+									$mdgriffith$elm_ui$Element$focused(
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+										]))
+								]),
+							{
+								label: A2(
+									$mdgriffith$elm_ui$Element$el,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$padding(10)
+										]),
+									$mdgriffith$elm_ui$Element$text('-')),
+								onPress: $elm$core$Maybe$Just(
+									A2($author$project$Model$Model$ChangeEditTime, $author$project$Model$Model$End, $author$project$Model$Model$Decrement))
+							}),
+							A4(
+							$author$project$View$View$createDropDownRow,
+							$author$project$Model$Model$ToggleShowEditingEndTimeDropDown,
+							endDropDownItems,
+							70,
+							$author$project$Model$Model$timeFrameToString(model.editingEndTimeFrame)),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$button,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+									$mdgriffith$elm_ui$Element$focused(
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+										]))
+								]),
+							{
+								label: A2(
+									$mdgriffith$elm_ui$Element$el,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$padding(10)
+										]),
+									$mdgriffith$elm_ui$Element$text('+')),
+								onPress: $elm$core$Maybe$Just(
+									A2($author$project$Model$Model$ChangeEditTime, $author$project$Model$Model$End, $author$project$Model$Model$Increment))
+							})
+						])),
+					A2(
+					$mdgriffith$elm_ui$Element$row,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					_List_fromArray(
+						[
+							A2(
+							$mdgriffith$elm_ui$Element$Input$button,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor),
+									$mdgriffith$elm_ui$Element$width(
+									$mdgriffith$elm_ui$Element$px(80)),
+									$mdgriffith$elm_ui$Element$focused(
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+										]))
+								]),
+							{
+								label: A2(
+									$mdgriffith$elm_ui$Element$el,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$padding(10)
+										]),
+									$mdgriffith$elm_ui$Element$text('Save')),
+								onPress: $elm$core$Maybe$Just(
+									$author$project$Model$Model$Editing(completed))
+							}),
+							$mdgriffith$elm_ui$Element$text(' '),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$button,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor),
+									$mdgriffith$elm_ui$Element$width(
+									$mdgriffith$elm_ui$Element$px(80)),
+									$mdgriffith$elm_ui$Element$focused(
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+										]))
+								]),
+							{
+								label: A2(
+									$mdgriffith$elm_ui$Element$el,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$padding(10)
+										]),
+									$mdgriffith$elm_ui$Element$text('Delete')),
+								onPress: $elm$core$Maybe$Just(
+									$author$project$Model$Model$DeleteCompleted(completed))
+							}),
+							$mdgriffith$elm_ui$Element$text(' '),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$button,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor),
+									$mdgriffith$elm_ui$Element$width(
+									$mdgriffith$elm_ui$Element$px(80)),
+									$mdgriffith$elm_ui$Element$focused(
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+										]))
+								]),
+							{
+								label: A2(
+									$mdgriffith$elm_ui$Element$el,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$padding(10)
+										]),
+									$mdgriffith$elm_ui$Element$text('Cancel')),
+								onPress: $elm$core$Maybe$Just($author$project$Model$Model$DiscardChanges)
+							})
+						]))
+				]));
 	});
 var $author$project$View$View$showEditing = function (model) {
 	var maybeCompleted = $elm$core$List$head(
@@ -16082,22 +16406,28 @@ var $author$project$View$View$showEditing = function (model) {
 			model.completedList));
 	if (maybeCompleted.$ === 'Just') {
 		var completed = maybeCompleted.a;
-		return A2(
-			$elm$html$Html$div,
-			_List_Nil,
-			A2($author$project$View$View$displayEditCompletedItem, model, completed));
+		return A2($author$project$View$View$displayEditCompletedItem, model, completed);
 	} else {
 		return A2(
-			$elm$html$Html$div,
+			$mdgriffith$elm_ui$Element$row,
 			_List_Nil,
 			_List_fromArray(
 				[
-					$elm$html$Html$text('No item found with id: ' + model.editingId),
+					$mdgriffith$elm_ui$Element$text('No item found with id: ' + model.editingId),
 					A2(
-					$elm$html$Html$button,
+					$mdgriffith$elm_ui$Element$Input$button,
 					_List_fromArray(
 						[
-							$elm$html$Html$Events$onClick(
+							$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor),
+							$mdgriffith$elm_ui$Element$focused(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+								]))
+						]),
+					{
+						label: $mdgriffith$elm_ui$Element$text('Return'),
+						onPress: $elm$core$Maybe$Just(
 							$author$project$Model$Model$Editing(
 								A5(
 									$author$project$Model$Model$Completed,
@@ -16106,12 +16436,101 @@ var $author$project$View$View$showEditing = function (model) {
 									$elm$time$Time$millisToPosix(0),
 									$elm$time$Time$millisToPosix(0),
 									'')))
-						]),
+					})
+				]));
+	}
+};
+var $author$project$Model$Model$ToggleShowFilterProject = function (a) {
+	return {$: 'ToggleShowFilterProject', a: a};
+};
+var $author$project$Model$Model$ToggleShowStarted = function (a) {
+	return {$: 'ToggleShowStarted', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Flag$fontWeight = $mdgriffith$elm_ui$Internal$Flag$flag(13);
+var $mdgriffith$elm_ui$Element$Font$bold = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontWeight, $mdgriffith$elm_ui$Internal$Style$classes.bold);
+var $mdgriffith$elm_ui$Element$Input$onKeyLookup = function (lookup) {
+	var decode = function (code) {
+		var _v0 = lookup(code);
+		if (_v0.$ === 'Nothing') {
+			return $elm$json$Json$Decode$fail('No key matched');
+		} else {
+			var msg = _v0.a;
+			return $elm$json$Json$Decode$succeed(msg);
+		}
+	};
+	var isKey = A2(
+		$elm$json$Json$Decode$andThen,
+		decode,
+		A2($elm$json$Json$Decode$field, 'key', $elm$json$Json$Decode$string));
+	return $mdgriffith$elm_ui$Internal$Model$Attr(
+		A2($elm$html$Html$Events$on, 'keyup', isKey));
+};
+var $mdgriffith$elm_ui$Element$Input$space = ' ';
+var $mdgriffith$elm_ui$Element$Input$tabindex = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Attr, $elm$html$Html$Attributes$tabindex);
+var $mdgriffith$elm_ui$Element$Input$checkbox = F2(
+	function (attrs, _v0) {
+		var label = _v0.label;
+		var icon = _v0.icon;
+		var checked = _v0.checked;
+		var onChange = _v0.onChange;
+		var attributes = _Utils_ap(
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Input$isHiddenLabel(label) ? $mdgriffith$elm_ui$Internal$Model$NoAttribute : $mdgriffith$elm_ui$Element$spacing(6),
+					$mdgriffith$elm_ui$Internal$Model$Attr(
+					$elm$html$Html$Events$onClick(
+						onChange(!checked))),
+					$mdgriffith$elm_ui$Element$Region$announce,
+					$mdgriffith$elm_ui$Element$Input$onKeyLookup(
+					function (code) {
+						return _Utils_eq(code, $mdgriffith$elm_ui$Element$Input$enter) ? $elm$core$Maybe$Just(
+							onChange(!checked)) : (_Utils_eq(code, $mdgriffith$elm_ui$Element$Input$space) ? $elm$core$Maybe$Just(
+							onChange(!checked)) : $elm$core$Maybe$Nothing);
+					}),
+					$mdgriffith$elm_ui$Element$Input$tabindex(0),
+					$mdgriffith$elm_ui$Element$pointer,
+					$mdgriffith$elm_ui$Element$alignLeft,
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+				]),
+			attrs);
+		return A3(
+			$mdgriffith$elm_ui$Element$Input$applyLabel,
+			attributes,
+			label,
+			A4(
+				$mdgriffith$elm_ui$Internal$Model$element,
+				$mdgriffith$elm_ui$Internal$Model$asEl,
+				$mdgriffith$elm_ui$Internal$Model$div,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Internal$Model$Attr(
+						A2($elm$html$Html$Attributes$attribute, 'role', 'checkbox')),
+						$mdgriffith$elm_ui$Internal$Model$Attr(
+						A2(
+							$elm$html$Html$Attributes$attribute,
+							'aria-checked',
+							checked ? 'true' : 'false')),
+						$mdgriffith$elm_ui$Element$Input$hiddenLabelAttribute(label),
+						$mdgriffith$elm_ui$Element$centerY,
+						$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink)
+					]),
+				$mdgriffith$elm_ui$Internal$Model$Unkeyed(
 					_List_fromArray(
 						[
-							$elm$html$Html$text('Return')
-						]))
-				]));
+							icon(checked)
+						]))));
+	});
+var $author$project$Model$Model$ChangeShowByProject = function (a) {
+	return {$: 'ChangeShowByProject', a: a};
+};
+var $author$project$Model$Model$ToggleFilterProjectDropDown = {$: 'ToggleFilterProjectDropDown'};
+var $author$project$View$View$createFilterByProjectRow = function (model) {
+	if (model.showFilterByProject) {
+		var dropDownItems = A4($author$project$View$View$createDropDownItems, model.showFilterByProjectDropDown, model.projectShown, $author$project$Model$Model$ChangeShowByProject, model.projectList);
+		return A4($author$project$View$View$createDropDownRow, $author$project$Model$Model$ToggleFilterProjectDropDown, dropDownItems, 100, model.projectShown);
+	} else {
+		return $mdgriffith$elm_ui$Element$text('Filter by project?');
 	}
 };
 var $author$project$Model$Model$ChangeCompletedFromTimeFrame = function (a) {
@@ -16124,46 +16543,342 @@ var $author$project$Model$Model$ChangeCompletedTime = F2(
 var $author$project$Model$Model$ChangeCompletedToTimeFrame = function (a) {
 	return {$: 'ChangeCompletedToTimeFrame', a: a};
 };
-var $author$project$Model$Model$ChangeShowByProject = function (a) {
-	return {$: 'ChangeShowByProject', a: a};
+var $author$project$Model$Model$ToggleTimeFrameFromDropDown = {$: 'ToggleTimeFrameFromDropDown'};
+var $author$project$Model$Model$ToggleTimeFrameToDropDown = {$: 'ToggleTimeFrameToDropDown'};
+var $author$project$View$View$createFilterByTimeRow = function (model) {
+	if (model.showByStartTime) {
+		var toTimeFrame = $author$project$Model$Model$timeFrameToString(model.completedToTimeFrame);
+		var timeFrameStringList = A2(
+			$elm$core$List$map,
+			function (tf) {
+				return $author$project$Model$Model$timeFrameToString(tf);
+			},
+			$author$project$Model$Model$timeFrameList);
+		var toDropDownItems = A4($author$project$View$View$createDropDownItems, model.showTimeFrameToDropDown, toTimeFrame, $author$project$Model$Model$ChangeCompletedToTimeFrame, timeFrameStringList);
+		var getToTimeFrame = A2($author$project$View$DisplayTime$stringDateTime, model.completedToTime, model.timeZone);
+		var toDay = getToTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Day));
+		var toHour = getToTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Hour));
+		var toMinute = getToTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Minute));
+		var toMonth = getToTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Month));
+		var toSecond = getToTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Second));
+		var toYear = getToTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Year));
+		var getFromTimeFrame = A2($author$project$View$DisplayTime$stringDateTime, model.completedFromTime, model.timeZone);
+		var fromYear = getFromTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Year));
+		var fromTimeFrame = $author$project$Model$Model$timeFrameToString(model.completedFromTimeFrame);
+		var fromSecond = getFromTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Second));
+		var fromMonth = getFromTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Month));
+		var fromMinute = getFromTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Minute));
+		var fromHour = getFromTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Hour));
+		var fromDropDownItems = A4($author$project$View$View$createDropDownItems, model.showTimeFrameFromDropDown, fromTimeFrame, $author$project$Model$Model$ChangeCompletedFromTimeFrame, timeFrameStringList);
+		var fromDay = getFromTimeFrame(
+			$elm$core$Maybe$Just($author$project$Model$Model$Day));
+		return A2(
+			$mdgriffith$elm_ui$Element$row,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$text(fromHour + (':' + (fromMinute + (':' + (fromSecond + (' ' + (fromDay + (' ' + (fromMonth + (' ' + fromYear)))))))))),
+					A2(
+					$mdgriffith$elm_ui$Element$Input$button,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+							$mdgriffith$elm_ui$Element$focused(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+								]))
+						]),
+					{
+						label: A2(
+							$mdgriffith$elm_ui$Element$el,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$padding(10)
+								]),
+							$mdgriffith$elm_ui$Element$text('-')),
+						onPress: $elm$core$Maybe$Just(
+							A2($author$project$Model$Model$ChangeCompletedTime, $author$project$Model$Model$Start, $author$project$Model$Model$Decrement))
+					}),
+					A4($author$project$View$View$createDropDownRow, $author$project$Model$Model$ToggleTimeFrameFromDropDown, fromDropDownItems, 70, fromTimeFrame),
+					A2(
+					$mdgriffith$elm_ui$Element$Input$button,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+							$mdgriffith$elm_ui$Element$focused(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+								]))
+						]),
+					{
+						label: A2(
+							$mdgriffith$elm_ui$Element$el,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$padding(10)
+								]),
+							$mdgriffith$elm_ui$Element$text('+')),
+						onPress: $elm$core$Maybe$Just(
+							A2($author$project$Model$Model$ChangeCompletedTime, $author$project$Model$Model$Start, $author$project$Model$Model$Increment))
+					}),
+					$mdgriffith$elm_ui$Element$text('   to   '),
+					$mdgriffith$elm_ui$Element$text(fromHour + (':' + (fromMinute + (':' + (fromSecond + (' ' + (fromDay + (' ' + (fromMonth + (' ' + fromYear)))))))))),
+					A2(
+					$mdgriffith$elm_ui$Element$Input$button,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+							$mdgriffith$elm_ui$Element$focused(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+								]))
+						]),
+					{
+						label: A2(
+							$mdgriffith$elm_ui$Element$el,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$padding(10)
+								]),
+							$mdgriffith$elm_ui$Element$text('-')),
+						onPress: $elm$core$Maybe$Just(
+							A2($author$project$Model$Model$ChangeCompletedTime, $author$project$Model$Model$End, $author$project$Model$Model$Decrement))
+					}),
+					A4($author$project$View$View$createDropDownRow, $author$project$Model$Model$ToggleTimeFrameToDropDown, toDropDownItems, 70, toTimeFrame),
+					A2(
+					$mdgriffith$elm_ui$Element$Input$button,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+							$mdgriffith$elm_ui$Element$focused(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+								]))
+						]),
+					{
+						label: A2(
+							$mdgriffith$elm_ui$Element$el,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$padding(10)
+								]),
+							$mdgriffith$elm_ui$Element$text('+')),
+						onPress: $elm$core$Maybe$Just(
+							A2($author$project$Model$Model$ChangeCompletedTime, $author$project$Model$Model$End, $author$project$Model$Model$Increment))
+					})
+				]));
+	} else {
+		return $mdgriffith$elm_ui$Element$text('Filter by started time?');
+	}
 };
-var $author$project$Model$Model$ToggleShowByProject = {$: 'ToggleShowByProject'};
-var $author$project$Model$Model$ToggleShowStarted = {$: 'ToggleShowStarted'};
-var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
+var $mdgriffith$elm_ui$Internal$Flag$fontAlignment = $mdgriffith$elm_ui$Internal$Flag$flag(12);
+var $mdgriffith$elm_ui$Element$Font$center = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.textCenter);
+var $elm$core$Basics$pi = _Basics_pi;
+var $elm$core$Basics$degrees = function (angleInDegrees) {
+	return (angleInDegrees * $elm$core$Basics$pi) / 180;
+};
+var $mdgriffith$elm_ui$Internal$Model$Rotate = F2(
+	function (a, b) {
+		return {$: 'Rotate', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Flag$rotate = $mdgriffith$elm_ui$Internal$Flag$flag(24);
+var $mdgriffith$elm_ui$Element$rotate = function (angle) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$TransformComponent,
+		$mdgriffith$elm_ui$Internal$Flag$rotate,
+		A2(
+			$mdgriffith$elm_ui$Internal$Model$Rotate,
+			_Utils_Tuple3(0, 0, 1),
+			angle));
+};
+var $mdgriffith$elm_ui$Internal$Model$boxShadowClass = function (shadow) {
+	return $elm$core$String$concat(
+		_List_fromArray(
+			[
+				shadow.inset ? 'box-inset' : 'box-',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.offset.a) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.offset.b) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.blur) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.size) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$formatColorClass(shadow.color)
+			]));
+};
+var $mdgriffith$elm_ui$Internal$Flag$shadows = $mdgriffith$elm_ui$Internal$Flag$flag(19);
+var $mdgriffith$elm_ui$Element$Border$shadow = function (almostShade) {
+	var shade = {blur: almostShade.blur, color: almostShade.color, inset: false, offset: almostShade.offset, size: almostShade.size};
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$shadows,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Single,
+			$mdgriffith$elm_ui$Internal$Model$boxShadowClass(shade),
+			'box-shadow',
+			$mdgriffith$elm_ui$Internal$Model$formatBoxShadow(shade)));
+};
+var $mdgriffith$elm_ui$Element$Font$size = function (i) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$fontSize,
+		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
+};
+var $mdgriffith$elm_ui$Element$Border$widthXY = F2(
+	function (x, y) {
+		return A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$borderWidth,
+			A5(
+				$mdgriffith$elm_ui$Internal$Model$BorderWidth,
+				'b-' + ($elm$core$String$fromInt(x) + ('-' + $elm$core$String$fromInt(y))),
+				y,
+				x,
+				y,
+				x));
+	});
+var $mdgriffith$elm_ui$Element$Border$widthEach = function (_v0) {
+	var bottom = _v0.bottom;
+	var top = _v0.top;
+	var left = _v0.left;
+	var right = _v0.right;
+	return (_Utils_eq(top, bottom) && _Utils_eq(left, right)) ? (_Utils_eq(top, right) ? $mdgriffith$elm_ui$Element$Border$width(top) : A2($mdgriffith$elm_ui$Element$Border$widthXY, left, top)) : A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$borderWidth,
+		A5(
+			$mdgriffith$elm_ui$Internal$Model$BorderWidth,
+			'b-' + ($elm$core$String$fromInt(top) + ('-' + ($elm$core$String$fromInt(right) + ('-' + ($elm$core$String$fromInt(bottom) + ('-' + $elm$core$String$fromInt(left))))))),
+			top,
+			right,
+			bottom,
+			left));
+};
+var $mdgriffith$elm_ui$Element$Input$defaultCheckbox = function (checked) {
+	return A2(
+		$mdgriffith$elm_ui$Element$el,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Internal$Model$htmlClass('focusable'),
+				$mdgriffith$elm_ui$Element$width(
+				$mdgriffith$elm_ui$Element$px(14)),
+				$mdgriffith$elm_ui$Element$height(
+				$mdgriffith$elm_ui$Element$px(14)),
+				$mdgriffith$elm_ui$Element$Font$color($mdgriffith$elm_ui$Element$Input$white),
+				$mdgriffith$elm_ui$Element$centerY,
+				$mdgriffith$elm_ui$Element$Font$size(9),
+				$mdgriffith$elm_ui$Element$Font$center,
+				$mdgriffith$elm_ui$Element$Border$rounded(3),
+				$mdgriffith$elm_ui$Element$Border$color(
+				checked ? A3($mdgriffith$elm_ui$Element$rgb, 59 / 255, 153 / 255, 252 / 255) : A3($mdgriffith$elm_ui$Element$rgb, 211 / 255, 211 / 255, 211 / 255)),
+				$mdgriffith$elm_ui$Element$Border$shadow(
+				{
+					blur: 1,
+					color: checked ? A4($mdgriffith$elm_ui$Element$rgba, 238 / 255, 238 / 255, 238 / 255, 0) : A3($mdgriffith$elm_ui$Element$rgb, 238 / 255, 238 / 255, 238 / 255),
+					offset: _Utils_Tuple2(0, 0),
+					size: 1
+				}),
+				$mdgriffith$elm_ui$Element$Background$color(
+				checked ? A3($mdgriffith$elm_ui$Element$rgb, 59 / 255, 153 / 255, 252 / 255) : $mdgriffith$elm_ui$Element$Input$white),
+				$mdgriffith$elm_ui$Element$Border$width(
+				checked ? 0 : 1)
+			]),
+		checked ? A2(
+			$mdgriffith$elm_ui$Element$el,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Border$color($mdgriffith$elm_ui$Element$Input$white),
+					$mdgriffith$elm_ui$Element$height(
+					$mdgriffith$elm_ui$Element$px(6)),
+					$mdgriffith$elm_ui$Element$width(
+					$mdgriffith$elm_ui$Element$px(9)),
+					$mdgriffith$elm_ui$Element$rotate(
+					$elm$core$Basics$degrees(-45)),
+					$mdgriffith$elm_ui$Element$centerX,
+					$mdgriffith$elm_ui$Element$centerY,
+					$mdgriffith$elm_ui$Element$moveUp(1),
+					$mdgriffith$elm_ui$Element$Border$widthEach(
+					{bottom: 2, left: 2, right: 0, top: 0})
+				]),
+			$mdgriffith$elm_ui$Element$none) : $mdgriffith$elm_ui$Element$none);
+};
 var $author$project$View$View$displayCompletedItem = F2(
 	function (model, completed) {
-		return _List_fromArray(
-			[
-				$elm$html$Html$text('Project: ' + completed.project),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				$elm$html$Html$text('time spend: '),
-				$elm$html$Html$text(
-				A2($author$project$View$DisplayTime$timeSpendString, completed.startTime, completed.endTime)),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				$elm$html$Html$text('note: ' + completed.note),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				$elm$html$Html$text('start time: '),
-				A2($author$project$View$DisplayTime$displayTime, completed.startTime, model.timeZone),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				$elm$html$Html$text('end time : '),
-				A2($author$project$View$DisplayTime$displayTime, completed.endTime, model.timeZone),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick(
-						$author$project$Model$Model$Editing(completed))
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Edit')
-					]))
-			]);
+		return A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					$mdgriffith$elm_ui$Element$text('Project: ' + completed.project)),
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					$mdgriffith$elm_ui$Element$text(
+						'Time spent: ' + A2($author$project$View$DisplayTime$timeSpendString, completed.startTime, completed.endTime))),
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					$mdgriffith$elm_ui$Element$text('Note: ' + completed.note)),
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					$mdgriffith$elm_ui$Element$text(
+						'Start time: ' + A3($author$project$View$DisplayTime$stringDateTime, completed.startTime, model.timeZone, $elm$core$Maybe$Nothing))),
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					$mdgriffith$elm_ui$Element$text(
+						'End time: ' + A3($author$project$View$DisplayTime$stringDateTime, completed.endTime, model.timeZone, $elm$core$Maybe$Nothing))),
+					A2(
+					$mdgriffith$elm_ui$Element$Input$button,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+							$mdgriffith$elm_ui$Element$focused(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+								])),
+							$mdgriffith$elm_ui$Element$centerX
+						]),
+					{
+						label: A2(
+							$mdgriffith$elm_ui$Element$el,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$padding(10)
+								]),
+							$mdgriffith$elm_ui$Element$text('Edit')),
+						onPress: $elm$core$Maybe$Just(
+							$author$project$Model$Model$Editing(completed))
+					})
+				]));
 	});
 var $author$project$View$FilterView$filterHistoryByProject = F2(
 	function (model, completedItem) {
-		return model.showByProject ? _Utils_eq(completedItem.project, model.projectShown) : true;
+		return model.showFilterByProject ? _Utils_eq(completedItem.project, model.projectShown) : true;
 	});
 var $author$project$View$FilterView$filterHistoryByStartTime = F2(
 	function (model, completedItem) {
@@ -16181,6 +16896,20 @@ var $author$project$View$FilterView$filterHistory = function (model) {
 		},
 		model.completedList);
 };
+var $author$project$View$View$displayItemList = function (model) {
+	return A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+			]),
+		A2(
+			$elm$core$List$map,
+			function (item) {
+				return A2($author$project$View$View$displayCompletedItem, model, item);
+			},
+			$author$project$View$FilterView$filterHistory(model)));
+};
 var $author$project$View$View$displayTotalTime = function (model) {
 	var completedTimes = A2(
 		$elm$core$List$map,
@@ -16190,245 +16919,353 @@ var $author$project$View$View$displayTotalTime = function (model) {
 		$author$project$View$FilterView$filterHistory(model));
 	var totalTime = A3($elm$core$List$foldl, $elm$core$Basics$add, 0, completedTimes);
 	return A2(
-		$mdgriffith$elm_ui$Element$layout,
-		_List_Nil,
-		A2(
-			$mdgriffith$elm_ui$Element$row,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$mdgriffith$elm_ui$Element$text(
-					'Total time spent: ' + A2(
-						$author$project$View$DisplayTime$timeSpendString,
-						$elm$time$Time$millisToPosix(0),
-						$elm$time$Time$millisToPosix(totalTime)))
-				])));
+		$mdgriffith$elm_ui$Element$row,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$padding(20),
+				$mdgriffith$elm_ui$Element$Font$bold
+			]),
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$text(
+				'Total time spent: ' + A2(
+					$author$project$View$DisplayTime$timeSpendString,
+					$elm$time$Time$millisToPosix(0),
+					$elm$time$Time$millisToPosix(totalTime)))
+			]));
 };
-var $elm$html$Html$h4 = _VirtualDom_node('h4');
-var $elm$html$Html$li = _VirtualDom_node('li');
-var $elm$html$Html$ul = _VirtualDom_node('ul');
+var $mdgriffith$elm_ui$Element$Input$OnRight = {$: 'OnRight'};
+var $mdgriffith$elm_ui$Element$Input$labelRight = $mdgriffith$elm_ui$Element$Input$Label($mdgriffith$elm_ui$Element$Input$OnRight);
+var $mdgriffith$elm_ui$Element$Font$underline = $mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.underline);
 var $author$project$View$View$viewTimedHistory = function (model) {
 	return $elm$core$List$isEmpty(model.completedList) ? A2(
-		$elm$html$Html$div,
-		_List_Nil,
+		$mdgriffith$elm_ui$Element$el,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$height(
+				$mdgriffith$elm_ui$Element$px(150))
+			]),
+		$mdgriffith$elm_ui$Element$text('History - No Completed Timed Items Yet...')) : A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+			]),
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$h4,
-				_List_Nil,
+				$mdgriffith$elm_ui$Element$row,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('History - No Completed Timed Items Yet...')
-					]))
-			])) : A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$h4,
-				_List_Nil,
+						$mdgriffith$elm_ui$Element$height(
+						$mdgriffith$elm_ui$Element$px(100)),
+						$mdgriffith$elm_ui$Element$centerX
+					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Timed History')
+						A2(
+						$mdgriffith$elm_ui$Element$el,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$lightColor),
+								$mdgriffith$elm_ui$Element$Font$bold,
+								$mdgriffith$elm_ui$Element$Font$underline
+							]),
+						$mdgriffith$elm_ui$Element$text('Timed History'))
 					])),
-				$elm$html$Html$text('Show history by: '),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
 				A2(
-				$elm$html$Html$input,
+				$mdgriffith$elm_ui$Element$row,
+				_List_fromArray(
+					[$mdgriffith$elm_ui$Element$centerX]),
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$type_('checkbox'),
-						$elm$html$Html$Attributes$checked(model.showByStartTime),
-						$elm$html$Html$Events$onClick($author$project$Model$Model$ToggleShowStarted)
-					]),
-				_List_Nil),
-				$elm$html$Html$text('Started timing between: '),
-				A2($author$project$View$DisplayTime$displayTime, model.completedFromTime, model.timeZone),
-				A4($author$project$View$View$displayAdjustTimes, model, $author$project$Model$Model$ChangeCompletedTime, $author$project$Model$Model$ChangeCompletedFromTimeFrame, $author$project$Model$Model$Start),
-				$elm$html$Html$text('\tand:   '),
-				A2($author$project$View$DisplayTime$displayTime, model.completedToTime, model.timeZone),
-				A4($author$project$View$View$displayAdjustTimes, model, $author$project$Model$Model$ChangeCompletedTime, $author$project$Model$Model$ChangeCompletedToTimeFrame, $author$project$Model$Model$End),
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
+						$mdgriffith$elm_ui$Element$text('Filter history by:')
+					])),
 				A2(
-				$elm$html$Html$input,
+				$mdgriffith$elm_ui$Element$row,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$type_('checkbox'),
-						$elm$html$Html$Attributes$checked(model.showByProject),
-						$elm$html$Html$Events$onClick($author$project$Model$Model$ToggleShowByProject)
+						$mdgriffith$elm_ui$Element$alignLeft,
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
 					]),
-				_List_Nil),
-				$elm$html$Html$text('Filter by project '),
-				A2(
-				$elm$html$Html$select,
 				_List_fromArray(
 					[
-						$elm$html$Html$Events$onInput($author$project$Model$Model$ChangeShowByProject)
-					]),
+						A2(
+						$mdgriffith$elm_ui$Element$Input$checkbox,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$padding(10),
+								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$darkColor),
+								$mdgriffith$elm_ui$Element$width(
+								$mdgriffith$elm_ui$Element$px(40))
+							]),
+						{
+							checked: model.showByStartTime,
+							icon: $mdgriffith$elm_ui$Element$Input$defaultCheckbox,
+							label: A2($mdgriffith$elm_ui$Element$Input$labelRight, _List_Nil, $mdgriffith$elm_ui$Element$none),
+							onChange: $author$project$Model$Model$ToggleShowStarted
+						}),
+						$author$project$View$View$createFilterByTimeRow(model)
+					])),
 				A2(
-					$elm$core$List$map,
-					function (project) {
-						var isSelected = _Utils_eq(project, model.projectShown);
-						return A2(
-							$elm$html$Html$option,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$value(project),
-									$elm$html$Html$Attributes$selected(isSelected)
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text(project)
-								]));
-					},
-					model.projectList)),
+				$mdgriffith$elm_ui$Element$row,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$alignLeft,
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$mdgriffith$elm_ui$Element$Input$checkbox,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$padding(10),
+								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$darkColor),
+								$mdgriffith$elm_ui$Element$width(
+								$mdgriffith$elm_ui$Element$px(40))
+							]),
+						{
+							checked: model.showFilterByProject,
+							icon: $mdgriffith$elm_ui$Element$Input$defaultCheckbox,
+							label: A2($mdgriffith$elm_ui$Element$Input$labelRight, _List_Nil, $mdgriffith$elm_ui$Element$none),
+							onChange: $author$project$Model$Model$ToggleShowFilterProject
+						}),
+						$author$project$View$View$createFilterByProjectRow(model)
+					])),
 				$author$project$View$View$displayTotalTime(model),
-				A2(
-				$elm$html$Html$ul,
-				_List_Nil,
-				A2(
-					$elm$core$List$map,
-					function (elem) {
-						return A2(
-							$elm$html$Html$li,
-							_List_Nil,
-							A2($author$project$View$View$displayCompletedItem, model, elem));
-					},
-					$author$project$View$FilterView$filterHistory(model)))
+				$author$project$View$View$displayItemList(model)
 			]));
 };
 var $author$project$View$View$showEditingOrCompleted = function (model) {
 	return model.editing ? $author$project$View$View$showEditing(model) : $author$project$View$View$viewTimedHistory(model);
 };
-var $author$project$View$View$viewDefault = function (model) {
-	return $elm$core$List$isEmpty(model.projectList) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : A2(
-		$elm$html$Html$div,
-		_List_Nil,
+var $author$project$Model$Model$AddProject = {$: 'AddProject'};
+var $author$project$Model$Model$NewProject = function (a) {
+	return {$: 'NewProject', a: a};
+};
+var $author$project$View$View$viewAddProject = function (model) {
+	return A2(
+		$mdgriffith$elm_ui$Element$row,
 		_List_fromArray(
 			[
-				A2($author$project$View$DisplayTime$displayTime, model.currentTime, model.timeZone),
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$height(
+				$mdgriffith$elm_ui$Element$px(100))
+			]),
+		_List_fromArray(
+			[
 				A2(
-				$elm$html$Html$select,
+				$mdgriffith$elm_ui$Element$Input$text,
+				_List_fromArray(
+					[$mdgriffith$elm_ui$Element$centerX]),
+				{
+					label: A2($mdgriffith$elm_ui$Element$Input$labelAbove, _List_Nil, $mdgriffith$elm_ui$Element$none),
+					onChange: $author$project$Model$Model$NewProject,
+					placeholder: $elm$core$Maybe$Just(
+						A2(
+							$mdgriffith$elm_ui$Element$Input$placeholder,
+							_List_Nil,
+							$mdgriffith$elm_ui$Element$text('Add a new project?'))),
+					text: model.newProject
+				}),
+				A2(
+				$mdgriffith$elm_ui$Element$Input$button,
 				_List_fromArray(
 					[
-						$elm$html$Html$Events$onInput($author$project$Model$Model$ChangeCurrentProject)
+						$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+						$mdgriffith$elm_ui$Element$focused(
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+							]))
 					]),
+				{
+					label: $mdgriffith$elm_ui$Element$text('Add Project'),
+					onPress: $elm$core$Maybe$Just($author$project$Model$Model$AddProject)
+				})
+			]));
+};
+var $author$project$Model$Model$ChangeCurrentProject = function (a) {
+	return {$: 'ChangeCurrentProject', a: a};
+};
+var $author$project$Model$Model$ChangeNote = function (a) {
+	return {$: 'ChangeNote', a: a};
+};
+var $author$project$Model$Model$ToggleProjectDropDown = {$: 'ToggleProjectDropDown'};
+var $author$project$Model$Model$ToggleTimer = {$: 'ToggleTimer'};
+var $author$project$View$View$viewDefault = function (model) {
+	var dropDownItems = A4($author$project$View$View$createDropDownItems, model.showProjectDropDown, model.currentProject, $author$project$Model$Model$ChangeCurrentProject, model.projectList);
+	return A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+			]),
+		_List_fromArray(
+			[
 				A2(
-					$elm$core$List$map,
-					function (project) {
-						var isSelected = _Utils_eq(project, model.currentProject);
-						return A2(
-							$elm$html$Html$option,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$value(project),
-									$elm$html$Html$Attributes$selected(isSelected)
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text(project)
-								]));
-					},
-					model.projectList)),
-				A2(
-				$elm$html$Html$button,
+				$mdgriffith$elm_ui$Element$row,
+				_List_fromArray(
+					[$mdgriffith$elm_ui$Element$centerX]),
 				_List_fromArray(
 					[
-						$elm$html$Html$Events$onClick($author$project$Model$Model$ToggleTimer)
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Start')
+						$mdgriffith$elm_ui$Element$text('Project to time: '),
+						A4($author$project$View$View$createDropDownRow, $author$project$Model$Model$ToggleProjectDropDown, dropDownItems, 100, model.currentProject),
+						A2(
+						$mdgriffith$elm_ui$Element$Input$button,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+								$mdgriffith$elm_ui$Element$focused(
+								_List_fromArray(
+									[
+										$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+									]))
+							]),
+						{
+							label: $mdgriffith$elm_ui$Element$text('Start'),
+							onPress: $elm$core$Maybe$Just($author$project$Model$Model$ToggleTimer)
+						})
 					])),
 				A2(
-				$elm$html$Html$input,
+				$mdgriffith$elm_ui$Element$row,
+				_List_fromArray(
+					[$mdgriffith$elm_ui$Element$centerX]),
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$type_('text'),
-						$elm$html$Html$Attributes$placeholder('Add a note?'),
-						$elm$html$Html$Attributes$value(model.note),
-						$elm$html$Html$Events$onInput($author$project$Model$Model$ChangeNote)
-					]),
-				_List_Nil),
-				$author$project$View$View$showEditingOrCompleted(model)
+						A2(
+						$mdgriffith$elm_ui$Element$Input$text,
+						_List_fromArray(
+							[$mdgriffith$elm_ui$Element$centerX]),
+						{
+							label: A2($mdgriffith$elm_ui$Element$Input$labelAbove, _List_Nil, $mdgriffith$elm_ui$Element$none),
+							onChange: $author$project$Model$Model$ChangeNote,
+							placeholder: $elm$core$Maybe$Just(
+								A2(
+									$mdgriffith$elm_ui$Element$Input$placeholder,
+									_List_Nil,
+									$mdgriffith$elm_ui$Element$text('Add a note?'))),
+							text: model.note
+						})
+					]))
 			]));
 };
 var $author$project$View$View$viewTiming = function (model) {
 	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
+		$mdgriffith$elm_ui$Element$column,
 		_List_fromArray(
 			[
-				$elm$html$Html$text(
-				A2($author$project$View$DisplayTime$timeSpendString, model.startTime, model.currentTime)),
-				$elm$html$Html$text(model.currentProject),
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+			]),
+		_List_fromArray(
+			[
 				A2(
-				$elm$html$Html$button,
+				$mdgriffith$elm_ui$Element$row,
 				_List_fromArray(
 					[
-						$elm$html$Html$Events$onClick($author$project$Model$Model$ToggleTimer)
+						$mdgriffith$elm_ui$Element$centerX,
+						$mdgriffith$elm_ui$Element$padding(20)
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Stop')
+						$mdgriffith$elm_ui$Element$text('Timing project: ' + model.currentProject)
 					])),
 				A2(
-				$elm$html$Html$input,
+				$mdgriffith$elm_ui$Element$row,
+				_List_fromArray(
+					[$mdgriffith$elm_ui$Element$centerX]),
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$type_('text'),
-						$elm$html$Html$Attributes$placeholder('Add a note?'),
-						$elm$html$Html$Attributes$value(model.note),
-						$elm$html$Html$Events$onInput($author$project$Model$Model$ChangeNote)
-					]),
-				_List_Nil),
-				$author$project$View$View$showEditingOrCompleted(model)
+						$mdgriffith$elm_ui$Element$text(
+						A2($author$project$View$DisplayTime$timeSpendString, model.startTime, model.currentTime))
+					])),
+				A2(
+				$mdgriffith$elm_ui$Element$row,
+				_List_fromArray(
+					[$mdgriffith$elm_ui$Element$centerX]),
+				_List_fromArray(
+					[
+						A2(
+						$mdgriffith$elm_ui$Element$Input$text,
+						_List_Nil,
+						{
+							label: A2($mdgriffith$elm_ui$Element$Input$labelAbove, _List_Nil, $mdgriffith$elm_ui$Element$none),
+							onChange: $author$project$Model$Model$ChangeNote,
+							placeholder: $elm$core$Maybe$Just(
+								A2(
+									$mdgriffith$elm_ui$Element$Input$placeholder,
+									_List_Nil,
+									$mdgriffith$elm_ui$Element$text('Add a note?'))),
+							text: model.note
+						})
+					])),
+				A2(
+				$mdgriffith$elm_ui$Element$row,
+				_List_fromArray(
+					[$mdgriffith$elm_ui$Element$centerX]),
+				_List_fromArray(
+					[
+						A2(
+						$mdgriffith$elm_ui$Element$Input$button,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$primaryColor),
+								$mdgriffith$elm_ui$Element$focused(
+								_List_fromArray(
+									[
+										$mdgriffith$elm_ui$Element$Background$color($author$project$View$Colors$focussedColor)
+									]))
+							]),
+						{
+							label: $mdgriffith$elm_ui$Element$text('Stop'),
+							onPress: $elm$core$Maybe$Just($author$project$Model$Model$ToggleTimer)
+						})
+					]))
 			]));
 };
 var $author$project$View$View$view = function (model) {
-	var _v0 = model.loginStatus;
-	switch (_v0.$) {
-		case 'LoggedOut':
-			return A2(
-				$mdgriffith$elm_ui$Element$layout,
-				_List_Nil,
-				$author$project$View$LoginView$loginView(model));
-		case 'Signup':
-			return A2(
-				$mdgriffith$elm_ui$Element$layout,
-				_List_Nil,
-				$author$project$View$LoginView$loginView(model));
-		case 'Pending':
-			return A2(
-				$mdgriffith$elm_ui$Element$layout,
-				_List_Nil,
-				$author$project$View$LoginView$loginView(model));
-		default:
-			return (!model.timing) ? A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$mdgriffith$elm_ui$Element$layout,
-						_List_Nil,
-						$author$project$View$LoginView$viewNavBar(model)),
-						$author$project$View$View$viewAddProject(model),
-						$author$project$View$View$viewDefault(model)
-					])) : A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$mdgriffith$elm_ui$Element$layout,
-						_List_Nil,
-						$author$project$View$LoginView$viewNavBar(model)),
-						$author$project$View$View$viewAddProject(model),
-						$author$project$View$View$viewTiming(model)
-					]));
-	}
+	var viewGenerate = function () {
+		var _v0 = model.loginStatus;
+		switch (_v0.$) {
+			case 'LoggedOut':
+				return $author$project$View$LoginView$loginView(model);
+			case 'Signup':
+				return $author$project$View$LoginView$loginView(model);
+			case 'Pending':
+				return $author$project$View$LoginView$loginView(model);
+			default:
+				return (!model.timing) ? A2(
+					$mdgriffith$elm_ui$Element$column,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+						]),
+					_List_fromArray(
+						[
+							$author$project$View$LoginView$loginView(model),
+							$author$project$View$View$showCurrentDateTime(model),
+							$author$project$View$View$viewAddProject(model),
+							$author$project$View$View$viewDefault(model),
+							$author$project$View$View$showEditingOrCompleted(model)
+						])) : A2(
+					$mdgriffith$elm_ui$Element$column,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+						]),
+					_List_fromArray(
+						[
+							$author$project$View$LoginView$viewNavBar(model),
+							$author$project$View$View$showCurrentDateTime(model),
+							$author$project$View$View$viewTiming(model),
+							$author$project$View$View$showEditingOrCompleted(model)
+						]));
+		}
+	}();
+	return A2($mdgriffith$elm_ui$Element$layout, _List_Nil, viewGenerate);
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
 	{init: $author$project$Model$Model$init, subscriptions: $author$project$Subscriptions$Subscriptions$subscriptions, update: $author$project$Update$Update$update, view: $author$project$View$View$view});
