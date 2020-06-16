@@ -5487,6 +5487,16 @@ var $author$project$Model$Model$Model = function (completedList) {
 };
 var $mdgriffith$elm_ui$Element$Phone = {$: 'Phone'};
 var $mdgriffith$elm_ui$Element$Portrait = {$: 'Portrait'};
+var $elm$json$Json$Decode$decodeValue = _Json_run;
+var $author$project$Model$Model$SavedUserInfo = function (userId) {
+	return {userId: userId};
+};
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$int = _Json_decodeInt;
+var $author$project$Model$Model$decoder = A2(
+	$elm$json$Json$Decode$map,
+	$author$project$Model$Model$SavedUserInfo,
+	A2($elm$json$Json$Decode$field, 'sttUserId', $elm$json$Json$Decode$int));
 var $elm$time$Time$Name = function (a) {
 	return {$: 'Name', a: a};
 };
@@ -5499,6 +5509,7 @@ var $elm$time$Time$Zone = F2(
 	});
 var $elm$time$Time$customZone = $elm$time$Time$Zone;
 var $elm$time$Time$here = _Time_here(_Utils_Tuple0);
+var $elm$core$Debug$log = _Debug_log;
 var $elm$time$Time$Posix = function (a) {
 	return {$: 'Posix', a: a};
 };
@@ -5511,7 +5522,17 @@ var $author$project$Model$Model$Year = {$: 'Year'};
 var $author$project$Model$Model$timeFrameList = _List_fromArray(
 	[$author$project$Model$Model$Year, $author$project$Model$Model$Month, $author$project$Model$Model$Day, $author$project$Model$Model$Hour, $author$project$Model$Model$Minute, $author$project$Model$Model$Second]);
 var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
-var $author$project$Model$Model$init = function (_v0) {
+var $author$project$Model$Model$init = function (flags) {
+	var savedId = function () {
+		var _v0 = A2($elm$json$Json$Decode$decodeValue, $author$project$Model$Model$decoder, flags);
+		if (_v0.$ === 'Ok') {
+			var savedInfo = _v0.a;
+			return $elm$core$Maybe$Just(savedInfo.userId);
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	}();
+	var x = A2($elm$core$Debug$log, 'savedId', savedId);
 	return _Utils_Tuple2(
 		$author$project$Model$Model$Model(_List_Nil)(false)('')(false)(false)(false)(false)(false)(false)(false)(
 			$elm$time$Time$millisToPosix(0))(
@@ -5521,7 +5542,7 @@ var $author$project$Model$Model$init = function (_v0) {
 			$elm$time$Time$millisToPosix(0))(
 			$elm$time$Time$millisToPosix(0))(false)(false)('')('')('')($author$project$Model$Model$LoggedOut)($elm$core$Maybe$Nothing)($author$project$Model$Model$HomeScreen)(
 			{_class: $mdgriffith$elm_ui$Element$Phone, orientation: $mdgriffith$elm_ui$Element$Portrait})(
-			{height: 550, width: 275}),
+			{height: 550, width: 320}),
 		A2($elm$core$Task$perform, $author$project$Model$Model$AdjustTimeZone, $elm$time$Time$here));
 };
 var $author$project$Model$Model$InitViewport = function (a) {
@@ -5932,8 +5953,6 @@ var $elm$time$Time$every = F2(
 			A2($elm$time$Time$Every, interval, tagger));
 	});
 var $elm$browser$Browser$Events$Window = {$: 'Window'};
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$int = _Json_decodeInt;
 var $elm$browser$Browser$Events$MySub = F3(
 	function (a, b, c) {
 		return {$: 'MySub', a: a, b: b, c: c};
@@ -6207,6 +6226,7 @@ var $author$project$Update$Update$addProject = function (model) {
 			projectList: A2($elm$core$List$cons, model.newProject, model.projectList)
 		})) : model;
 };
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$time$Time$posixToMillis = function (_v0) {
 	var millis = _v0.a;
 	return millis;
@@ -7305,8 +7325,6 @@ var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
 		{body: $elm$http$Http$emptyBody, expect: r.expect, headers: _List_Nil, method: 'GET', timeout: $elm$core$Maybe$Nothing, tracker: $elm$core$Maybe$Nothing, url: r.url});
 };
-var $elm$core$Debug$log = _Debug_log;
-var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Update$Update$getUserHistory = function (maybeUserId) {
 	if (maybeUserId.$ === 'Just') {
@@ -7769,6 +7787,7 @@ var $author$project$Update$Update$initViewport = F2(
 	});
 var $author$project$Update$Update$loginEndPoint = 'login';
 var $elm$core$Basics$not = _Basics_not;
+var $elm$json$Json$Encode$null = _Json_encodeNull;
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
@@ -7788,6 +7807,7 @@ var $author$project$Update$Update$setCurrentTime = F2(
 			model,
 			{completedFromTime: startDayThisZone, completedToTime: endDayThisZone});
 	});
+var $author$project$Update$Update$setStorage = _Platform_outgoingPort('setStorage', $elm$core$Basics$identity);
 var $author$project$Model$Model$CreatedItemId = function (a) {
 	return {$: 'CreatedItemId', a: a};
 };
@@ -8704,7 +8724,13 @@ var $author$project$Update$Update$update = F2(
 						{loginStatus: $author$project$Model$Model$Pending}),
 					A2($author$project$Update$Update$fetchUserId, model, $author$project$Update$Update$loginEndPoint));
 			case 'Logout':
-				return $author$project$Model$Model$init(_Utils_Tuple0);
+				var cleared = $author$project$Update$Update$setStorage(
+					$elm$json$Json$Encode$object(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('sttUserId', $elm$json$Json$Encode$null)
+							])));
+				return $author$project$Model$Model$init($elm$json$Json$Encode$null);
 			case 'CreateAccount':
 				return _Utils_Tuple2(
 					_Utils_update(
@@ -8713,16 +8739,36 @@ var $author$project$Update$Update$update = F2(
 					A2($author$project$Update$Update$fetchUserId, model, $author$project$Update$Update$createAccountEndPoint));
 			case 'UserIdResult':
 				var result = msg.a;
-				return A2($author$project$Update$Update$useUserCreatedResult, model, result);
+				return A2($author$project$Update$Update$useUserIdResult, model, result);
 			case 'CreatedItemId':
 				var result = msg.a;
 				return _Utils_Tuple2(
 					A2($author$project$Update$Update$useCreatedItemId, model, result),
 					$elm$core$Platform$Cmd$none);
 			case 'CreateItemList':
+				var jsonUserId = function () {
+					var _v3 = model.userId;
+					if (_v3.$ === 'Just') {
+						var id = _v3.a;
+						return $elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'sttUserId',
+									$elm$json$Json$Encode$int(id))
+								]));
+					} else {
+						return $elm$json$Json$Encode$null;
+					}
+				}();
 				return _Utils_Tuple2(
 					model,
-					A3($author$project$Update$Update$createItemList, model.userId, model.completedList, $author$project$Update$Update$createItemListEndPoint));
+					$elm$core$Platform$Cmd$batch(
+						_List_fromArray(
+							[
+								$author$project$Update$Update$setStorage(jsonUserId),
+								A3($author$project$Update$Update$createItemList, model.userId, model.completedList, $author$project$Update$Update$createItemListEndPoint)
+							])));
 			case 'CreatedItemList':
 				var result = msg.a;
 				return A2($author$project$Update$Update$useCreatedItemList, model, result);
@@ -8845,7 +8891,7 @@ var $author$project$Update$Update$useCreatedItemList = F2(
 			return A2($author$project$Update$Update$update, $author$project$Model$Model$GetUserHistory, model);
 		}
 	});
-var $author$project$Update$Update$useUserCreatedResult = F2(
+var $author$project$Update$Update$useUserIdResult = F2(
 	function (model, result) {
 		if (result.$ === 'Ok') {
 			var userId = result.a;
@@ -8865,6 +8911,7 @@ var $author$project$Update$Update$useUserCreatedResult = F2(
 				$elm$core$Platform$Cmd$none);
 		}
 	});
+var $elm$json$Json$Decode$value = _Json_decodeValue;
 var $mdgriffith$elm_ui$Internal$Model$Unkeyed = function (a) {
 	return {$: 'Unkeyed', a: a};
 };
@@ -17871,5 +17918,4 @@ var $author$project$View$View$view = function (model) {
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
 	{init: $author$project$Model$Model$init, subscriptions: $author$project$Subscriptions$Subscriptions$subscriptions, update: $author$project$Update$Update$update, view: $author$project$View$View$view});
-_Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
+_Platform_export({'Main':{'init':$author$project$Main$main($elm$json$Json$Decode$value)(0)}});}(this));
