@@ -5407,6 +5407,7 @@ var $author$project$Model$Model$AdjustTimeZone = function (a) {
 };
 var $author$project$Model$Model$HomeScreen = {$: 'HomeScreen'};
 var $author$project$Model$Model$Hour = {$: 'Hour'};
+var $author$project$Model$Model$LoggedIn = {$: 'LoggedIn'};
 var $author$project$Model$Model$LoggedOut = {$: 'LoggedOut'};
 var $author$project$Model$Model$Model = function (completedList) {
 	return function (timing) {
@@ -5514,6 +5515,10 @@ var $elm$time$Time$Posix = function (a) {
 	return {$: 'Posix', a: a};
 };
 var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
+var $elm$core$Tuple$second = function (_v0) {
+	var y = _v0.b;
+	return y;
+};
 var $author$project$Model$Model$Day = {$: 'Day'};
 var $author$project$Model$Model$Minute = {$: 'Minute'};
 var $author$project$Model$Model$Month = {$: 'Month'};
@@ -5523,16 +5528,19 @@ var $author$project$Model$Model$timeFrameList = _List_fromArray(
 	[$author$project$Model$Model$Year, $author$project$Model$Model$Month, $author$project$Model$Model$Day, $author$project$Model$Model$Hour, $author$project$Model$Model$Minute, $author$project$Model$Model$Second]);
 var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
 var $author$project$Model$Model$init = function (flags) {
-	var savedId = function () {
+	var savedInfo = function () {
 		var _v0 = A2($elm$json$Json$Decode$decodeValue, $author$project$Model$Model$decoder, flags);
 		if (_v0.$ === 'Ok') {
-			var savedInfo = _v0.a;
-			return $elm$core$Maybe$Just(savedInfo.userId);
+			var savedId = _v0.a;
+			return _Utils_Tuple2(
+				$author$project$Model$Model$LoggedIn,
+				$elm$core$Maybe$Just(savedId.userId));
 		} else {
-			return $elm$core$Maybe$Nothing;
+			var savedId = _v0.a;
+			return _Utils_Tuple2($author$project$Model$Model$LoggedOut, $elm$core$Maybe$Nothing);
 		}
 	}();
-	var x = A2($elm$core$Debug$log, 'savedId', savedId);
+	var x = A2($elm$core$Debug$log, 'savedInfo', savedInfo);
 	return _Utils_Tuple2(
 		$author$project$Model$Model$Model(_List_Nil)(false)('')(false)(false)(false)(false)(false)(false)(false)(
 			$elm$time$Time$millisToPosix(0))(
@@ -5540,7 +5548,7 @@ var $author$project$Model$Model$init = function (flags) {
 			$elm$time$Time$millisToPosix(0))(
 			$elm$time$Time$millisToPosix(0))($author$project$Model$Model$Hour)($author$project$Model$Model$Hour)($author$project$Model$Model$timeFrameList)($author$project$Model$Model$Hour)($author$project$Model$Model$Hour)(
 			$elm$time$Time$millisToPosix(0))(
-			$elm$time$Time$millisToPosix(0))(false)(false)('')('')('')($author$project$Model$Model$LoggedOut)($elm$core$Maybe$Nothing)($author$project$Model$Model$HomeScreen)(
+			$elm$time$Time$millisToPosix(0))(false)(false)('')('')('')(savedInfo.a)(savedInfo.b)($author$project$Model$Model$HomeScreen)(
 			{_class: $mdgriffith$elm_ui$Element$Phone, orientation: $mdgriffith$elm_ui$Element$Portrait})(
 			{height: 550, width: 320}),
 		A2($elm$core$Task$perform, $author$project$Model$Model$AdjustTimeZone, $elm$time$Time$here));
@@ -6188,13 +6196,13 @@ var $author$project$Subscriptions$Subscriptions$subscriptions = function (model)
 var $author$project$Model$Model$CreateItemList = {$: 'CreateItemList'};
 var $author$project$Model$Model$GetUserHistory = {$: 'GetUserHistory'};
 var $author$project$Model$Model$History = {$: 'History'};
-var $author$project$Model$Model$LoggedIn = {$: 'LoggedIn'};
 var $author$project$Model$Model$Pending = {$: 'Pending'};
 var $author$project$Model$Model$SetCompletedTimes = function (a) {
 	return {$: 'SetCompletedTimes', a: a};
 };
 var $author$project$Model$Model$Signup = {$: 'Signup'};
 var $author$project$Model$Model$Timing = {$: 'Timing'};
+var $author$project$Model$Model$UseUserIdFromStorage = {$: 'UseUserIdFromStorage'};
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -8682,9 +8690,10 @@ var $author$project$Update$Update$update = F2(
 					A2($elm$core$Task$perform, $author$project$Model$Model$InitViewport, $elm$browser$Browser$Dom$getViewport));
 			case 'InitViewport':
 				var window = msg.a;
-				return _Utils_Tuple2(
-					A2($author$project$Update$Update$initViewport, model, window),
-					$elm$core$Platform$Cmd$none);
+				return A2(
+					$author$project$Update$Update$update,
+					$author$project$Model$Model$UseUserIdFromStorage,
+					A2($author$project$Update$Update$initViewport, model, window));
 			case 'ChangeCompletedTime':
 				var startOrEnd = msg.a;
 				var incOrDec = msg.b;
@@ -8724,13 +8733,20 @@ var $author$project$Update$Update$update = F2(
 						{loginStatus: $author$project$Model$Model$Pending}),
 					A2($author$project$Update$Update$fetchUserId, model, $author$project$Update$Update$loginEndPoint));
 			case 'Logout':
-				var cleared = $author$project$Update$Update$setStorage(
-					$elm$json$Json$Encode$object(
+				var initTuple = $author$project$Model$Model$init($elm$json$Json$Encode$null);
+				var cleared = $elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2('sttUser', $elm$json$Json$Encode$null)
+						]));
+				return _Utils_Tuple2(
+					initTuple.a,
+					$elm$core$Platform$Cmd$batch(
 						_List_fromArray(
 							[
-								_Utils_Tuple2('sttUserId', $elm$json$Json$Encode$null)
+								$author$project$Update$Update$setStorage(cleared),
+								initTuple.b
 							])));
-				return $author$project$Model$Model$init($elm$json$Json$Encode$null);
 			case 'CreateAccount':
 				return _Utils_Tuple2(
 					_Utils_update(
@@ -8747,9 +8763,9 @@ var $author$project$Update$Update$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'CreateItemList':
 				var jsonUserId = function () {
-					var _v3 = model.userId;
-					if (_v3.$ === 'Just') {
-						var id = _v3.a;
+					var _v4 = model.userId;
+					if (_v4.$ === 'Just') {
+						var id = _v4.a;
 						return $elm$json$Json$Encode$object(
 							_List_fromArray(
 								[
@@ -8869,7 +8885,7 @@ var $author$project$Update$Update$update = F2(
 						model,
 						{loggedInPage: $author$project$Model$Model$History}),
 					$elm$core$Platform$Cmd$none);
-			default:
+			case 'Home':
 				return model.timing ? _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -8879,6 +8895,8 @@ var $author$project$Update$Update$update = F2(
 						model,
 						{loggedInPage: $author$project$Model$Model$HomeScreen}),
 					$elm$core$Platform$Cmd$none);
+			default:
+				return $author$project$Update$Update$useUserIdFromStorage(model);
 		}
 	});
 var $author$project$Update$Update$useCreatedItemList = F2(
@@ -8891,6 +8909,14 @@ var $author$project$Update$Update$useCreatedItemList = F2(
 			return A2($author$project$Update$Update$update, $author$project$Model$Model$GetUserHistory, model);
 		}
 	});
+var $author$project$Update$Update$useUserIdFromStorage = function (model) {
+	var _v1 = model.userId;
+	if (_v1.$ === 'Just') {
+		return A2($author$project$Update$Update$update, $author$project$Model$Model$CreateItemList, model);
+	} else {
+		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+	}
+};
 var $author$project$Update$Update$useUserIdResult = F2(
 	function (model, result) {
 		if (result.$ === 'Ok') {
@@ -9062,10 +9088,6 @@ var $mdgriffith$elm_ui$Internal$Model$lengthClassName = function (x) {
 			var len = x.b;
 			return 'max' + ($elm$core$String$fromInt(max) + $mdgriffith$elm_ui$Internal$Model$lengthClassName(len));
 	}
-};
-var $elm$core$Tuple$second = function (_v0) {
-	var y = _v0.b;
-	return y;
 };
 var $mdgriffith$elm_ui$Internal$Model$floatClass = function (x) {
 	return $elm$core$String$fromInt(
