@@ -6202,7 +6202,6 @@ var $author$project$Model$Model$SetCompletedTimes = function (a) {
 };
 var $author$project$Model$Model$Signup = {$: 'Signup'};
 var $author$project$Model$Model$Timing = {$: 'Timing'};
-var $author$project$Model$Model$UseUserIdFromStorage = {$: 'UseUserIdFromStorage'};
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -6663,7 +6662,7 @@ var $author$project$Update$Update$createAccountEndPoint = 'createaccount';
 var $author$project$Model$Model$CreatedItemList = function (a) {
 	return {$: 'CreatedItemList', a: a};
 };
-var $author$project$Update$Update$url = 'https://shrouded-lowlands-13511.herokuapp.com/';
+var $author$project$Update$Update$url = 'http://localhost:9000/';
 var $author$project$Update$Update$api = $author$project$Update$Update$url + 'api/';
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -8690,10 +8689,9 @@ var $author$project$Update$Update$update = F2(
 					A2($elm$core$Task$perform, $author$project$Model$Model$InitViewport, $elm$browser$Browser$Dom$getViewport));
 			case 'InitViewport':
 				var window = msg.a;
-				return A2(
-					$author$project$Update$Update$update,
-					$author$project$Model$Model$UseUserIdFromStorage,
-					A2($author$project$Update$Update$initViewport, model, window));
+				return _Utils_Tuple2(
+					A2($author$project$Update$Update$initViewport, model, window),
+					$elm$core$Platform$Cmd$none);
 			case 'ChangeCompletedTime':
 				var startOrEnd = msg.a;
 				var incOrDec = msg.b;
@@ -8763,9 +8761,9 @@ var $author$project$Update$Update$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'CreateItemList':
 				var jsonUserId = function () {
-					var _v4 = model.userId;
-					if (_v4.$ === 'Just') {
-						var id = _v4.a;
+					var _v3 = model.userId;
+					if (_v3.$ === 'Just') {
+						var id = _v3.a;
 						return $elm$json$Json$Encode$object(
 							_List_fromArray(
 								[
@@ -8885,7 +8883,7 @@ var $author$project$Update$Update$update = F2(
 						model,
 						{loggedInPage: $author$project$Model$Model$History}),
 					$elm$core$Platform$Cmd$none);
-			case 'Home':
+			default:
 				return model.timing ? _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -8895,8 +8893,6 @@ var $author$project$Update$Update$update = F2(
 						model,
 						{loggedInPage: $author$project$Model$Model$HomeScreen}),
 					$elm$core$Platform$Cmd$none);
-			default:
-				return $author$project$Update$Update$useUserIdFromStorage(model);
 		}
 	});
 var $author$project$Update$Update$useCreatedItemList = F2(
@@ -8909,14 +8905,6 @@ var $author$project$Update$Update$useCreatedItemList = F2(
 			return A2($author$project$Update$Update$update, $author$project$Model$Model$GetUserHistory, model);
 		}
 	});
-var $author$project$Update$Update$useUserIdFromStorage = function (model) {
-	var _v1 = model.userId;
-	if (_v1.$ === 'Just') {
-		return A2($author$project$Update$Update$update, $author$project$Model$Model$CreateItemList, model);
-	} else {
-		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-	}
-};
 var $author$project$Update$Update$useUserIdResult = F2(
 	function (model, result) {
 		if (result.$ === 'Ok') {
