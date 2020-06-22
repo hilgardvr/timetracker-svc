@@ -14,7 +14,7 @@
      var storedData = localStorage.getItem('simpletimetracker');
      var flags = storedData ? JSON.parse(storedData) : null;
 
-     console.log('flags:' + JSON.stringify(flags));
+     //console.log('flags:' + JSON.stringify(flags));
 
     var app = Elm.Main.init({
       node: document.getElementById('simpletimetracker'),
@@ -22,7 +22,7 @@
     });
 
     app.ports.setStorage.subscribe(function(state) {
-      console.log("setting: " + JSON.stringify(state));
+      //console.log("setting: " + JSON.stringify(state));
       localStorage.setItem('simpletimetracker', JSON.stringify(state));
     });
 
