@@ -6658,7 +6658,7 @@ var $author$project$Update$Update$createAccountEndPoint = 'createaccount';
 var $author$project$Model$Model$CreatedItemList = function (a) {
 	return {$: 28, a: a};
 };
-var $author$project$Update$Update$url = 'http://localhost:9000/';
+var $author$project$Update$Update$url = 'https://shrouded-lowlands-13511.herokuapp.com/';
 var $author$project$Update$Update$api = $author$project$Update$Update$url + 'api/';
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
