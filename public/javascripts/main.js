@@ -14278,6 +14278,12 @@ var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
 };
 var $mdgriffith$elm_ui$Internal$Model$Right = 2;
 var $mdgriffith$elm_ui$Element$alignRight = $mdgriffith$elm_ui$Internal$Model$AlignX(2);
+var $mdgriffith$elm_ui$Internal$Model$Class = F2(
+	function (a, b) {
+		return {$: 3, a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Flag$fontWeight = $mdgriffith$elm_ui$Internal$Flag$flag(13);
+var $mdgriffith$elm_ui$Element$Font$bold = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontWeight, $mdgriffith$elm_ui$Internal$Style$classes.b6);
 var $mdgriffith$elm_ui$Internal$Model$Button = {$: 8};
 var $mdgriffith$elm_ui$Internal$Model$Describe = function (a) {
 	return {$: 2, a: a};
@@ -14357,10 +14363,6 @@ var $mdgriffith$elm_ui$Element$Input$onKey = F2(
 var $mdgriffith$elm_ui$Element$Input$onEnter = function (msg) {
 	return A2($mdgriffith$elm_ui$Element$Input$onKey, $mdgriffith$elm_ui$Element$Input$enter, msg);
 };
-var $mdgriffith$elm_ui$Internal$Model$Class = F2(
-	function (a, b) {
-		return {$: 3, a: a, b: b};
-	});
 var $mdgriffith$elm_ui$Internal$Flag$cursor = $mdgriffith$elm_ui$Internal$Flag$flag(21);
 var $mdgriffith$elm_ui$Element$pointer = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$cursor, $mdgriffith$elm_ui$Internal$Style$classes.cu);
 var $elm$html$Html$Attributes$tabindex = function (n) {
@@ -14664,6 +14666,17 @@ var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
 	return {$: 0, a: a};
 };
 var $mdgriffith$elm_ui$Element$px = $mdgriffith$elm_ui$Internal$Model$Px;
+var $mdgriffith$elm_ui$Internal$Flag$borderRound = $mdgriffith$elm_ui$Internal$Flag$flag(17);
+var $mdgriffith$elm_ui$Element$Border$rounded = function (radius) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$borderRound,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Single,
+			'br-' + $elm$core$String$fromInt(radius),
+			'border-radius',
+			$elm$core$String$fromInt(radius) + 'px'));
+};
 var $mdgriffith$elm_ui$Element$text = function (content) {
 	return $mdgriffith$elm_ui$Internal$Model$Text(content);
 };
@@ -14697,7 +14710,9 @@ var $author$project$View$LoginView$makeCreateOrLogOutButton = function (status) 
 				$mdgriffith$elm_ui$Element$px($author$project$View$Styles$navBarHeight)),
 				A2($mdgriffith$elm_ui$Element$paddingXY, 10, 0),
 				$mdgriffith$elm_ui$Element$width(
-				$mdgriffith$elm_ui$Element$px(100))
+				$mdgriffith$elm_ui$Element$px(100)),
+				$mdgriffith$elm_ui$Element$Border$rounded(5),
+				$mdgriffith$elm_ui$Element$Font$bold
 			]),
 		A2(
 			$mdgriffith$elm_ui$Element$Input$button,
@@ -14758,7 +14773,9 @@ var $author$project$View$LoginView$viewNavBar = function (model) {
 				$mdgriffith$elm_ui$Element$height(
 				$mdgriffith$elm_ui$Element$px($author$project$View$Styles$navBarHeight)),
 				A2($mdgriffith$elm_ui$Element$paddingXY, 10, 0),
-				$mdgriffith$elm_ui$Element$alignRight
+				$mdgriffith$elm_ui$Element$alignRight,
+				$mdgriffith$elm_ui$Element$Border$rounded(5),
+				$mdgriffith$elm_ui$Element$Font$bold
 			]),
 		{
 			ac: $mdgriffith$elm_ui$Element$text('History'),
@@ -14782,17 +14799,19 @@ var $author$project$View$LoginView$viewNavBar = function (model) {
 						$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$lightColor),
 						$mdgriffith$elm_ui$Element$height(
 						$mdgriffith$elm_ui$Element$px($author$project$View$Styles$navBarHeight)),
-						A2($mdgriffith$elm_ui$Element$paddingXY, 10, 0)
+						A2($mdgriffith$elm_ui$Element$paddingXY, 10, 0),
+						$mdgriffith$elm_ui$Element$Border$rounded(5),
+						$mdgriffith$elm_ui$Element$Font$bold
 					]),
 				{
-					ac: $mdgriffith$elm_ui$Element$text('timeme.org'),
+					ac: $mdgriffith$elm_ui$Element$text('STT'),
 					aA: $elm$core$Maybe$Just($author$project$Model$Model$Home)
 				}),
 				(model.em.el > 600) ? A2(
 				$mdgriffith$elm_ui$Element$el,
 				_List_fromArray(
-					[$mdgriffith$elm_ui$Element$centerX]),
-				$mdgriffith$elm_ui$Element$text('Focus on the process')) : $mdgriffith$elm_ui$Element$none,
+					[$mdgriffith$elm_ui$Element$centerX, $mdgriffith$elm_ui$Element$Font$bold]),
+				$mdgriffith$elm_ui$Element$text('simple-timetracker.com')) : $mdgriffith$elm_ui$Element$none,
 				historyButton,
 				createOrLogoutButton
 			]));
@@ -14809,6 +14828,19 @@ var $author$project$Model$Model$ChangeUserName = function (a) {
 var $author$project$Model$Model$CreateAccount = {$: 24};
 var $author$project$Model$Model$Login = {$: 22};
 var $author$project$View$Styles$darkColor = A3($mdgriffith$elm_ui$Element$rgb255, 106, 203, 160);
+var $author$project$View$Styles$buttonAttributes = _List_fromArray(
+	[
+		$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$darkColor),
+		$mdgriffith$elm_ui$Element$focused(
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
+			])),
+		$mdgriffith$elm_ui$Element$Border$rounded(5),
+		$mdgriffith$elm_ui$Element$Font$bold,
+		$mdgriffith$elm_ui$Element$width(
+		$mdgriffith$elm_ui$Element$px(100))
+	]);
 var $author$project$View$Styles$edges = {cb: 0, c2: 0, dq: 0, aV: 0};
 var $mdgriffith$elm_ui$Element$Input$Above = 2;
 var $mdgriffith$elm_ui$Element$Input$Label = F3(
@@ -14982,17 +15014,6 @@ var $mdgriffith$elm_ui$Element$rgb = F3(
 	});
 var $mdgriffith$elm_ui$Element$Input$darkGrey = A3($mdgriffith$elm_ui$Element$rgb, 186 / 255, 189 / 255, 182 / 255);
 var $mdgriffith$elm_ui$Element$Input$defaultTextPadding = A2($mdgriffith$elm_ui$Element$paddingXY, 12, 12);
-var $mdgriffith$elm_ui$Internal$Flag$borderRound = $mdgriffith$elm_ui$Internal$Flag$flag(17);
-var $mdgriffith$elm_ui$Element$Border$rounded = function (radius) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$borderRound,
-		A3(
-			$mdgriffith$elm_ui$Internal$Model$Single,
-			'br-' + $elm$core$String$fromInt(radius),
-			'border-radius',
-			$elm$core$String$fromInt(radius) + 'px'));
-};
 var $mdgriffith$elm_ui$Element$Input$white = A3($mdgriffith$elm_ui$Element$rgb, 1, 1, 1);
 var $mdgriffith$elm_ui$Internal$Model$BorderWidth = F5(
 	function (a, b, c, d, e) {
@@ -15806,7 +15827,10 @@ var $author$project$View$LoginView$viewLoggedOutRow = function (model) {
 						]),
 					A2(
 						$mdgriffith$elm_ui$Element$Input$username,
-						_List_Nil,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Border$rounded(5)
+							]),
 						{
 							ac: A2($mdgriffith$elm_ui$Element$Input$labelAbove, _List_Nil, $mdgriffith$elm_ui$Element$none),
 							bn: $author$project$Model$Model$ChangeUserName,
@@ -15831,7 +15855,10 @@ var $author$project$View$LoginView$viewLoggedOutRow = function (model) {
 						]),
 					A2(
 						$mdgriffith$elm_ui$Element$Input$newPassword,
-						_List_Nil,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Border$rounded(5)
+							]),
 						{
 							ac: A2($mdgriffith$elm_ui$Element$Input$labelAbove, _List_Nil, $mdgriffith$elm_ui$Element$none),
 							bn: $author$project$Model$Model$ChangePassword,
@@ -15857,18 +15884,7 @@ var $author$project$View$LoginView$viewLoggedOutRow = function (model) {
 						]),
 					A2(
 						$mdgriffith$elm_ui$Element$Input$button,
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$darkColor),
-								$mdgriffith$elm_ui$Element$focused(
-								_List_fromArray(
-									[
-										$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
-									])),
-								$mdgriffith$elm_ui$Element$centerX,
-								$mdgriffith$elm_ui$Element$width(
-								$mdgriffith$elm_ui$Element$px(100))
-							]),
+						A2($elm$core$List$cons, $mdgriffith$elm_ui$Element$centerX, $author$project$View$Styles$buttonAttributes),
 						{
 							ac: A2(
 								$mdgriffith$elm_ui$Element$el,
@@ -16117,7 +16133,8 @@ var $author$project$View$View$createDropDownItems = F4(
 			$mdgriffith$elm_ui$Element$column,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$lightColor)
+					$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$primaryColor),
+					$mdgriffith$elm_ui$Element$Border$rounded(5)
 				]),
 			A2(
 				$elm$core$List$map,
@@ -16475,21 +16492,24 @@ var $author$project$View$View$displayEditCompletedItem = F2(
 							$mdgriffith$elm_ui$Element$Input$button,
 							_List_fromArray(
 								[
-									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$lightColor),
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$primaryColor),
 									$mdgriffith$elm_ui$Element$width(
 									$mdgriffith$elm_ui$Element$px(80)),
 									$mdgriffith$elm_ui$Element$focused(
 									_List_fromArray(
 										[
 											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
-										]))
+										])),
+									$mdgriffith$elm_ui$Element$Border$rounded(5)
 								]),
 							{
 								ac: A2(
 									$mdgriffith$elm_ui$Element$el,
 									_List_fromArray(
 										[
-											$mdgriffith$elm_ui$Element$padding(10)
+											$mdgriffith$elm_ui$Element$padding(10),
+											$mdgriffith$elm_ui$Element$centerX,
+											$mdgriffith$elm_ui$Element$Font$bold
 										]),
 									$mdgriffith$elm_ui$Element$text('Save')),
 								aA: $elm$core$Maybe$Just(
@@ -16500,21 +16520,24 @@ var $author$project$View$View$displayEditCompletedItem = F2(
 							$mdgriffith$elm_ui$Element$Input$button,
 							_List_fromArray(
 								[
-									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$lightColor),
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$primaryColor),
 									$mdgriffith$elm_ui$Element$width(
 									$mdgriffith$elm_ui$Element$px(80)),
 									$mdgriffith$elm_ui$Element$focused(
 									_List_fromArray(
 										[
 											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
-										]))
+										])),
+									$mdgriffith$elm_ui$Element$Border$rounded(5)
 								]),
 							{
 								ac: A2(
 									$mdgriffith$elm_ui$Element$el,
 									_List_fromArray(
 										[
-											$mdgriffith$elm_ui$Element$padding(10)
+											$mdgriffith$elm_ui$Element$padding(10),
+											$mdgriffith$elm_ui$Element$centerX,
+											$mdgriffith$elm_ui$Element$Font$bold
 										]),
 									$mdgriffith$elm_ui$Element$text('Delete')),
 								aA: $elm$core$Maybe$Just(
@@ -16525,21 +16548,24 @@ var $author$project$View$View$displayEditCompletedItem = F2(
 							$mdgriffith$elm_ui$Element$Input$button,
 							_List_fromArray(
 								[
-									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$lightColor),
+									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$primaryColor),
 									$mdgriffith$elm_ui$Element$width(
 									$mdgriffith$elm_ui$Element$px(80)),
 									$mdgriffith$elm_ui$Element$focused(
 									_List_fromArray(
 										[
 											$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
-										]))
+										])),
+									$mdgriffith$elm_ui$Element$Border$rounded(5)
 								]),
 							{
 								ac: A2(
 									$mdgriffith$elm_ui$Element$el,
 									_List_fromArray(
 										[
-											$mdgriffith$elm_ui$Element$padding(10)
+											$mdgriffith$elm_ui$Element$padding(10),
+											$mdgriffith$elm_ui$Element$centerX,
+											$mdgriffith$elm_ui$Element$Font$bold
 										]),
 									$mdgriffith$elm_ui$Element$text('Cancel')),
 								aA: $elm$core$Maybe$Just($author$project$Model$Model$DiscardChanges)
@@ -16588,8 +16614,6 @@ var $author$project$Model$Model$ChangeCurrentProject = function (a) {
 };
 var $author$project$Model$Model$ToggleProjectDropDown = {$: 35};
 var $author$project$Model$Model$ToggleTimer = {$: 0};
-var $mdgriffith$elm_ui$Internal$Flag$fontWeight = $mdgriffith$elm_ui$Internal$Flag$flag(13);
-var $mdgriffith$elm_ui$Element$Font$bold = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontWeight, $mdgriffith$elm_ui$Internal$Style$classes.b6);
 var $author$project$View$Styles$cardWidth = function (model) {
 	return (model.em.el > 500) ? 500 : (model.em.el - 50);
 };
@@ -16639,26 +16663,25 @@ var $author$project$View$View$viewAddProject = function (model) {
 					bH: model.da
 				}),
 				A2(
-				$mdgriffith$elm_ui$Element$Input$button,
+				$mdgriffith$elm_ui$Element$el,
 				_List_fromArray(
 					[
-						$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$primaryColor),
-						$mdgriffith$elm_ui$Element$focused(
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
-							]))
+						$mdgriffith$elm_ui$Element$padding(5)
 					]),
-				{
-					ac: A2(
-						$mdgriffith$elm_ui$Element$el,
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$padding(10)
-							]),
-						$mdgriffith$elm_ui$Element$text('Add')),
-					aA: $elm$core$Maybe$Just($author$project$Model$Model$AddProject)
-				})
+				A2(
+					$mdgriffith$elm_ui$Element$Input$button,
+					$author$project$View$Styles$buttonAttributes,
+					{
+						ac: A2(
+							$mdgriffith$elm_ui$Element$el,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$padding(10),
+									$mdgriffith$elm_ui$Element$centerX
+								]),
+							$mdgriffith$elm_ui$Element$text('Add')),
+						aA: $elm$core$Maybe$Just($author$project$Model$Model$AddProject)
+					}))
 			]));
 };
 var $author$project$View$View$viewDefault = function (model) {
@@ -16682,26 +16705,25 @@ var $author$project$View$View$viewDefault = function (model) {
 					[$mdgriffith$elm_ui$Element$Font$bold]),
 				A4($author$project$View$View$createDropDownRow, $author$project$Model$Model$ToggleProjectDropDown, dropDownItems, 100, model.cs)),
 				A2(
-				$mdgriffith$elm_ui$Element$Input$button,
+				$mdgriffith$elm_ui$Element$el,
 				_List_fromArray(
 					[
-						$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$primaryColor),
-						$mdgriffith$elm_ui$Element$focused(
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
-							]))
+						$mdgriffith$elm_ui$Element$padding(5)
 					]),
-				{
-					ac: A2(
-						$mdgriffith$elm_ui$Element$el,
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$padding(10)
-							]),
-						$mdgriffith$elm_ui$Element$text('Start')),
-					aA: $elm$core$Maybe$Just($author$project$Model$Model$ToggleTimer)
-				})
+				A2(
+					$mdgriffith$elm_ui$Element$Input$button,
+					$author$project$View$Styles$buttonAttributes,
+					{
+						ac: A2(
+							$mdgriffith$elm_ui$Element$el,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$padding(10),
+									$mdgriffith$elm_ui$Element$centerX
+								]),
+							$mdgriffith$elm_ui$Element$text('Start')),
+						aA: $elm$core$Maybe$Just($author$project$Model$Model$ToggleTimer)
+					}))
 			]));
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
@@ -17177,7 +17199,9 @@ var $author$project$View$View$displayCompletedItem = F2(
 								[
 									$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
 								])),
-							$mdgriffith$elm_ui$Element$centerX
+							$mdgriffith$elm_ui$Element$centerX,
+							$mdgriffith$elm_ui$Element$Border$rounded(5),
+							$mdgriffith$elm_ui$Element$Font$bold
 						]),
 					{
 						ac: A2(
@@ -17308,7 +17332,9 @@ var $author$project$View$View$viewTimedHistory = function (model) {
 						_List_fromArray(
 							[
 								$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
-							]))
+							])),
+						$mdgriffith$elm_ui$Element$Border$rounded(5),
+						$mdgriffith$elm_ui$Element$Font$bold
 					]),
 				{
 					ac: A2(
@@ -17346,7 +17372,9 @@ var $author$project$View$View$viewTimedHistory = function (model) {
 								_List_fromArray(
 									[
 										$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
-									]))
+									])),
+								$mdgriffith$elm_ui$Element$Border$rounded(5),
+								$mdgriffith$elm_ui$Element$Font$bold
 							]),
 						{
 							ac: A2(
@@ -17516,6 +17544,7 @@ var $author$project$View$View$viewTiming = function (model) {
 						_List_fromArray(
 							[
 								$mdgriffith$elm_ui$Element$centerX,
+								$mdgriffith$elm_ui$Element$Border$rounded(5),
 								A2($mdgriffith$elm_ui$Element$paddingXY, 5, 0)
 							]),
 						{
@@ -17547,7 +17576,8 @@ var $author$project$View$View$viewTiming = function (model) {
 								_List_fromArray(
 									[
 										$mdgriffith$elm_ui$Element$Background$color($author$project$View$Styles$focussedColor)
-									]))
+									])),
+								$mdgriffith$elm_ui$Element$Border$rounded(5)
 							]),
 						{
 							ac: A2(
