@@ -32,11 +32,11 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
     Ok("")
   }
 
-  def getHistory(userId: Long) = Action { implicit request: Request[AnyContent] =>
-    Ok(Json.toJson(historyService.fetchUserHistory(userId)))
+  def getHistory(userHash: String) = Action { implicit request: Request[AnyContent] =>
+    Ok(Json.toJson(historyService.fetchUserHistory(userHash)))
   }
 
-  def createItemList(userId: Long) = Action { implicit request: Request[AnyContent] =>
+  def createItemList(userHash: String) = Action { implicit request: Request[AnyContent] =>
     val jsonBody: Option[JsValue] = request.body.asJson
 
     jsonBody match {
@@ -44,7 +44,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
         val items = Try(jsonItems.as[List[TimedItem]])
         items match {
           case Success(timedItems) => {
-            timedItems.map(item => historyService.addUserHistoryItem(userId, item))
+            timedItems.map(item => historyService.addUserHistoryItem(userHash, item))
             Created
           }
           case Failure(_) => BadRequest(request.body.toString)
@@ -56,7 +56,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
     }
   }
 
-  def createItem(userId: Long) = Action { implicit request: Request[AnyContent] =>
+  def createItem(userHash: String) = Action { implicit request: Request[AnyContent] =>
 
     val jsonBody: Option[JsValue] = request.body.asJson
 
@@ -65,7 +65,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
         val item = Try(jsonItem.as[TimedItem])
         item match {
           case Success(timedItem) => {
-            historyService.addUserHistoryItem(userId, timedItem)
+            historyService.addUserHistoryItem(userHash, timedItem)
             Created
           }
           case Failure(_) => BadRequest(request.body.toString)
@@ -75,12 +75,12 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
     }
   }
 
-  def deleteItem(userId: Long, itemId: String) = Action { implicit request: Request[AnyContent] =>
-    historyService.deleteItem(userId, itemId)
+  def deleteItem(userHash: String, itemId: String) = Action { implicit request: Request[AnyContent] =>
+    historyService.deleteItem(userHash, itemId)
     Ok("Deleted")
   }
 
-  def updateItem(userId: Long) = Action { implicit request: Request[AnyContent] =>
+  def updateItem(userHash: String) = Action { implicit request: Request[AnyContent] =>
     
     val jsonBody: Option[JsValue] = request.body.asJson
 
@@ -89,7 +89,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
         val item = Try(jsonItem.as[TimedItem])
         item match {
           case Success(timedItem) => {
-            historyService.updateItem(userId, timedItem)
+            historyService.updateItem(userHash, timedItem)
             Created
           }
           case Failure(_) => BadRequest(request.body.toString)
@@ -106,7 +106,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
     login match {
       case Some(creds) => {
         historyService.login(creds) match {
-          case Some(userId) => Ok(JsNumber(userId))
+          case Some(userId) => Ok(JsString(userId))
           case None         => Unauthorized(request.body.toString)
         }
       }
@@ -123,7 +123,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
       case Some(creds) => {
         historyService.createAccount(creds) match {
           case Left(err)     => ServiceUnavailable(err)
-          case Right(result) => Created(JsNumber(result))
+          case Right(result) => Created(JsString(result))
         }
       }
       case None => BadRequest(request.body.toString)

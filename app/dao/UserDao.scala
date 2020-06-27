@@ -18,23 +18,32 @@ class UserDao @Inject()(timeDb: Database) {
         )
     }
 
-    def createUser(creds: Login): Int = {
-        timeDb.withConnection( implicit con => 
+    def getUserHash(creds: Login): Option[String] = {
+        timeDb.withConnection(implicit con => 
             SQL"""
-                insert into dsrleiwu.public.users (email, password)
-                values (${creds.email}, ${creds.password})
-                returning user_id;
-            """.as(scalar[Int].single)
+               select user_hash from dsrleiwu.public.users where
+                email = ${creds.email}
+            """.as(scalar[String].singleOpt)
         )
     }
 
-    def getPasswordHash(creds: Login): String = {
+    def createUser(creds: Login): String = {
+        timeDb.withConnection( implicit con => 
+            SQL"""
+                insert into dsrleiwu.public.users (email, password, user_hash)
+                values (${creds.email}, ${creds.password}, concat(md5(random()::text), ${creds.email}))
+                returning user_hash;
+            """.as(scalar[String].single)
+        )
+    }
+
+    def getPasswordHash(creds: Login): Option[String] = {
       timeDb.withConnection( implicit con =>
         SQL"""
              select password
              from users
              where email = ${creds.email}
-        """.as(scalar[String].single)
+        """.as(scalar[String].singleOpt)
       )
     }
 

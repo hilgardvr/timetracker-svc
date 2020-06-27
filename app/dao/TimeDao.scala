@@ -10,41 +10,39 @@ import service.{TimedItem, Login}
 @Singleton
 class TimeDao @Inject()(timeDb: Database) {
 
-    private val table: String = "dsrleiwu.public.timed_items"
-
-    def fetchForUser(id: Long): List[TimedItem]= {
+    def fetchForUser(userHash: String): List[TimedItem]= {
         val x = timeDb.withConnection( implicit con =>
             SQL"""
-                select id, project, startTime, endTime, note from dsrleiwu.public.timed_items where user_id = $id;
+                select id, project, startTime, endTime, note from dsrleiwu.public.timed_items where user_hash = $userHash;
             """.as(Macro.indexedParser[TimedItem].*)
         )
         x
     }
 
-    def insertItem(userId: Long, timedItem: TimedItem) = {
+    def insertItem(userHash: String, timedItem: TimedItem) = {
         timeDb.withConnection( implicit con => 
             SQL"""
-                insert into dsrleiwu.public.timed_items (id, project, startTime, endTime, note, user_id) 
-                values (${timedItem.id}, ${timedItem.project}, ${timedItem.startTime}, ${timedItem.endTime}, ${timedItem.note}, $userId)
+                insert into dsrleiwu.public.timed_items (id, project, startTime, endTime, note, user_hash) 
+                values (${timedItem.id}, ${timedItem.project}, ${timedItem.startTime}, ${timedItem.endTime}, ${timedItem.note}, $userHash)
                 returning id;
             """.execute
         )
     }
 
-    def deleteItem(userId: Long, itemId: String) = {
+    def deleteItem(userHash: String, itemId: String) = {
         timeDb.withConnection( implicit con =>
             SQL"""
-                delete from dsrleiwu.public.timed_items * where user_id = $userId and id = ${itemId}
+                delete from dsrleiwu.public.timed_items * where user_hash = $userHash and id = ${itemId}
             """.execute
         )
     }
 
-    def updateItem(userId: Long, timedItem: TimedItem) = {
+    def updateItem(userHash: String, timedItem: TimedItem) = {
         timeDb.withConnection( implicit con =>
             SQL"""
                 UPDATE dsrleiwu.public.timed_items
                 SET project=${timedItem.project}, starttime=${timedItem.startTime}, endtime=${timedItem.endTime}, note=${timedItem.note}
-                WHERE user_id = $userId and id = ${timedItem.id};
+                WHERE user_hash = $userHash and id = ${timedItem.id};
             """.execute
         )
     }

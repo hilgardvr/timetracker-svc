@@ -8,11 +8,11 @@ GET         /                                   controllers.Assets.at(path="/pub
 
 # An example controller showing a sample home page
 GET         /api/health                         controllers.TimedItemController.health()
-GET         /api/userhistory/:id                controllers.TimedItemController.getHistory(id: Long)
-POST        /api/createitem/:id                 controllers.TimedItemController.createItem(id: Long)
-POST        /api/createitemlist/:id             controllers.TimedItemController.createItemList(id: Long)
-PUT         /api/updateitem/:userId             controllers.TimedItemController.updateItem(userId: Long)
-DELETE      /api/deleteitem/:userId/:itemId     controllers.TimedItemController.deleteItem(userId: Long, itemId: String)
+GET         /api/userhistory/:userHash          controllers.TimedItemController.getHistory(userHash: String)
+POST        /api/createitem/:userHash           controllers.TimedItemController.createItem(userHash: String)
+POST        /api/createitemlist/:userHash       controllers.TimedItemController.createItemList(userHash: String)
+PUT         /api/updateitem/:userHash           controllers.TimedItemController.updateItem(userHash: String)
+DELETE      /api/deleteitem/:userHash/:itemId     controllers.TimedItemController.deleteItem(userHash: String, itemId: String)
 
 #User actions
 POST        /api/login                          controllers.TimedItemController.login()

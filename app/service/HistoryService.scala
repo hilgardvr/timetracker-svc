@@ -16,36 +16,45 @@ class HistoryService @Inject()(
 
      def checkPassword(creds: Login): Boolean = {
        val pwHash = userDao.getPasswordHash(creds)
-       BCrypt.checkpw(creds.password, pwHash)
+       pwHash match {
+         case Some(hash) => BCrypt.checkpw(creds.password, hash)
+         case None => false
+       }
      }
 
-    def fetchUserHistory(userId: Long): List[TimedItem] = {
-      timeDao.fetchForUser(userId)
+    def fetchUserHistory(userHash: String): List[TimedItem] = {
+      timeDao.fetchForUser(userHash)
     }
 
     def fetchUserHistory(creds: Login): List[TimedItem] = {
 
-      val user_id: Option[Int] = userDao.getUserId(creds)
+      val userHash: Option[String] = userDao.getUserHash(creds)
 
-      user_id match {
-        case Some(user_id) => {
-          timeDao.fetchForUser(user_id)
+      userHash match {
+        case Some(hash) => {
+          timeDao.fetchForUser(hash)
         }
         case None => List[TimedItem]()
       }
 
     }
 
-    def addUserHistoryItem(userId: Long, timedItem: TimedItem): Boolean = {
-      timeDao.insertItem(userId, timedItem)
+    def addUserHistoryItem(userHash: String, timedItem: TimedItem): Boolean = {
+      val checkedItem =
+        if (timedItem.project.length() > 128) {
+          timedItem.copy(project = timedItem.project.substring(64))
+        } else {
+          timedItem
+        }
+      timeDao.insertItem(userHash, checkedItem)
     }
 
-    def login(creds: Login): Option[Int] = {
-      if (checkPassword(creds)) userDao.getUserId(creds)
+    def login(creds: Login): Option[String] = {
+      if (checkPassword(creds)) userDao.getUserHash(creds)
       else None
     }
 
-    def createAccount(creds: Login): Either[String, Int] = {
+    def createAccount(creds: Login): Either[String, String] = {
       try {
         val hashedCreds = Login(creds.email, hashPassword(creds.password))
         Right(userDao.createUser(hashedCreds))
@@ -54,11 +63,11 @@ class HistoryService @Inject()(
       }
     }
 
-    def deleteItem(userId: Long, itemId: String) = {
-      timeDao.deleteItem(userId, itemId)
+    def deleteItem(userHash: String, itemId: String) = {
+      timeDao.deleteItem(userHash, itemId)
     }
 
-    def updateItem(userId: Long, timedItem: TimedItem) = {
-      timeDao.updateItem(userId, timedItem)
+    def updateItem(userHash: String, timedItem: TimedItem) = {
+      timeDao.updateItem(userHash, timedItem)
     }
 }
