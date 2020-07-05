@@ -11,12 +11,14 @@ import service.{TimedItem, Login}
 class TimeDao @Inject()(timeDb: Database) {
 
     def fetchForUser(userHash: String): List[TimedItem]= {
-        val x = timeDb.withConnection( implicit con =>
+        timeDb.withConnection( implicit con =>
             SQL"""
-                select id, project, startTime, endTime, note from dsrleiwu.public.timed_items where user_hash = $userHash;
+                select id, project, startTime, endTime, note 
+                from dsrleiwu.public.timed_items 
+                where user_hash = $userHash 
+                order by endtime desc;
             """.as(Macro.indexedParser[TimedItem].*)
         )
-        x
     }
 
     def insertItem(userHash: String, timedItem: TimedItem) = {
@@ -32,7 +34,8 @@ class TimeDao @Inject()(timeDb: Database) {
     def deleteItem(userHash: String, itemId: String) = {
         timeDb.withConnection( implicit con =>
             SQL"""
-                delete from dsrleiwu.public.timed_items * where user_hash = $userHash and id = ${itemId}
+                delete from dsrleiwu.public.timed_items * 
+                where user_hash = $userHash and id = ${itemId}
             """.execute
         )
     }
