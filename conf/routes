@@ -5,14 +5,17 @@
 
 #base index
 GET         /                                   controllers.Assets.at(path="/public", file="html/index.html")
-
-# An example controller showing a sample home page
 GET         /api/health                         controllers.TimedItemController.health()
 GET         /api/userhistory/:userHash          controllers.TimedItemController.getHistory(userHash: String)
 POST        /api/createitem/:userHash           controllers.TimedItemController.createItem(userHash: String)
 POST        /api/createitemlist/:userHash       controllers.TimedItemController.createItemList(userHash: String)
 PUT         /api/updateitem/:userHash           controllers.TimedItemController.updateItem(userHash: String)
 DELETE      /api/deleteitem/:userHash/:itemId     controllers.TimedItemController.deleteItem(userHash: String, itemId: String)
+
+#PWA
+GET         /serviceWorker.js                   controllers.Assets.at(path="/public", file="serviceWorker.js")
+GET         /manifest.json                      controllers.Assets.at(path="/public", file="manifest.json")
+GET         /sw.js                              controllers.Assets.at(path="/public", file="sw.js")
 
 #User actions
 POST        /api/login                          controllers.TimedItemController.login()

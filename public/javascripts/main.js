@@ -8452,6 +8452,10 @@ var $author$project$Update$Update$toggleTimer = function (model) {
 			$elm$core$Platform$Cmd$none);
 	}
 };
+var $author$project$Update$Update$useCreatedItemResult = F2(
+	function (model, result) {
+		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+	});
 var $elm$core$Set$Set_elm_builtin = $elm$core$Basics$identity;
 var $elm$core$Set$empty = $elm$core$Dict$empty;
 var $elm$core$Set$insert = F2(
@@ -8737,7 +8741,7 @@ var $author$project$Update$Update$update = F2(
 				return A2($author$project$Update$Update$useUserIdResult, model, result);
 			case 27:
 				var result = msg.a;
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				return A2($author$project$Update$Update$useCreatedItemResult, model, result);
 			case 32:
 				var jsonUserId = function () {
 					var _v2 = model.aW;
