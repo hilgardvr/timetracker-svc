@@ -1,16 +1,13 @@
-window.onload = () => {
-    console.log('[PWA Info] load serviceWorker.js');
-    'use strict';
-
-    if (navigator.serviceWorker !== undefined) {
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
         navigator.serviceWorker.register('serviceWorker.js', { scope: '/' })
         .then(reg => {
-            console.log('[PWA Info] registered serviceWorker.js');
+            console.log('[PWA Info] registered serviceWorker.js', reg);
         })
         .catch(err => {
             console.log('[PWA Info] error registering serviceWorker.js', err);
         });
-    } else {
-        console.log('[PWA Info] serviceWorker already installed');
-    }
+    })
+} else {
+    console.log('[PWA Info] browser does not support service workers');
 }

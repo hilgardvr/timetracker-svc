@@ -20,6 +20,21 @@ self.addEventListener('install', event => {
     );
 })
 
+//clean up old data
+self.addEventListener('activate', event => {
+    console.log('[PWA Info] activate');
+    event.waitUntil(
+        caches.keys().then(keyList => {
+            return Promise.all(keyList.map(key => {
+                if (key !== CACHE_NAME) {
+                    console.log('[PWA Info] removing old cache', key);
+                    return caches.delete(key);
+                }
+            }));
+        })
+    )
+})
+
 //serve offline page if fetch fails
 self.addEventListener('fetch', event => {
     event.respondWith(
@@ -31,24 +46,3 @@ self.addEventListener('fetch', event => {
         })
     );
 });
-
-
-//serve offline page if fetch fails
-// self.addEventListener('fetch', event => {
-//     event.respondWith(
-//         fetch(event.request).catch(error => {
-//             console.log('[PWA Info] App offline, serving offline page' + error);
-//             return caches.open('mypwa-offline').then(cache => {
-//                 return cache.match('offline.html');
-//             })
-//         })
-//     );
-// });
-
-
-// self.addEventListener('refreshOffline', reponse => {
-//     return caches.open('mypwa-offline').then(cache => {
-//         console.log('[PWA Info] Offline page updated'); 
-//         return cache.put(offlineSite, response)
-//     })
-// })
