@@ -69,8 +69,9 @@ class HistoryService @Inject()(
       }
     }
 
-    def deleteItem(userHash: String, itemId: String) = {
-      timeDao.deleteItem(userHash, itemId)
+    def deleteItem(userHash: String, itemId: String): Long = {
+      val result = timeDao.deleteItem(userHash, itemId)
+      result
     }
 
     def updateItem(userHash: String, timedItem: TimedItem) = {

@@ -3,13 +3,14 @@ package controllers
 import javax.inject._
 import play.api.mvc._
 import play.api.libs.json._
+import play.api.Logging
 import service.HistoryService
 import service.TimedItem
 import service.Login
 import scala.util.{Try, Success, Failure}
 
 @Singleton
-class TimedItemController @Inject()(val controllerComponents: ControllerComponents, historyService: HistoryService) extends BaseController {
+class TimedItemController @Inject()(val controllerComponents: ControllerComponents, historyService: HistoryService) extends BaseController with Logging {
 
   def health() = Action { implicit request: Request[AnyContent] => 
     Ok("")
@@ -59,8 +60,13 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
   }
 
   def deleteItem(userHash: String, itemId: String) = Action { implicit request: Request[AnyContent] =>
-    historyService.deleteItem(userHash, itemId)
-    Ok("Deleted")
+    val result = historyService.deleteItem(userHash, itemId)
+    if (result == 1) Ok(JsString(itemId))
+    else if (result > 1) {
+      logger.warn("Multiple items deleted when only one was expected")
+      Ok (JsString(itemId))
+    }
+    else NotFound
   }
 
   def updateItem(userHash: String) = Action { implicit request: Request[AnyContent] =>
@@ -73,7 +79,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
         item match {
           case Success(timedItem) => {
             historyService.updateItem(userHash, timedItem)
-            Created
+            Created(jsonItem)
           }
           case Failure(_) => BadRequest(request.body.toString)
         }

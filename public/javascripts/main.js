@@ -7421,40 +7421,10 @@ var $author$project$Update$Update$createItemList = F3(
 		}
 	});
 var $author$project$Update$Update$createItemListEndPoint = 'createitemlist/';
-var $elm$core$Basics$neq = _Utils_notEqual;
-var $author$project$Update$Update$deleteCompleted = F2(
-	function (model, itemToDelete) {
-		var filteredList = A2(
-			$elm$core$List$filter,
-			function (completedItem) {
-				return !_Utils_eq(completedItem.c_, itemToDelete.c_);
-			},
-			model.cp);
-		return _Utils_update(
-			model,
-			{cp: filteredList, db: 2});
-	});
 var $author$project$Model$Model$ItemDeleted = function (a) {
 	return {$: 29, a: a};
 };
 var $author$project$Update$Update$deleteItemEndPoint = 'deleteitem/';
-var $elm$http$Http$expectBytesResponse = F2(
-	function (toMsg, toResult) {
-		return A3(
-			_Http_expect,
-			'arraybuffer',
-			_Http_toDataView,
-			A2($elm$core$Basics$composeR, toResult, toMsg));
-	});
-var $elm$http$Http$expectWhatever = function (toMsg) {
-	return A2(
-		$elm$http$Http$expectBytesResponse,
-		toMsg,
-		$elm$http$Http$resolve(
-			function (_v0) {
-				return $elm$core$Result$Ok(0);
-			}));
-};
 var $author$project$Update$Update$deleteItem = F2(
 	function (model, item) {
 		var _v0 = model.aV;
@@ -7463,7 +7433,7 @@ var $author$project$Update$Update$deleteItem = F2(
 			return $elm$http$Http$request(
 				{
 					aj: $elm$http$Http$emptyBody,
-					ab: $elm$http$Http$expectWhatever($author$project$Model$Model$ItemDeleted),
+					ab: A2($elm$http$Http$expectJson, $author$project$Model$Model$ItemDeleted, $elm$json$Json$Decode$string),
 					a8: _List_Nil,
 					bh: 'DELETE',
 					bH: $elm$core$Maybe$Nothing,
@@ -7479,7 +7449,14 @@ var $author$project$Model$Model$ItemUpdated = function (a) {
 	return {$: 30, a: a};
 };
 var $author$project$Update$Update$sendUpdateCompletedItem = F3(
-	function (model, completedItem, endpoint) {
+	function (model, completed, endpoint) {
+		var validStartEnd = _Utils_cmp(
+			$elm$time$Time$posixToMillis(model.cJ),
+			$elm$time$Time$posixToMillis(model.cE)) < 0;
+		var startTime = validStartEnd ? model.cJ : completed.bD;
+		var note = (model.cH === '') ? completed.bk : model.cH;
+		var endTime = validStartEnd ? model.cE : completed.cM;
+		var editedCompleted = A5($author$project$Model$Model$Completed, completed.c_, model.cI, startTime, endTime, note);
 		var _v0 = model.aV;
 		if (!_v0.$) {
 			var userId = _v0.a;
@@ -7491,23 +7468,23 @@ var $author$project$Update$Update$sendUpdateCompletedItem = F3(
 								[
 									_Utils_Tuple2(
 									'id',
-									$elm$json$Json$Encode$string(completedItem.c_)),
+									$elm$json$Json$Encode$string(editedCompleted.c_)),
 									_Utils_Tuple2(
 									'project',
-									$elm$json$Json$Encode$string(completedItem.du)),
+									$elm$json$Json$Encode$string(editedCompleted.du)),
 									_Utils_Tuple2(
 									'startTime',
 									$elm$json$Json$Encode$int(
-										$elm$time$Time$posixToMillis(completedItem.bD))),
+										$elm$time$Time$posixToMillis(editedCompleted.bD))),
 									_Utils_Tuple2(
 									'endTime',
 									$elm$json$Json$Encode$int(
-										$elm$time$Time$posixToMillis(completedItem.cM))),
+										$elm$time$Time$posixToMillis(editedCompleted.cM))),
 									_Utils_Tuple2(
 									'note',
-									$elm$json$Json$Encode$string(completedItem.bk))
+									$elm$json$Json$Encode$string(editedCompleted.bk))
 								]))),
-					ab: $elm$http$Http$expectWhatever($author$project$Model$Model$ItemUpdated),
+					ab: A2($elm$http$Http$expectJson, $author$project$Model$Model$ItemUpdated, $author$project$Update$Update$completedDecoder),
 					a8: _List_Nil,
 					bh: 'PUT',
 					bH: $elm$core$Maybe$Nothing,
@@ -7520,53 +7497,17 @@ var $author$project$Update$Update$sendUpdateCompletedItem = F3(
 			return $elm$core$Platform$Cmd$none;
 		}
 	});
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
-var $elm$core$List$sortBy = _List_sortBy;
-var $author$project$Update$Update$sortCompletedList = function (lst) {
-	return A2(
-		$elm$core$List$sortBy,
-		function (item) {
-			return $elm$time$Time$posixToMillis(item.bD) * (-1);
-		},
-		lst);
-};
 var $author$project$Update$Update$updateItemEndpoint = 'updateitem/';
 var $author$project$Update$Update$editCompleted = F2(
 	function (model, completed) {
 		if (model.db === 3) {
-			var validStartEnd = _Utils_cmp(
-				$elm$time$Time$posixToMillis(model.cJ),
-				$elm$time$Time$posixToMillis(model.cE)) < 0;
-			var startTime = validStartEnd ? model.cJ : completed.bD;
-			var note = (model.cH === '') ? completed.bk : model.cH;
-			var endTime = validStartEnd ? model.cE : completed.cM;
-			var editedCompleted = A5($author$project$Model$Model$Completed, completed.c_, model.cI, startTime, endTime, note);
-			var editedList = A2(
-				$elm$core$List$map,
-				function (comp) {
-					return _Utils_eq(comp.c_, completed.c_) ? editedCompleted : comp;
-				},
-				model.cp);
-			var sortedList = $author$project$Update$Update$sortCompletedList(editedList);
-			var saveEditedItemModel = _Utils_update(
-				model,
-				{
-					cp: sortedList,
-					cE: $elm$time$Time$millisToPosix(0),
-					cH: '',
-					cI: model.cu,
-					cJ: $elm$time$Time$millisToPosix(0),
-					db: 2
-				});
 			var _v0 = model.aV;
 			if (!_v0.$) {
 				return _Utils_Tuple2(
-					saveEditedItemModel,
-					A3($author$project$Update$Update$sendUpdateCompletedItem, model, editedCompleted, $author$project$Update$Update$updateItemEndpoint));
+					model,
+					A3($author$project$Update$Update$sendUpdateCompletedItem, model, completed, $author$project$Update$Update$updateItemEndpoint));
 			} else {
-				return _Utils_Tuple2(saveEditedItemModel, $elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			}
 		} else {
 			return _Utils_Tuple2(
@@ -7750,6 +7691,68 @@ var $author$project$Update$Update$handleFilterTimeChange = F4(
 			}
 		} else {
 			return model;
+		}
+	});
+var $elm$core$Basics$neq = _Utils_notEqual;
+var $author$project$Update$Update$handleItemDelete = F2(
+	function (model, result) {
+		if (!result.$) {
+			var itemToDelete = result.a;
+			var filteredList = A2(
+				$elm$core$List$filter,
+				function (completedItem) {
+					return !_Utils_eq(completedItem.c_, itemToDelete);
+				},
+				model.cp);
+			return _Utils_update(
+				model,
+				{cp: filteredList, db: 2});
+		} else {
+			var err = result.a;
+			return _Utils_update(
+				model,
+				{cB: 'Please check your internet connection', cC: 'Error deleting item', dL: true});
+		}
+	});
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $elm$core$List$sortBy = _List_sortBy;
+var $author$project$Update$Update$sortCompletedList = function (lst) {
+	return A2(
+		$elm$core$List$sortBy,
+		function (item) {
+			return $elm$time$Time$posixToMillis(item.bD) * (-1);
+		},
+		lst);
+};
+var $author$project$Update$Update$handleItemUpdate = F2(
+	function (model, result) {
+		if (!result.$) {
+			var editedCompleted = result.a;
+			var editedList = A2(
+				$elm$core$List$map,
+				function (comp) {
+					return _Utils_eq(comp.c_, editedCompleted.c_) ? editedCompleted : comp;
+				},
+				model.cp);
+			var sortedList = $author$project$Update$Update$sortCompletedList(editedList);
+			var editedItemModel = _Utils_update(
+				model,
+				{
+					cp: sortedList,
+					cE: $elm$time$Time$millisToPosix(0),
+					cH: '',
+					cI: model.cu,
+					cJ: $elm$time$Time$millisToPosix(0),
+					db: 2
+				});
+			return editedItemModel;
+		} else {
+			var err = result.a;
+			return _Utils_update(
+				model,
+				{cB: 'Please check your internet connection', cC: 'Item has not been updated', dL: true});
 		}
 	});
 var $mdgriffith$elm_ui$Element$BigDesktop = 3;
@@ -8670,11 +8673,6 @@ var $author$project$Update$Update$update = F2(
 							cr: $author$project$Update$Update$getTimeFrameFromString(timeFrame)
 						}),
 					$elm$core$Platform$Cmd$none);
-			case 16:
-				var itemToDelete = msg.a;
-				return _Utils_Tuple2(
-					A2($author$project$Update$Update$deleteCompleted, model, itemToDelete),
-					A2($author$project$Update$Update$deleteItem, model, itemToDelete));
 			case 17:
 				return _Utils_Tuple2(
 					_Utils_update(
@@ -8793,12 +8791,23 @@ var $author$project$Update$Update$update = F2(
 				return _Utils_Tuple2(
 					model,
 					$author$project$Update$Update$getUserHistory(model.aV));
+			case 16:
+				var itemToDelete = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{db: 2}),
+					A2($author$project$Update$Update$deleteItem, model, itemToDelete));
 			case 29:
 				var result = msg.a;
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2(
+					A2($author$project$Update$Update$handleItemDelete, model, result),
+					$elm$core$Platform$Cmd$none);
 			case 30:
 				var result = msg.a;
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2(
+					A2($author$project$Update$Update$handleItemUpdate, model, result),
+					$elm$core$Platform$Cmd$none);
 			case 33:
 				return _Utils_Tuple2(
 					_Utils_update(

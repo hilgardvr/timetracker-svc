@@ -31,12 +31,12 @@ class TimeDao @Inject()(timeDb: Database) {
         )
     }
 
-    def deleteItem(userHash: String, itemId: String) = {
+    def deleteItem(userHash: String, itemId: String): Long = {
         timeDb.withConnection( implicit con =>
             SQL"""
                 delete from dsrleiwu.public.timed_items * 
                 where user_hash = $userHash and id = ${itemId}
-            """.execute
+            """.executeUpdate
         )
     }
 
