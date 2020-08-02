@@ -1,5 +1,5 @@
-const CACHE_NAME = "stt-v0.1"
-const DATA_CACHE_NAME = "stt-data-v0.1"
+const CACHE_NAME = "stt-v0.2"
+const DATA_CACHE_NAME = "stt-data-v0.2"
 
 const FILES_TO_CACHE = [
     '/',
