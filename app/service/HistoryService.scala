@@ -4,6 +4,12 @@ import com.google.inject.Inject
 import dao.TimeDao
 import dao.UserDao
 import org.mindrot.jbcrypt.BCrypt
+import play.api.mvc.Request
+import play.api.mvc.AnyContent
+import play.api.libs.json.JsValue
+import scala.util.Try
+import scala.util.Success
+import scala.util.Failure
 
 class HistoryService @Inject()(
   timeDao: TimeDao,
@@ -70,4 +76,22 @@ class HistoryService @Inject()(
     def updateItem(userHash: String, timedItem: TimedItem) = {
       timeDao.updateItem(userHash, timedItem)
     }
+
+   def extractCreds(request: Request[AnyContent]): Option[Login] = {
+    val jsonBody: Option[JsValue] = request.body.asJson
+
+    jsonBody match {
+      case Some(jsonItem) => {
+
+        val creds = Try(jsonItem.as[Login])
+      
+        creds match {
+          case Success(creds) => Some(creds)
+          case Failure(_) => None
+        }
+      }
+      case None => None
+    }
+  }
+
 }

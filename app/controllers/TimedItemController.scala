@@ -11,23 +11,6 @@ import scala.util.{Try, Success, Failure}
 @Singleton
 class TimedItemController @Inject()(val controllerComponents: ControllerComponents, historyService: HistoryService) extends BaseController {
 
-  private def extractCreds(request: Request[AnyContent]): Option[Login] = {
-    val jsonBody: Option[JsValue] = request.body.asJson
-
-    jsonBody match {
-      case Some(jsonItem) => {
-
-        val creds = Try(jsonItem.as[Login])
-      
-        creds match {
-          case Success(creds) => Some(creds)
-          case Failure(_) => None
-        }
-      }
-      case None => None
-    }
-  }
-
   def health() = Action { implicit request: Request[AnyContent] => 
     Ok("")
   }
@@ -45,7 +28,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
         items match {
           case Success(timedItems) => {
             timedItems.map(item => historyService.addUserHistoryItem(userHash, item))
-            Created
+            Created(Json.toJson(timedItems))
           }
           case Failure(_) => BadRequest(request.body.toString)
         }
@@ -66,7 +49,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
         item match {
           case Success(timedItem) => {
             historyService.addUserHistoryItem(userHash, timedItem)
-            Created
+            Created(Json.toJson(timedItem))
           }
           case Failure(_) => BadRequest(request.body.toString)
         }
@@ -101,7 +84,7 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
 
   def login() = Action { implicit request: Request[AnyContent] =>
     
-    val login = extractCreds(request)
+    val login: Option[Login] = historyService.extractCreds(request)
             
     login match {
       case Some(creds) => {
@@ -117,12 +100,12 @@ class TimedItemController @Inject()(val controllerComponents: ControllerComponen
 
   def createAccount() = Action { implicit request: Request[AnyContent] =>
 
-    val login: Option[Login] = extractCreds(request)
+    val login: Option[Login] = historyService.extractCreds(request)
             
     login match {
       case Some(creds) => {
         historyService.createAccount(creds) match {
-          case Left(err)     => ServiceUnavailable(err)
+          case Left(err)     => Conflict(err)
           case Right(result) => Created(JsString(result))
         }
       }
