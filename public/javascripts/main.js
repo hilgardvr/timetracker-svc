@@ -8449,7 +8449,7 @@ var $author$project$Update$Update$toggleTimer = function (model) {
 		return _Utils_Tuple2(
 			_Utils_update(
 				model,
-				{db: 0, bk: '', em: false}),
+				{db: 2}),
 			A3($author$project$Update$Update$createItem, model, completed, $author$project$Update$Update$createItemEndPoint));
 	} else {
 		return _Utils_Tuple2(
@@ -8467,13 +8467,13 @@ var $author$project$Update$Update$useCreatedItemResult = F2(
 			return _Utils_Tuple2(
 				_Utils_update(
 					model,
-					{cp: updatedList}),
+					{cp: updatedList, bk: '', em: false}),
 				$elm$core$Platform$Cmd$none);
 		} else {
 			return _Utils_Tuple2(
 				_Utils_update(
 					model,
-					{cB: 'Please check your internet connection', cC: 'Items could not be saved', dL: true}),
+					{cB: 'Please check your internet connection', cC: 'Item could not be saved', db: 1, dL: true}),
 				$elm$core$Platform$Cmd$none);
 		}
 	});

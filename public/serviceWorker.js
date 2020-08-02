@@ -1,4 +1,4 @@
-const CACHE_NAME = "stt-v0.4"
+const CACHE_NAME = "stt-v0.5"
 const DATA_CACHE_NAME = "stt-data-v0.4"
 
 const FILES_TO_CACHE = [
